@@ -72,7 +72,7 @@ aside li{
 aside ul{
     text-align:center;
 }
-aside ul&gt;li::before {
+aside ul&gtli::before {
     content: "\f152";
     position: relative;
     font-family: FontAwesome;
