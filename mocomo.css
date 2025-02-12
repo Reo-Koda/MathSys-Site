@@ -26,7 +26,7 @@ nav li a{
     display: block;
     padding:0.5em 1.5em;
     color:#fff;
-    border-bottom:#ccc dotted 0.5px
+    border-bottom:#ccc dotted 0.5px;
 }
 
 nav li a:hover{
@@ -72,7 +72,7 @@ aside li{
 aside ul{
     text-align:center;
 }
-aside ul&gtli::before {
+aside ul&gt;li::before {
     content: "\f152";
     position: relative;
     font-family: FontAwesome;
@@ -100,7 +100,7 @@ footer{
         max-width:800px;
         margin-left:50px;
     }
-}
+
 
 nav ul{display:flex;width:80%;margin:auto;}
 nav li{width:20%;text-align: center;}
@@ -135,3 +135,4 @@ aside ul{
 }
 #contents{max-width:950px;}
 #none{display:block;}
+}
