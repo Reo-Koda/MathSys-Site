@@ -3,9 +3,9 @@
 html{overflow:auto;}
 
 body{
-    color: #333;
+    /*color: #333;
     font: 16px/2 sans-serif;
-    overflow:hidden;
+    overflow:hidden;*/
     --scroll-gap: 30px;
 }
 @keyframes infiniteScroll {
@@ -13,17 +13,63 @@ body{
       transform: translateX(0);
     }
     100% {
-      transform: translateX(-100%);
+      transform: translateX(calc(-50% - var(--scroll-gap) / 2));
     }
   }
-  
-  .scroll_track {
-    animation: infiniteScroll 10s linear infinite;
-  }
 
+.scroll_wrap {
+    margin: 0;
+    width: 100vw;
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+  }
+  .scroll_track {
+    display: flex;
+    animation: infiniteScroll 5s linear infinite;
+  }
+  .scroll_inner {
+    display: flex;
+    flex-wrap: nowrap;
+    gap: 0 var(--scroll-gap);
+    padding: 0;
+    margin: 0;
+  }
+  
+  .scroll_cont {
+    display: grid;
+    place-content: center;
+    flex-shrink: 0;
+    min-width: 22vw;
+    aspect-ratio: 1 / 1;
+    color: white;
+    font-size: 1.375rem;
+    font-weight: bold;
+    padding: 0;
+  }
   &:hover {
     animation-play-state: paused;
   }
+  /*.scroll_inner {
+    display: flex;
+    flex-wrap: nowrap;
+    gap: 0 var(--scroll-gap);
+  }
+  
+  .scroll_cont {
+    display: grid;
+    place-content: center;
+    flex-shrink: 0;
+    min-width: 22vw;
+    aspect-ratio: 1 / 1;
+    color: white;
+    font-size: 1.375rem;
+    font-weight: bold;
+  }*/
+ 
+  
+
+ 
 
 img{
     width:100%;
