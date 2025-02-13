@@ -173,7 +173,7 @@ nav li a{border-bottom:none;}
 nav li a:hover{
     transition: background-color 0.5s linear;
 }
-nav li :not(:last-child){
+nav li:not(:last-child){
     border-right: 1px dotted #D692A3
 }
 main{
