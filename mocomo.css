@@ -6,7 +6,24 @@ body{
     color: #333;
     font: 16px/2 sans-serif;
     overflow:hidden;
+    --scroll-gap: 30px;
 }
+@keyframes infiniteScroll {
+    0% {
+      transform: translateX(0);
+    }
+    100% {
+      transform: translateX(-100%);
+    }
+  }
+  
+  .scroll_track {
+    animation: infiniteScroll 10s linear infinite;
+  }
+
+  &:hover {
+    animation-play-state: paused;
+  }
 
 img{
     width:100%;
@@ -94,6 +111,8 @@ footer{
 .small{font-size:small;}
 
 #none{display: none;}
+
+
 
 @media screen and (min-width:600px){
     header{
