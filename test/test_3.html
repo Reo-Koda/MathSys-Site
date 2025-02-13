@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>ABC大学 学生専用過去問サイト</title>
+  <style>
+    /* リセット */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    body {
+      font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+      background-color: #f7f9fc;
+      color: #333;
+      line-height: 1.6;
+    }
+    /* ヘッダー */
+    header {
+      background-color: #00274d; /* 大学のイメージカラー */
+      color: #fff;
+      padding: 20px;
+      text-align: center;
+      position: relative;
+    }
+    header img.logo {
+      width: 60px;
+      height: auto;
+      position: absolute;
+      left: 20px;
+      top: 20px;
+    }
+    header h1 {
+      font-size: 1.8em;
+      margin-bottom: 5px;
+    }
+    header p {
+      font-size: 1em;
+    }
+    /* ナビゲーション */
+    nav {
+      background-color: #fff;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+      margin: 20px;
+      border-radius: 8px;
+    }
+    nav ul {
+      list-style: none;
+      display: flex;
+      justify-content: center;
+      padding: 10px 0;
+    }
+    nav ul li {
+      margin: 0 15px;
+    }
+    nav ul li a {
+      text-decoration: none;
+      color: #00274d;
+      font-weight: bold;
+      transition: color 0.3s ease;
+    }
+    nav ul li a:hover {
+      color: #00509e;
+    }
+    /* メインコンテナ */
+    .container {
+      width: 90%;
+      max-width: 1200px;
+      margin: 20px auto;
+    }
+    /* 検索セクション */
+    #search {
+      background-color: #fff;
+      padding: 20px;
+      margin-bottom: 20px;
+      border-radius: 8px;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 10px;
+    }
+    #search input[type="text"] {
+      width: 70%;
+      padding: 10px;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      font-size: 1em;
+    }
+    #search button {
+      padding: 10px 15px;
+      border: none;
+      background-color: #00274d;
+      color: #fff;
+      border-radius: 4px;
+      cursor: pointer;
+      font-size: 1em;
+      transition: background-color 0.3s ease;
+    }
+    #search button:hover {
+      background-color: #00509e;
+    }
+    /* 投稿一覧 */
+    #posts {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 20px;
+    }
+    .post {
+      background-color: #fff;
+      padding: 15px;
+      border-radius: 8px;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+      transition: transform 0.3s ease;
+    }
+    .post:hover {
+      transform: translateY(-5px);
+    }
+    .post h2 {
+      font-size: 1.2em;
+      margin-bottom: 10px;
+      color: #00274d;
+    }
+    .post p {
+      font-size: 0.9em;
+      color: #666;
+    }
+    /* フッター */
+    footer {
+      background-color: #00274d;
+      color: #fff;
+      text-align: center;
+      padding: 20px;
+      margin-top: 20px;
+      border-radius: 8px 8px 0 0;
+    }
+    /* レスポンシブ対応 */
+    @media (max-width: 768px) {
+      nav ul {
+        flex-direction: column;
+        align-items: center;
+      }
+      nav ul li {
+        margin: 10px 0;
+      }
+      #search {
+        flex-direction: column;
+      }
+      #search input[type="text"] {
+        width: 100%;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <!-- 大学のロゴ（実際の画像ファイルに差し替え） -->
+    <img src="logo.png" alt="ABC大学ロゴ" class="logo">
+    <h1>ABC大学 学生専用過去問サイト</h1>
+    <p>あなたの学びをサポートする試験対策コミュニティ</p>
+  </header>
+  
+  <nav>
+    <ul>
+      <li><a href="#">ホーム</a></li>
+      <li><a href="#">講義情報</a></li>
+      <li><a href="#">試験対策</a></li>
+      <li><a href="#">掲示板</a></li>
+      <li><a href="#">ログイン</a></li>
+    </ul>
+  </nav>
+  
+  <div class="container">
+    <section id="search">
+      <input type="text" placeholder="講義名、科目、年度で検索">
+      <button>検索</button>
+    </section>
+    
+    <section id="posts">
+      <article class="post">
+        <h2>経済学部 経済学入門 過去問 2023</h2>
+        <p>投稿者: studentA</p>
+      </article>
+      
+      <article class="post">
+        <h2>法学部 民法 過去問 2022</h2>
+        <p>投稿者: studentB</p>
+      </article>
+      
+      <article class="post">
+        <h2>工学部 機械工学 基礎過去問 2023</h2>
+        <p>投稿者: studentC</p>
+      </article>
+      
+      <article class="post">
+        <h2>文学部 英文学 講義試験過去問 2021</h2>
+        <p>投稿者: studentD</p>
+      </article>
+    </section>
+  </div>
+  
+  <footer>
+    <p>&copy; 2025 ABC大学 学生専用過去問サイト</p>
+  </footer>
+</body>
+</html>

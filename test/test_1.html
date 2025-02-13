@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>大学過去問投稿サイト</title>
+  <style>
+    /* リセット */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    body {
+      font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+      background-color: #f4f4f4;
+      color: #333;
+      line-height: 1.6;
+    }
+    header {
+      background-color: #007BFF;
+      color: #fff;
+      padding: 20px;
+      text-align: center;
+    }
+    nav {
+      background: #333;
+      padding: 10px 0;
+    }
+    nav ul {
+      list-style: none;
+      display: flex;
+      justify-content: center;
+    }
+    nav ul li {
+      margin: 0 15px;
+    }
+    nav ul li a {
+      color: #fff;
+      text-decoration: none;
+      font-weight: bold;
+    }
+    .container {
+      width: 90%;
+      max-width: 1200px;
+      margin: 20px auto;
+    }
+    /* 検索セクション */
+    #search {
+      background: #fff;
+      padding: 20px;
+      margin-bottom: 20px;
+      border-radius: 5px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 10px;
+    }
+    #search input[type="text"] {
+      width: 70%;
+      padding: 10px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+    }
+    #search button {
+      padding: 10px 15px;
+      border: none;
+      background-color: #007BFF;
+      color: #fff;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+    /* 投稿一覧 */
+    #posts {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 20px;
+    }
+    .post {
+      background: #fff;
+      padding: 15px;
+      border-radius: 5px;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    }
+    .post h2 {
+      font-size: 1.2em;
+      margin-bottom: 10px;
+    }
+    .post p {
+      font-size: 0.9em;
+      color: #666;
+    }
+    footer {
+      background: #333;
+      color: #fff;
+      text-align: center;
+      padding: 20px;
+      margin-top: 20px;
+    }
+    /* レスポンシブ対応 */
+    @media (max-width: 768px) {
+      nav ul {
+        flex-direction: column;
+        align-items: center;
+      }
+      nav ul li {
+        margin: 10px 0;
+      }
+      #search {
+        flex-direction: column;
+      }
+      #search input[type="text"] {
+        width: 100%;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>大学過去問投稿サイト</h1>
+    <p>みんなで過去問をシェアしよう！</p>
+  </header>
+  
+  <nav>
+    <ul>
+      <li><a href="#">ホーム</a></li>
+      <li><a href="#">投稿する</a></li>
+      <li><a href="#">お気に入り</a></li>
+      <li><a href="#">ログイン</a></li>
+    </ul>
+  </nav>
+  
+  <div class="container">
+    <section id="search">
+      <input type="text" placeholder="大学名、科目、年度で検索">
+      <button>検索</button>
+    </section>
+    
+    <section id="posts">
+      <article class="post">
+        <h2>東京大学 理系 過去問 2020</h2>
+        <p>アップロード者: user123</p>
+      </article>
+      
+      <article class="post">
+        <h2>京都大学 文系 過去問 2019</h2>
+        <p>アップロード者: examlover</p>
+      </article>
+      
+      <article class="post">
+        <h2>早稲田大学 工学部 過去問 2021</h2>
+        <p>アップロード者: studybuddy</p>
+      </article>
+      
+      <article class="post">
+        <h2>慶應義塾大学 経済学部 過去問 2018</h2>
+        <p>アップロード者: questionmaster</p>
+      </article>
+    </section>
+  </div>
+  
+  <footer>
+    <p>&copy; 2025 大学過去問投稿サイト All Rights Reserved.</p>
+  </footer>
+</body>
+</html>
