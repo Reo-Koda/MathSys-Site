@@ -1,0 +1,66 @@
+配置場所
+Dockerfileはプロジェクトファイルと同じ階層(プロジェクトディレクトリ内の最上層)に配置する。
+
+
+docker独自の命令文
+FROM ベースとなるコンテナイメージ:タグ
+例:FROM ubuntu:20.04, FROM ruby:2.7
+
+USER ユーザー名  コンテナ側のユーザーを変更できる
+例:USER root
+
+WORKDIR /docker内で作業する場所(なんでもよい)
+例:WORKDIR /var, WORKDIR /app/www
+
+ENV 環境変数名=設定する値  コンテナ側の環境変数を設定できる
+例:ENV SITE_DOMAIN=vtuber.supu.com
+
+COPY ./Dockerfileのある場所を基準としたソースファイルがある場所へのパス /docker内においてコピーする場所
+例:COPY ./src /var, COPY ./src /app/www  src配下のファイルすべてをdocker内の指定したパスにコピーする
+例:COPY requirements.txt /var  例はtxtファイルがDockerfileと同じ階層にあるとき
+requirements.txtの中身の例
+numpy==1.20.2
+pandas==1.2.3
+
+RUN  コンテナイメージ作成の際に実行するシェルコマンドを設定する
+例:RUN apt update, RUN apt install -y python3.9, RUN apt install -y python3-pip, RUN python3.9 -m pip install-r requirements.txt
+本来「RUN apt install」では「&&」を用いてシェルコマンドを一行で書き、最後にキャッシュを削除するコマンドを書いたほうがイメージサイズが小さくなって好ましい
+例:RUN apt update, RUN apt install -y python3.9 && apt install -y python3-pip
+
+ENTRYPOINT ["実行ファイル", "パラメータ1", "パラメータ2"]  コンテナ実行時に実行するコマンドを設定する
+
+ADD 追加元のファイルパス 追加先のファイルパス  コンテナ側にファイルを追加する
+例:ADD https://~ /var
+COPYとADDの違い
+COPYは追加元のファイルが必ずローカル環境内になければならないが、ADDは追加元のファイルがリモートファイルであっても大丈夫
+COPYは圧縮ファイルがそのままコピーされるが、ADDは圧縮ファイルが解凍されて追加される
+
+CMD [""] dockerを起動する際のコマンド
+例:CMD ["/bin/bash"]  bashを起動する
+
+
+書く際の注意点
+主にCMDの記述について
+dockerコンテナ内に入って実行する際のコマンドを記述するので、実際にdockerコンテナ内に入ってコマンドがうまく動作するのかを確認して書いていく
+
+
+Dockerfileをもとにコンテナイメージを作成し、コンテナを起動する方法
+ターミナルより Dockerfileが置いてある場所に移動して
+
+docker build  Dockerfileからコンテナイメージを作成する
+-t コンテナイメージにタグをつけるオプション
+例:docker build -t supu-python:1.0
+-f Dockerfileのパスを指定するオプション
+例:docker build -t supu-python:1.0 -f Dockerfile  デフォルトで -f は -f Dockerfile になっている
+ビルドコンテキスト 「.」
+例:docker build -t supu-python:1.0 .
+
+docker build を実行後、docker imagesで設定したタグのイメージがあることを確認する
+
+docker run コンテナイメージをもとにコンテナを起動する
+-it コンテナを起動したままにするオプション(コンテナはプロセスが終了するとコンテナも終了する)(dockerfileの最後にプロセスを起動するような記述がある場合、このオプションは必要ない)
+-d バックグラウンドで実行するオプション
+docker run --name コンテナ名(任意) -it -d コンテナイメージ
+例:docker run --name supu-server -it -d supu-python:1.0
+
+docker run を実行後、docker psでコンテナが設定されたコンテナ名で起動されているのを確認する
