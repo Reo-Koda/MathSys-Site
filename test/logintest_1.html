@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>ログイン - ABC大学 学生専用過去問サイト</title>
+  <style>
+    /* リセット */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    body {
+      background: linear-gradient(135deg, #f7f9fc, #e3efff);
+      font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+    }
+    .login-container {
+      background-color: #fff;
+      border-radius: 8px;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+      width: 90%;
+      max-width: 400px;
+      padding: 30px;
+      text-align: center;
+    }
+    .login-container img.logo {
+      width: 80px;
+      margin-bottom: 20px;
+    }
+    .login-container h2 {
+      color: #00274d;
+      margin-bottom: 20px;
+    }
+    .login-container form {
+      display: flex;
+      flex-direction: column;
+      gap: 15px;
+    }
+    .login-container input[type="email"],
+    .login-container input[type="password"] {
+      padding: 12px 15px;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      font-size: 1em;
+    }
+    .login-container button {
+      padding: 12px 15px;
+      border: none;
+      border-radius: 4px;
+      background-color: #00274d;
+      color: #fff;
+      font-size: 1em;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+    }
+    .login-container button:hover {
+      background-color: #00509e;
+    }
+    .login-container .forgot-password {
+      font-size: 0.9em;
+      color: #555;
+      text-decoration: none;
+      margin-top: 10px;
+    }
+    .login-container .forgot-password:hover {
+      text-decoration: underline;
+    }
+  </style>
+</head>
+<body>
+  <div class="login-container">
+    <!-- 大学のロゴ（実際の画像に差し替え） -->
+    <img src="logo.png" alt="ABC大学ロゴ" class="logo">
+    <h2>ログイン</h2>
+    <form action="#" method="post">
+      <input type="email" name="email" placeholder="大学のメールアドレス" required>
+      <input type="password" name="password" placeholder="パスワード" required>
+      <button type="submit">ログイン</button>
+    </form>
+    <a href="#" class="forgot-password">パスワードをお忘れですか？</a>
+  </div>
+</body>
+</html>
