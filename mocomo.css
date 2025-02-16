@@ -30,6 +30,7 @@ body{
     display: flex;
     justify-content: center;
    
+<<<<<<< HEAD
 }
 .scroll_track {
   display: flex;
@@ -54,6 +55,33 @@ body{
 .scroll_cont:hover{
   animation-play-state: paused;
 }
+=======
+  }
+  .scroll_track {
+    display: flex;
+    animation: infiniteScroll 30s linear infinite;
+  }
+  .scroll_track:hover{
+    animation-play-state: paused;
+  }
+
+  .scroll_inner {
+    display: flex;
+    flex-wrap: nowrap;
+    gap: 0 var(--scroll-gap);
+    padding: 0;
+    margin: 0;
+  }
+  
+  .scroll_cont {
+    display: grid;
+    place-content: center;
+    flex-shrink: 0;
+    }
+ .scroll_track:hover{
+    animation-play-state: paused;
+  }
+>>>>>>> 66cb266 (re)
 img{
     width:100%;
     vertical-align:bottom;
