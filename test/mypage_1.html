@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>マイページ - お気に入り</title>
+  <style>
+    /* リセット */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    body {
+      font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+      background-color: #f7f9fc;
+      color: #333;
+      line-height: 1.6;
+    }
+    header {
+      background-color: #00274d;
+      color: #fff;
+      padding: 20px;
+      text-align: center;
+    }
+    header h1 {
+      font-size: 1.8em;
+    }
+    nav {
+      background-color: #fff;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+      margin: 20px;
+      border-radius: 8px;
+    }
+    nav ul {
+      list-style: none;
+      display: flex;
+      justify-content: center;
+      padding: 10px 0;
+    }
+    nav ul li {
+      margin: 0 15px;
+    }
+    nav ul li a {
+      text-decoration: none;
+      color: #00274d;
+      font-weight: bold;
+      transition: color 0.3s ease;
+    }
+    nav ul li a:hover {
+      color: #00509e;
+    }
+    .container {
+      width: 90%;
+      max-width: 1200px;
+      margin: 20px auto;
+    }
+    .mypage-header {
+      background-color: #fff;
+      border-radius: 8px;
+      padding: 20px;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+      margin-bottom: 20px;
+      text-align: center;
+    }
+    .mypage-header h2 {
+      font-size: 1.6em;
+      color: #00274d;
+      margin-bottom: 10px;
+    }
+    /* お気に入り一覧グリッド */
+    .favorites {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 20px;
+    }
+    .favorite-item {
+      background-color: #fff;
+      padding: 15px;
+      border-radius: 8px;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+      position: relative;
+      transition: transform 0.3s ease;
+    }
+    .favorite-item:hover {
+      transform: translateY(-5px);
+    }
+    .favorite-item h3 {
+      font-size: 1.2em;
+      margin-bottom: 10px;
+      color: #00274d;
+    }
+    .favorite-item p {
+      font-size: 0.9em;
+      color: #666;
+    }
+    .remove-btn {
+      position: absolute;
+      top: 10px;
+      right: 10px;
+      background: transparent;
+      border: none;
+      color: #ff4d4d;
+      font-size: 1.2em;
+      cursor: pointer;
+    }
+    /* レスポンシブ対応 */
+    @media (max-width: 768px) {
+      nav ul {
+        flex-direction: column;
+        align-items: center;
+      }
+      nav ul li {
+        margin: 10px 0;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>ABC大学 学生専用サイト</h1>
+  </header>
+  
+  <nav>
+    <ul>
+      <li><a href="#">ホーム</a></li>
+      <li><a href="#">講義情報</a></li>
+      <li><a href="#">試験対策</a></li>
+      <li><a href="#">掲示板</a></li>
+      <li><a href="#">マイページ</a></li>
+    </ul>
+  </nav>
+  
+  <div class="container">
+    <div class="mypage-header">
+      <h2>お気に入り一覧</h2>
+      <p>あなたが登録したお気に入りの過去問やコンテンツ</p>
+    </div>
+    
+    <div class="favorites">
+      <div class="favorite-item">
+        <button class="remove-btn" title="お気に入り解除">×</button>
+        <h3>経済学部 経済学入門 過去問 2023</h3>
+        <p>投稿者: studentA</p>
+      </div>
+      
+      <div class="favorite-item">
+        <button class="remove-btn" title="お気に入り解除">×</button>
+        <h3>法学部 民法 過去問 2022</h3>
+        <p>投稿者: studentB</p>
+      </div>
+      
+      <div class="favorite-item">
+        <button class="remove-btn" title="お気に入り解除">×</button>
+        <h3>工学部 機械工学 基礎過去問 2023</h3>
+        <p>投稿者: studentC</p>
+      </div>
+      
+      <div class="favorite-item">
+        <button class="remove-btn" title="お気に入り解除">×</button>
+        <h3>文学部 英文学 講義試験過去問 2021</h3>
+        <p>投稿者: studentD</p>
+      </div>
+    </div>
+  </div>
+</body>
+</html>

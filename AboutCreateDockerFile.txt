@@ -3,7 +3,7 @@ Dockerfileはプロジェクトファイルと同じ階層(プロジェクトデ
 
 
 docker独自の命令文
-FROM ベースとなるコンテナイメージ:タグ
+FROM ベースとなるコンテナイメージ:タグ ベースはhttps://hub.docker.com/ で見つける
 例:FROM ubuntu:20.04, FROM ruby:2.7
 
 USER ユーザー名  コンテナ側のユーザーを変更できる
