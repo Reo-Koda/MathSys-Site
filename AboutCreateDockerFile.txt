@@ -1,8 +1,8 @@
-配置場所
++配置場所
 Dockerfileはプロジェクトファイルと同じ階層(プロジェクトディレクトリ内の最上層)に配置する。
 
 
-docker独自の命令文
++docker独自の命令文
 FROM ベースとなるコンテナイメージ:タグ ベースはhttps://hub.docker.com/ で見つける
 例:FROM ubuntu:20.04, FROM ruby:2.7
 
@@ -39,12 +39,12 @@ CMD [""] dockerを起動する際のコマンド
 例:CMD ["/bin/bash"]  bashを起動する
 
 
-書く際の注意点
++書く際の注意点
 主にCMDの記述について
 dockerコンテナ内に入って実行する際のコマンドを記述するので、実際にdockerコンテナ内に入ってコマンドがうまく動作するのかを確認して書いていく
 
 
-Dockerfileをもとにコンテナイメージを作成し、コンテナを起動する方法
++Dockerfileをもとにコンテナイメージを作成し、コンテナを起動する方法
 ターミナルより Dockerfileが置いてある場所に移動して
 
 docker build  Dockerfileからコンテナイメージを作成する
@@ -64,3 +64,21 @@ docker run --name コンテナ名(任意) -it -d コンテナイメージ
 例:docker run --name supu-server -it -d supu-python:1.0
 
 docker run を実行後、docker psでコンテナが設定されたコンテナ名で起動されているのを確認する
+
+
++docker コマンドについて
+コンテナの再起動において、コンテナ内のファイルの変更が反映されるコマンド
+docker start  既に存在するコンテナの起動
+docker stop  既に存在するコンテナの停止
+コンテナの再起動において、コンテナ内のファイルの変更が反映されないコマンド
+docker start  既に存在するコンテナの起動
+docker stop  既に存在するコンテナの停止
+
+
++docker compose コマンドについて
+コンテナの再起動において、コンテナ内のファイルの変更が反映されるコマンド
+docker compose start  既に存在するコンテナの起動
+docker compose stop  既に存在するコンテナの停止
+コンテナの再起動において、コンテナ内のファイルの変更が反映されないコマンド
+docker compose start  既に存在するコンテナの起動
+docker compose stop  既に存在するコンテナの停止
