@@ -71,8 +71,8 @@ docker run を実行後、docker psでコンテナが設定されたコンテナ
 docker start  既に存在するコンテナの起動
 docker stop  既に存在するコンテナの停止
 コンテナの再起動において、コンテナ内のファイルの変更が反映されないコマンド
-docker start  既に存在するコンテナの起動
-docker stop  既に存在するコンテナの停止
+docker pause  既に存在するコンテナの起動
+docker unpause  既に存在するコンテナの停止
 
 
 +docker compose コマンドについて
@@ -80,5 +80,5 @@ docker stop  既に存在するコンテナの停止
 docker compose start  既に存在するコンテナの起動
 docker compose stop  既に存在するコンテナの停止
 コンテナの再起動において、コンテナ内のファイルの変更が反映されないコマンド
-docker compose start  既に存在するコンテナの起動
-docker compose stop  既に存在するコンテナの停止
+docker compose pause  既に存在するコンテナの起動
+docker compose unpause  既に存在するコンテナの停止
