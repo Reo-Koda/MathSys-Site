@@ -1,15 +1,16 @@
 import css from "./page.module.css";
+import Link from "next/link";
 
 export default function Home() {
   return (
     <>
       <nav>
         <ul>
-          <li><a href="#">ホーム</a></li>
-          <li><a href="#">講義情報</a></li>
-          <li><a href="#">試験対策</a></li>
-          <li><a href="#">掲示板</a></li>
-          <li><a href="#">ログイン</a></li>
+          <li><Link href={`/`}>ホーム</Link></li>
+          <li><Link href={`/mypage`}>マイページ</Link></li>
+          <li><Link href={`/throw`}>投稿</Link></li>
+          <li><Link href={`/tag`}>タグ一覧</Link></li>
+          <li><Link href={`/login`}>ログイン</Link></li>
         </ul>
       </nav>
       

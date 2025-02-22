@@ -1,5 +1,5 @@
 import Image from "next/image";
-import SadCat from "../public/download20250201122629.png";
+import SadCat from "../public/sadcat_1.png";
 
 const NotFound = () => {
   return (
@@ -8,7 +8,7 @@ const NotFound = () => {
       <p>お探しのページが見つかりませんでした</p>
       <Image src={SadCat} alt="sadcat" />
     </>
-  )
+  );
 }
 
-export default NotFound
+export default NotFound;
