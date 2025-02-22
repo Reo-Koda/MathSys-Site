@@ -1,0 +1,10 @@
+.container {
+  text-align: center;
+  padding-top: 2em;
+}
+.container h1 {
+  font-size: 4em;
+}
+.container p {
+  font-size: 2em;
+}

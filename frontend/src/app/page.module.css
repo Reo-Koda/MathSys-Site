@@ -1,17 +1,9 @@
-.logo {
-  width: 60px;
-  height: auto;
-  position: absolute;
-  left: 20px;
-  top: 20px;
-  border-radius: 10px;
-}
-
 .container {
   width: 90%;
   max-width: 1200px;
   margin: 20px auto;
 }
+
 .search {
   background-color: #fff;
   padding: 20px;
@@ -43,11 +35,13 @@
 .search button:hover {
   background-color: #00509e;
 }
+
 .posts {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
   gap: 20px;
 }
+
 .post {
   background-color: #fff;
   padding: 15px;

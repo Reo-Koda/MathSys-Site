@@ -1,0 +1,27 @@
+.topListContainer {
+  background-color: var(--white);
+  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+  margin: 20px;
+  border-radius: 8px;
+}
+
+.topListBox {
+  list-style: none;
+  display: flex;
+  justify-content: center;
+  padding: 10px 0;
+}
+
+.topListElement {
+  margin: 0 15px;
+}
+
+.topListLink {
+  text-decoration: none;
+  color: var(--blue);
+  font-weight: bold;
+  transition: color 0.3s ease;
+}
+.topListLink:hover {
+  color: var(--hover-blue);
+}
