@@ -49,7 +49,7 @@ export default function Home() {
         <section className={ css.posts }>
           { tagList.map((tagList, index) => {
             return (
-              <PostBlock tagList={ tagList } index={ index }></PostBlock>
+              <PostBlock tagList={ tagList } key={ index }></PostBlock>
             )
           }) }
         </section>

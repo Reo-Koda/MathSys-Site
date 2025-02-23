@@ -13,12 +13,11 @@ interface tag {
 
 type Props = {
   tagList: tag
-  index: number
 }
 
-const PostBlock = ({ tagList, index }: Props) => {
+const PostBlock = ({ tagList }: Props) => {
   return (
-    <article className={ styles.post } key={ index }>
+    <article className={ styles.post }>
       <h2>{ tagList.class } { tagList.category } { tagList.year }</h2>
       <div className={ styles.tagContainer }>
         <p>{ tagList.doctor }</p>
