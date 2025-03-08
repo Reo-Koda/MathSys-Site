@@ -1,20 +1,19 @@
 @charset "UTF-8";
-
+/*縦方向にスクロールが可能*/
 html{overflow:auto;}
 
 body{
-    
-    margin: 0 ;
-    
-    padding: 0 ;
-    --scroll-gap:30px;
-    
+    margin:0;
+    padding: 0; /*余白なし*/
+    color: #333; /*文字の色*/
+    font: 17px/2 sans-serif; 
+    overflow-x:hidden; /*横スクロールできない*/
 }
 
 main {
     display: flex;
-    justify-content: space-between;
-    max-width: 1100px;
+    justify-content: space-between; /*要素を均等に配置*/
+    max-width: 1200px;
     margin: auto;
     padding: 20px 0;
 }
@@ -38,7 +37,7 @@ main {
 
 .scroll_wrap {
     margin: 0;
-    width: 100vw;
+    width: 100%;
     overflow: hidden;
     display: flex;
     justify-content: center;
@@ -57,6 +56,7 @@ main {
   gap: 0 var(--scroll-gap);
   padding: 0;
   margin: 0;
+  width:100%;
 }
 
 .scroll_cont {
@@ -70,7 +70,9 @@ main {
 
  
 img{
-    width:100%;
+    /*width: 600px;*/
+    width: 100%;
+    height: auto;
     vertical-align:bottom;
 }
 
@@ -79,19 +81,30 @@ a{text-decoration:underline;}
 header{padding:5px 0;}
 
 nav{background-color:#cc0033;
-    margin:0;
-    padding:0;
+    width:100%;
+    /*margin:0;
+    position: relative;*/
+    /*padding:0;*/
     }
 
 nav ul {
     display: flex;
-    justify-content: center;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: nowrap;
     padding: 0;
     margin: 0;
+    /*width: 100%;
+    overflow-x: auto;*/
     list-style: none;
+    
 }
 
 nav li {
+    flex: 1; 
+    text-align: center;
+    min-width: 120px; /* 最低幅を設定 */
+    padding: 15px 0; /* 余白を調整 */
     border-right: 1px solid #D692A3;
     /*margin:0;
     padding:0;*/
@@ -101,13 +114,18 @@ nav li:last-child {
     border-right: none;
 }
 
+/*navの境界線*/
+/*レスポンシブ対応で解決メディアクエリを追加で書く
+contentとasideを1つの大きなdivで囲む*/
 nav a {
     display: block;
-    padding: 0.7em 3.5em;
+    /*padding: 0;*/
     color: #fff;
     text-decoration: none;
     font-weight: bold;
-    white-space: nowrap;
+    padding: 10px 0;
+    /*white-space: nowrap;
+    text-align: center;*/
 }
 
 nav a:hover {
@@ -117,13 +135,14 @@ nav a:hover {
 h2{
     font-size:1.5em;
     font-weight:bold;
-    margin:1em 1 1.0em 1;
+    margin:1em 0 0.5em 0;
     border-left:10px solid #cc0033;
-    padding-left:0.5em;
+    padding-left:0.2em;
 }
 
 
 h3{
+    
     background-color:#eee;
     font-weight:bold;
     padding:5px;
@@ -140,15 +159,16 @@ h4{
 }
 
 #contents{
-    width:95%;
+    /*width:95%;*/
+    max-width: 850px;
     margin:10px auto;
 }
 
 aside{
     padding:0 10px;
-    width: 30%;
-    max-width: 350px;
-    margin-left: 40px;
+    width: 28%;
+    max-width: 400px;
+    margin-left: 0;
 }
 aside li{
     display:inline;
@@ -158,7 +178,7 @@ aside li{
 aside ul{
     text-align:center;
 }
-aside ul&gtli::before {
+aside ul>li::before {
     content: "\f152";
     position: relative;
     font-family: FontAwesome;
@@ -190,9 +210,13 @@ footer{
     }
 
 
-nav ul{display:flex;width:80%;margin:auto;padding:0;}
-nav li{width:20%;text-align: center; border-right: 1px solid #D692A3;
-    list-style: none;}
+nav ul{/*display:flex;margin:auto;padding:0;*/
+    flex-direction: row;
+    width:100%;}
+nav li{border-right: none;
+    border-bottom: 1px solid #D692A3;
+    text-align: center;
+    width: auto;}
 nav li:last-child{border-bottom:none;}
 nav li a:hover{
     transition: background-color 0.5s linear;
@@ -203,16 +227,19 @@ nav li :not(:last-child){
 main{
     display:flex;
     justify-content: space-between;
-    width:100%;max-width: 1400px;
+    width:100%;
+    max-width: 1400px;
     padding:5px;
     margin:auto;
 }
 aside{
-    width:30%;max-width:450px;
-    text-align: left;
+    width:30%;
+    max-width:450px;
+    /*text-align: left;*/
     padding:10px 0 0 30px;
-    margin-left:30px;
+    margin-left:0;
     border-left:dotted 1px #ccc;
+    box-sizing: border-box;
 }
 aside li{
     display:block;
