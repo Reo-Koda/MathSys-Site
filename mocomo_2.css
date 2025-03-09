@@ -1,114 +1,48 @@
 @charset "UTF-8";
-/*縦方向にスクロールが可能*/
-html{overflow:auto;}
 
-body{
+@keyframes infinity-scroll-left {
+    from {
+      transform: translateX(0);
+    }
+      to {
+      transform: translateX(-300%);
+    }
+}
+
+/*縦方向にスクロールが可能*/
+html {
+    overflow: auto;
+}
+
+body {
     margin:0;
     padding: 0; /*余白なし*/
     color: #333; /*文字の色*/
-    font: 16px/2 sans-serif; 
-    overflow-x:hidden; /*横スクロールできない*/
+    font: 16px/2 sans-serif;
+    overflow-x: hidden;
 }
 
-main {
-    display: flex;
-    justify-content: space-between; /*要素を均等に配置*/
-    max-width: 1200px;
-    margin: auto;
-    padding: 20px 0;
-}
-
-
-
-@keyframes infiniteScroll {
-    0% {
-      transform: translateX(0);
-    }
-    33.33% {
-      transform: translateX(-100%);
-    }
-    66.66%{
-        transform: translateX(-200%);
-    }
-    100%{
-        transform: translateX(0%);
-    }
-  }
-
-.scroll_wrap {
-    margin: 0;
-    width: 100%;
-    overflow: hidden;
-    display: flex;
-    justify-content: center;
-    animation: infiniteScroll 30s linear infinite;
-
-}
-.scroll_wrap:hover{
-    animation-play-state: paused;
-  }
-
-.scroll_track {
-  display: flex;
-  width: 100%;
-}
-.scroll_track:hover{
-  animation-play-state: paused;
-}
-.scroll_inner {
-  display: flex;
-  flex-wrap: nowrap;
-  gap: 0 var(--scroll-gap);
-  padding: 0;
-  margin: 0;
-  width:100%;
-}
-
-.scroll_cont {
-  display: grid;
-  place-content: center;
-  flex-shrink: 0;
-  width: 100%;
-}
-.scroll_cont:hover{
-  animation-play-state: paused;
-}
-
- 
-img{
-    width: 100%;
-    /* height: auto; */
-    vertical-align:bottom;
-}
-
-a{text-decoration:underline;}
-
-/* header{padding:5px 0;}
-修正案 */
 header {
-    padding:10px 0;
-    max-width:800px;
-    margin-left:50px;
+    padding: 10px 0;
+    max-width: 800px;
+    margin-left: 50px;
+}
+
+.header-img {
+    width: 100%;
+    vertical-align: bottom;
+}
+
+ul {
+    list-style: none;
 }
 
 nav {
     background-color:#cc0033;
 }
 
-/* nav ul {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    flex-wrap: nowrap;
-    padding: 0;
-    margin: 0;
-    list-style: none;
-    
-}
-修正案 */
 nav ul {
     display: flex;
-    list-style: none;
     margin: 0 auto;
     padding: 0;
     width: 80%;
@@ -116,7 +50,7 @@ nav ul {
 
 nav li {
     text-align: center;
-    border-right: 1px solid #D692A3;
+    border-right: 1px dotted #D692A3;
     width: 20%;
 }
 
@@ -139,6 +73,41 @@ nav a:hover {
     background-color: rgba(0, 0, 0, 0.2);
 }
 
+main {
+    display: flex;
+    justify-content: space-between; /*要素を均等に配置*/
+    max-width: 1400px;
+    margin: auto;
+    padding: 5px;
+}
+
+.scroll_wrap {
+    width: 100%;
+}
+
+.scroll_inner {
+    margin: 0;
+    padding: 0;
+    display: flex;
+
+    animation: infinity-scroll-left 20s linear infinite;
+}
+
+.scroll_cont img {
+    width: 100vw;
+    vertical-align: bottom;
+}
+
+
+
+
+
+
+
+
+
+
+
 h2{
     font-size:1.5em;
     font-weight:bold;
@@ -147,7 +116,6 @@ h2{
     padding-left:0.2em;
 }
 
-
 h3{
     
     background-color:#eee;
@@ -155,6 +123,7 @@ h3{
     padding:5px;
     margin-top:1.5em;
 }
+
 h4{
     font-size:1em;
     text-align:left;
