@@ -93,6 +93,10 @@ main {
     animation: infinity-scroll-left 20s linear infinite;
 }
 
+.scroll_inner:hover {
+  animation-play-state: paused;
+}
+
 .scroll_cont img {
     width: 100vw;
     vertical-align: bottom;
