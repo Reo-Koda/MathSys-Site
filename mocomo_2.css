@@ -160,20 +160,20 @@ aside{
     margin-left: 0;
 }
 aside li{
-    display:inline;
+    display:block;
     font-size:1.0em;
     margin:10px 0.6em 0 0;
 }
-aside ul{
+/*aside ul{
     text-align:center;
-}
-aside ul>li::before {
+}*/
+/*aside ul>li::before {
     content: "\f152";
     position: relative;
     font-family: FontAwesome;
     margin-right: .5em;
     color:#3E5B9A;
-}
+}*/
 video{
     max-width: 100%;background-color:#fff;
 }
