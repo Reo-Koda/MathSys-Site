@@ -110,6 +110,9 @@ img{
     vertical-align:bottom;
 }
 
+
+
+
 a{text-decoration:underline;}
 
 header{padding:5px 0;}
@@ -132,9 +135,10 @@ h2{
 h3{
     
     background-color:#eee;
+    font-size:16px;
     font-weight:bold;
     padding:5px;
-    margin-top:1.5em;
+    margin:1.5em 0 0;
 }
 
 h4{
@@ -144,20 +148,20 @@ h4{
     font-weight:bold;
     color: #cc0033;
     padding-left:0.5em;
-    margin-bottom:20px;
+    margin:0 0 20px;
 }
 
 #contents{
-    /*width:95%;*/
-    max-width: 850px;
-    margin:10px auto;
+    max-width: 950px;
+    margin:10px 0;
 }
 
 aside{
-    padding:0 10px;
-    width: 28%;
-    max-width: 400px;
-    margin-left: 0;
+    padding:10px 0 0 30px;
+    width: 30%;
+    max-width: 450px;
+    margin: 0 0 0 30px;
+    border-left: dotted 1px #ccc;
 }
 aside li{
     display:block;
@@ -184,9 +188,13 @@ footer{
     font-weight:bold;
     margin-top:10px;
 }
-.mt10{margin-top:1em;}
+.mt10{margin:1em 0 0;}
 .mt20{margin-top:2em;}
 .small{font-size:small;}
+.cont_p {margin: 0;}
+.aside_ul{margin:0; padding:0;} 
+.aside_ul i::before{margin-right: 0.5em;}
+.aside_ul a{color: #333;}
 
 @media screen and (max-width:600px) {
     #none{display: none;}
