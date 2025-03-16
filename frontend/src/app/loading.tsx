@@ -3,7 +3,7 @@ import styles from "./loading.module.css";
 const Loading = () => {
   return (
     <div className={ styles.loadingContainer }>
-      <div className={ styles.squareSpin }></div>
+      <div className={ styles.circleSpin }></div>
       <p>Loading...</p>
     </div>
   );

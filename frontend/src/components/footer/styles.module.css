@@ -5,3 +5,7 @@
 	padding: 20px;
 	margin-top: 20px;
 }
+
+.footer p:hover {
+	text-decoration: underline;
+}

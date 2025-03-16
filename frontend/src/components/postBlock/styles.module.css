@@ -7,6 +7,7 @@
 }
 .post:hover {
   transform: translateY(-5px);
+  cursor: default;
 }
 .post h2 {
   font-size: 1.2em;
@@ -25,13 +26,14 @@
 
 .tagContainer p {
   display: inline-block;
-  color: var(--blue);
+  color: rgb(142, 142, 142);
   border: 1px solid var(--hover-blue);
   border-radius: 5px;
-  background-color: #BAD3FF;
+  background-color: rgb(225, 251, 255);
   margin: 0 5px 6px;
   padding: 2px 3px;
 }
 .tagContainer p:hover {
   font-weight: 700;
+  cursor: pointer;
 }
