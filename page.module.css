@@ -1,0 +1,254 @@
+@charset "UTF-8";
+/*縦方向にスクロールが可能*/
+html{overflow:auto;}
+
+.body{
+    margin:0;
+    padding: 0; /*余白なし*/
+    color: #333; /*文字の色*/
+    font: 17px/2 sans-serif; 
+    overflow-x:hidden; /*横スクロールできない*/
+}
+
+.main001 {
+    display: flex;
+    justify-content: space-between; /*要素を均等に配置*/
+    max-width: 1200px;
+    margin: auto;
+    padding: 20px 0;
+}
+
+
+
+@keyframes infiniteScroll {
+    0% {
+      transform: translateX(0);
+    }
+    33.33% {
+      transform: translateX(-100%);
+    }
+    66.66%{
+        transform: translateX(-200%);
+    }
+    100%{
+        transform: translateX(0%);
+    }
+  }
+
+.scroll_wrap {
+    margin: 0;
+    width: 100%;
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+
+}
+.scroll_track {
+  display: flex;
+  animation: infiniteScroll 30s linear infinite;
+}
+.scroll_track:hover{
+  animation-play-state: paused;
+}
+.scroll_inner {
+  display: flex;
+  flex-wrap: nowrap;
+  gap: 0 var(--scroll-gap);
+  padding: 0;
+  margin: 0;
+  width:100%;
+}
+
+.scroll_cont {
+  display: grid;
+  place-content: center;
+  flex-shrink: 0;
+}
+.scroll_cont:hover{
+  animation-play-state: paused;
+}
+
+ 
+.headerImg{
+    /*width: 600px;*/
+    width: 100%;
+    height: auto;
+    vertical-align:bottom;
+}
+
+.a{text-decoration:underline;}
+
+.header{padding:5px 0;}
+
+.nav{background-color:#cc0033;
+    width:100%;
+    /*margin:0;
+    position: relative;*/
+    /*padding:0;*/
+    }
+
+.nav_ul {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: nowrap;
+    padding: 0;
+    margin: 0;
+    /*width: 100%;
+    overflow-x: auto;*/
+    list-style: none;
+    
+}
+
+.nav_li {
+    flex: 1; 
+    text-align: center;
+    min-width: 120px; /* 最低幅を設定 */
+    padding: 15px 0; /* 余白を調整 */
+    border-right: 1px solid #D692A3;
+    /*margin:0;
+    padding:0;*/
+}
+
+.nav_li:last-child {
+    border-right: none;
+}
+
+/*navの境界線*/
+/*レスポンシブ対応で解決メディアクエリを追加で書く
+contentとasideを1つの大きなdivで囲む*/
+.nav_a {
+    display: block;
+    /*padding: 0;*/
+    color: #fff;
+    text-decoration: none;
+    font-weight: bold;
+    padding: 10px 0;
+    /*white-space: nowrap;
+    text-align: center;*/
+}
+
+.nav_a:hover {
+    background-color: rgba(0, 0, 0, 0.2);
+}
+
+.h2{
+    font-size:1.5em;
+    font-weight:bold;
+    margin:1em 0 0.5em 0;
+    border-left:10px solid #cc0033;
+    padding-left:0.2em;
+}
+
+
+.h3{
+    
+    background-color:#eee;
+    font-weight:bold;
+    padding:5px;
+    margin-top:1.5em;
+}
+.h4{
+    font-size:1em;
+    text-align:left;
+    border-left:10px solid #cc0033;
+    font-weight:bold;
+    color: #cc0033;
+    padding-left:0.5em;
+    margin-bottom:20px;
+}
+
+.contents{
+    /*width:95%;*/
+    max-width: 850px;
+    margin:10px auto;
+}
+
+.aside{
+    padding:0 10px;
+    width: 28%;
+    max-width: 400px;
+    margin-left: 0;
+}
+.aside_li{
+    display:inline;
+    font-size:0.8em;
+    margin:10px 0.6em 0 0;
+}
+.aside_ul{
+    text-align:center;
+}
+.aside ul>li::before {
+    content: "\f152";
+    position: relative;
+    font-family: FontAwesome;
+    margin-right: .5em;
+    color:#3E5B9A;
+}
+.video{
+    max-width: 100%;background-color:#fff;
+}
+.footer{
+    background-color:#eee;
+    padding:10px;
+    text-align:center;
+    font-weight:bold;
+    margin-top:10px;
+}
+.mt10{margin-top:1em;}
+.mt20{margin-top:2em;}
+.small{font-size:small;}
+.color{color: #333;}
+.none{display: none;}
+
+
+
+@media screen and (min-width:600px){
+    .header{
+        max-width:800px;
+        margin-left:50px;
+    }
+
+
+.nav_ul{/*display:flex;margin:auto;padding:0;*/
+    flex-direction: row;
+    width:100%;}
+.nav_li{border-right: none;
+    border-bottom: 1px solid #D692A3;
+    text-align: center;
+    width: auto;}
+.nav_li:last-child{border-bottom:none;}
+.nav_li nav_a:hover{
+    transition: background-color 0.5s linear;
+}
+nav_li :not(:last-child){
+    border-right: 1px dotted #D692A3
+}
+.main{
+    display:flex;
+    justify-content: space-between;
+    width:100%;
+    max-width: 1400px;
+    padding:5px;
+    margin:auto;
+}
+.aside{
+    width:30%;
+    max-width:450px;
+    /*text-align: left;*/
+    padding:10px 0 0 30px;
+    margin-left:0;
+    border-left:dotted 1px #ccc;
+    box-sizing: border-box;
+}
+.aside_li{
+    display:block;
+	font-size:1em;
+}
+ 
+.aside_ul{
+    text-align:left;
+}
+.contents{max-width:950px;}
+.none{display:block;}
+}
