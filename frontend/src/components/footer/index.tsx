@@ -17,8 +17,12 @@ const Footer = ({ head }: Props) => {
       <Link href={"#"}>
         <p>&copy; { head.year } { head.university } { head.site }</p>
       </Link>
-      <p>プライバシーポリシー</p>
-			<p>ご利用に際しての注意事項</p>
+      <Link href={"#"}>
+        <p>プライバシーポリシー</p>
+      </Link>
+      <Link href={"#"}>
+        <p>ご利用に際しての注意事項</p>
+      </Link>
     </footer>
   );
 }
