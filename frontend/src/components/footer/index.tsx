@@ -23,6 +23,9 @@ const Footer = ({ head }: Props) => {
       <Link href={"#"}>
         <p>ご利用に際しての注意事項</p>
       </Link>
+      <Link href={"#"}>
+        <p>お問い合わせ</p>
+      </Link>
     </footer>
   );
 }
