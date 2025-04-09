@@ -1,6 +1,6 @@
 @charset "UTF-8";
 /*縦方向にスクロールが可能*/
-html{overflow:auto;}
+/* html{overflow:auto;} */
 
 .body{
     margin:0;
@@ -221,7 +221,7 @@ contentとasideを1つの大きなdivで囲む*/
 .nav_li nav_a:hover{
     transition: background-color 0.5s linear;
 }
-nav_li :not(:last-child){
+.nav_li :not(:last-child){
     border-right: 1px dotted #D692A3
 }
 .main{

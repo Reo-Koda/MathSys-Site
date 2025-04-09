@@ -1,0 +1,15 @@
+.overlay {
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba( 0, 0, 0, .3);
+
+    position: "fixed";
+    top: 0;
+    left: 0;
+}
+
+.modal {
+    width: 100px;
+    height: 100px;
+    background-color: var(--white);
+}
