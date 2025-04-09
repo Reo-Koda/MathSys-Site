@@ -2,7 +2,6 @@ import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import sampleUviversityIcon from "@/public/sampleUniversity.png";
 import Header from "@/components/header";
-import TopList from "@/components/topList";
 import Footer from "@/components/footer";
 import "./globals.css";
 import { StaticImageData } from "next/image";
@@ -38,29 +37,11 @@ const head: head = {
   uniImage: sampleUviversityIcon,
 }
 
-interface topList {
-  ref: string
-	top: string
-}
-
-const topList: topList[] = [
-  { ref: `/`, top: "ホーム" },
-  { ref: `/mypage`, top: "マイページ" },
-  { ref: `/post`, top: "投稿" },
-  { ref: `/tag`, top: "タグ一覧" },
-  { ref: `/signin`, top: "ログイン" },
-]
-
-export default function RootLayout({
-  children,
-}: Readonly<{
-  children: React.ReactNode;
-}>) {
+export default function RootLayout({ children }: Readonly<{ children: React.ReactNode; }>) {
   return (
     <html lang="en">
       <body className={`${ geistSans.variable } ${ geistMono.variable }`}>
         <Header head={ head }></Header>
-        <TopList topList={ topList }/>
 
         { children }
         
