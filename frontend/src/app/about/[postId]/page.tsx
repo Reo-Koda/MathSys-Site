@@ -1,8 +1,12 @@
 import styles from "./page.module.css";
 
-const About = ({ params }: { params: { postId: string } }) => {
+const About = async ({ params }: { params: { postId: string } }) => {
+  const { postId } = await Promise.resolve(params);
+
   return (
-    <div className={ styles.divs }>投稿番号：{ params.postId }</div>
+    <div className={ styles.container }>
+      <div className={ styles.divs }>投稿番号：{ postId }</div>
+    </div>
   );
 }
 
