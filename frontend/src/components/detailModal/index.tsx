@@ -10,7 +10,7 @@ const DetailModal = ({ showModal, toggleModal }: Props) => {
     <>
     { showModal && (
         <div className={ styles.overlay } onClick={ toggleModal }>
-            <div className={ styles.modal }></div>
+            <div className={ styles.modal } onClick={ (e) => e.stopPropagation() }></div>
         </div>
     ) }
     </>

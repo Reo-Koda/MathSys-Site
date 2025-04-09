@@ -1,8 +1,8 @@
-import React from 'react'
+import styles from "./page.module.css";
 
 const Post = () => {
   return (
-    <div>Post</div>
+    <div className={ styles.divs }>Post</div>
   );
 }
 

@@ -1,7 +1,4 @@
-"use client";
-import { useState } from "react";
 import styles from "./styles.module.css";
-import DetailModal from "../detailModal";
 
 interface tag {
   class: string
@@ -19,14 +16,9 @@ type Props = {
 }
 
 const PostBlock = ({ tagList }: Props) => {
-  const [isOpen, setIsOpen] = useState(false);
-  const toggleModal = () => {
-    setIsOpen(!isOpen);
-  }
 
   return (
-    <>
-    <article className={ styles.post } onClick={ toggleModal }>
+    <article className={ styles.post }>
       <h2>{ tagList.class } { tagList.category } { tagList.year }</h2>
       <div className={ styles.tagContainer }>
         <p>{ tagList.doctor }</p>
@@ -36,9 +28,6 @@ const PostBlock = ({ tagList }: Props) => {
       <p>投稿者: { tagList.author }</p>
       <p>投稿日: { tagList.createdDay }</p>
     </article>
-
-    <DetailModal showModal={ isOpen } toggleModal={ toggleModal } />
-    </>
   );
 }
 

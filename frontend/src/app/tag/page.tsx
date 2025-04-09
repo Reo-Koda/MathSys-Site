@@ -1,8 +1,8 @@
-import React from 'react'
+import styles from "./page.module.css";
 
 const Tag = () => {
   return (
-    <div>Tag</div>
+    <div className={ styles.divs }>Tag</div>
   );
 }
 
