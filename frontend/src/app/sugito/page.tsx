@@ -1,23 +1,23 @@
 import styles from "./page.module.css";
-
+import logoSvg from "@/mocomo/public/logo.svg";
 
 
 const Sugito = () => {
-  return (
-    <>
-    <header className={styles.header} >
-    <div className={ styles.logo}><img className={ styles.headerImg } src="sozai/images/logo.svg"/>Sugito</div>
+    return (
+      <>
+      <header className={styles.header} >
+      <div className={ styles.logo}><img className={ styles.headerImg } src={ logoSvg } />Sugito</div>
 </header>
 <body className={styles.body}>
 
 <nav className={styles.nav}>
     <ul className={styles.nav_ul}>
         <a className={styles.a}>
-            <li className={styles.nav_li}><a href="#">ホーム</a></li>
-        <li className={styles.nav_li}><a className={styles.nav_a} href="#">お知らせ</a></li>
-        <li className={styles.nav_li}><a className={styles.nav_a} href="#">製品</a></li>
-        <li className={styles.nav_li}><a className={styles.nav_a} href="#">サービス</a></li>
-        <li className={styles.nav_li}><a className={styles.nav_a} href="#">料金・割引</a></li>
+        <li className={styles.nav_li}><span className={styles.nav_a} >ホーム</span></li>
+        <li className={styles.nav_li}><span className={styles.nav_a} >お知らせ</span></li>
+        <li className={styles.nav_li}><span className={styles.nav_a} >製品</span></li>
+        <li className={styles.nav_li}><span className={styles.nav_a} >サービス</span></li>
+        <li className={styles.nav_li}><span className={styles.nav_a} >料金・割引</span></li>
         </a>
     </ul>
 </nav>
