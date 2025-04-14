@@ -1,12 +1,12 @@
 import styles from "./page.module.css";
-import logoSvg from "@/public/mocomo/logo.svg";
-
+// import logoSvg from "@/public/mocomo/logo.svg";
+<img className={styles.headerImg} src="/mocomo/logo.svg" />
 
 const Sugito = () => {
   return (
     <>
     <header className={styles.header} >
-    <div className={ styles.logo}><img className={ styles.headerImg } src={ logoSvg } />Sugito</div>
+    <div className={ styles.logo}><img className={ styles.headerImg } src={ "/mocomo/logoSvg" } />Sugito</div>
 </header>
 <body className={styles.body}>
 
