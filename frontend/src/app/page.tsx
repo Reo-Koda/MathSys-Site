@@ -1,6 +1,6 @@
 import css from "./page.module.css";
-import TopList from "@/components/topList";
-import PostBlock from "@/components/postBlock";
+import TopList from "../components/topList";
+import PostBlock from "../components/postBlock";
 
 interface topList {
   ref: string

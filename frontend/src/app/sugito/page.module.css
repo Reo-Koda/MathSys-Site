@@ -68,6 +68,7 @@
 
 .sliderImg {
   width: 100vw;
+  height: auto;
 }
 
 .a{text-decoration:underline;}
