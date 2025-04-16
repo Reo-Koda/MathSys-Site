@@ -1,6 +1,6 @@
 import styles from "./page.module.css";
-// import logoSvg from "@/public/mocomo/logo.svg";
-<img className={styles.headerImg} src="/mocomo/logo.svg" />
+import Image from 'next/image'
+import scrollImg from "../../public/mocomo/slider/image01.jpg";
 
 const Sugito = () => {
   return (
@@ -20,16 +20,11 @@ const Sugito = () => {
     <div className={ styles.scroll_wrap }>
         <ul className={ styles.scroll_inner }>
             <li className={ styles.scroll_cont }>
-                <img src="sozai/images/slider/image01.jpg" alt="aaa"/>
-            </li>
-            <li className={ styles.scroll_cont}>
-                <img src="sozai/images/slider/image02.jpg" alt="bbb"/>
-            </li>
-            <li className={ styles.scroll_cont }>
-                <img src="sozai/images/slider/image03.jpg" alt="ccc"/>
-            </li>
-            <li className={ styles.scroll_cont}>
-                <img src="sozai/images/slider/image01.jpg" alt="aaa"/>
+                <Image
+                    src={ scrollImg }  // 画像のパス
+                    alt="aaa"  // 代替テキスト（必須）
+                    className={ styles.sliderImg }
+                />
             </li>
         </ul>
     </div>
