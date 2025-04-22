@@ -1,5 +1,5 @@
 import styles from "./page.module.css";
-import TopList from "@/components/topList";
+import TopList from "../../components/topList";
 
 interface topList {
   ref: string
