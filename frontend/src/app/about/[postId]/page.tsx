@@ -1,6 +1,13 @@
 import styles from "./page.module.css";
 
-const About = ({ params }: { params: { postId: string } }) => {
+type AboutProps = {
+  params: {
+    postId: string;
+  };
+};
+
+
+const About = ({ params }: AboutProps) => {
   const { postId } = params;
 
   return (
