@@ -1,14 +1,7 @@
 import styles from "./page.module.css";
 
-type AboutProps = {
-  params: {
-    postId: string;
-  };
-};
-
-
-const About = ({ params }: AboutProps) => {
-  const { postId } = params;
+export default async function About ({ params }: { params: Promise<{ postId: string }>;}) {
+  const { postId } = await params;
 
   return (
     <div className={ styles.container }>
@@ -16,5 +9,3 @@ const About = ({ params }: AboutProps) => {
     </div>
   );
 }
-
-export default About;
