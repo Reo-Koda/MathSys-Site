@@ -1,0 +1,88 @@
+
+import styles from "./page.module.css";
+import TopList from "../../../../../../components/topList";
+import Image from "next/image";
+import Logo from "../../../../../../public/glass.svg";
+interface topList {
+  ref: string
+	top: string
+}
+
+const topList: topList[] = [
+  { ref: `/`, top: "ホーム" },
+  { ref: `/mypage`, top: "マイページ" },
+  { ref: `/post`, top: "投稿" },
+  { ref: `/tag`, top: "タグ一覧" },
+  { ref: `/signin`, top: "ログイン" },
+]
+
+const Mypage = ({params}:{params:{mypageID:string ; gakubuID:string ; nenID:string ; authorID:string}}) => {
+  return(
+    <>
+
+    <TopList topList={ topList }/>
+    <div className={ styles.divs }>Mypage</div>
+
+  
+    <div className={styles.container}>
+      <div className={styles.mypageheader}>
+        <h2>お気に入り一覧</h2>
+        <p>あなたが登録したお気に入りの過去問やコンテンツ</p>
+      </div>
+    <div className={styles.pagesearch}>
+      <section className={styles.pagesearch}>
+        <input type="text" placeholder="講義名、教授名、学部、学科、年度"/>
+        <button className={styles.pagesearchbtn} aria-label="検索">
+        <Image src={Logo} width={40} height={35} alt="icons"></Image>
+        </button>
+      </section>
+    
+      <div className={styles.favorites}>
+        <div className={styles.favoriteitem}>
+          <button className={styles.removebtn} title="お気に入り解除">×</button>
+          <h3>経済学部 経済学入門 過去問 2023</h3>
+          <button className={styles.gakubu} title="学部">経済学部</button>
+          <button className={styles.nen} title="年度">2023</button>
+          <p>投稿者: studentA</p>
+        </div>
+        
+        <div className={styles.favoriteitem}>
+          <button className={styles.removebtn} title="お気に入り解除">×</button>
+          <h3>法学部 民法 過去問 2022</h3>
+          <button className={styles.gakubu} title="学部">法学部</button>
+          <button className={styles.nen} title="年度">2022</button>
+          <p>投稿者: studentB</p>
+        </div>
+        
+        <div className={styles.favoriteitem}>
+          <button className={styles.removebtn} title="お気に入り解除">×</button>
+          <h3>工学部 機械工学 基礎過去問 2023</h3>
+          <button className={styles.gakubu} title="学部">工学部</button>
+          <button className={styles.nen} title="年度">2023</button>
+          <p>投稿者: studentC</p>
+        </div>
+        
+        <div className={styles.favoriteitem}>
+          <button className={styles.removebtn} title="お気に入り解除">×</button>
+          <h3>文学部 英文学 過去問 2021</h3>
+          <button className={styles.gakubu} title="学部">文学部</button>
+          <button className={styles.nen} title="年度">2021</button>
+          <p>投稿者: studentD</p>
+        </div>
+
+        <div className={styles.favoriteitem}> 
+            <button className={styles.removebtn} title="お気に入り解除">×</button>
+            <h3>{decodeURIComponent(params.mypageID)}</h3>
+            <button className={styles.gakubu} title="学部">{decodeURIComponent(params.gakubuID)}</button>
+            <button className={styles.nen} title="年度">{params.nenID}</button>
+            <p>投稿者:{decodeURIComponent(params.authorID)}</p>
+        </div>
+      </div>
+    </div>
+    </div>
+
+  </>
+  );
+}
+
+export default Mypage;
