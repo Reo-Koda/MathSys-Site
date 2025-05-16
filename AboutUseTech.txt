@@ -5,5 +5,4 @@
   Next.js
  バックエンド
   Go
-  PHP
-  Laravel
+  Gin

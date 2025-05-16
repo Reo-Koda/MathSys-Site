@@ -1,10 +1,16 @@
 services:
-  web:
-    build: ./frontend
-    ports:
-      - "3000:3000"
+  mysql:
+    image: mysql:8.0
     volumes:
-      - ./frontend:/app
-      - /frontend/app/node_modules
+      - ./mysql/db:/docker-entrypoint-initdb.d # 初期データ
+      - mathsys_db:/var/lib/mysql
     environment:
-      - NODE_ENV=development
+      MYSQL_HOST: localhost
+      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
+      MYSQL_DATABASE: mathsys_db
+      MYSQL_USER: ${MYSQL_USER}
+      MYSQL_PASSWORD: ${MYSQL_PASSWORD}
+      TZ: Asia/Tokyo
+
+volumes:
+  mathsys_db:
