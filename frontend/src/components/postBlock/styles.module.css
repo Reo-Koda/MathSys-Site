@@ -8,33 +8,124 @@
 }
 .post:hover {
   transform: translateY(-5px);
-  cursor: default;
+  /*cursor: default;*/
 }
 .post h2 {
   font-size: 1.2em;
   margin-bottom: 10px;
-  color: var(--blue);
-
+  color: #00274d;
   width: 100%;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
+  white-space: normal;
+  overflow: visible;
+  text-align: center;
+  /*text-overflow: ellipsis;*/
 }
 .post p {
   font-size: 0.9em;
   color: #666;
 }
-
-.tagContainer p {
-  display: inline-block;
-  color: rgb(142, 142, 142);
-  border: 1px solid var(--hover-blue);
-  border-radius: 5px;
-  background-color: rgb(225, 251, 255);
-  margin: 0 5px 6px;
-  padding: 2px 3px;
+.tagContainer {
+  margin-bottom: 10px;
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
 }
-.tagContainer p:hover {
+.tagContainer p {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  height: 36px;
+  padding: 0 12px;
+  font-size: 0.9em;
+  background-color: #e0e7ff;
+  border: none;
+  border-radius: 6px;
+  color: #00274d;
+  margin: 5px 5px 0 0;
+  cursor: default;
+}
+.nameday p{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+/*.tagContainer removebtn {
+position: absolute;
+top: 5px;
+right: 5px;
+background-color: #fc9292 !important;
+border: none;
+color: #ffffff !important;
+font-size: 1em;
+border-radius: 50%;
+width: 24px;
+height: 24px;
+display: flex;
+align-items: center;
+justify-content: center;
+cursor: pointer;
+padding: 0;
+}*/
+/*.tagContainer p:hover {
   font-weight: 700;
   cursor: pointer;
+}*/
+
+/* お気に入り一覧グリッド */
+/*.favorites {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 20px;
 }
+.favoriteitem {
+  background-color: #fff;
+  padding: 30px 15px 15px;
+  border-radius: 8px;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+  position: relative;
+  transition: transform 0.3s ease;
+}
+.favoriteitem:hover {
+  transform: translateY(-5px);
+}
+.favoriteitem h3 {
+  font-size: 1.2em;
+  margin-bottom: 10px;
+  color: #00274d;
+}
+.favoriteitem p {
+  font-size: 0.9em;
+  color: #666;
+}
+.removebtn {
+position: absolute;
+top: 5px;
+right: 5px;
+background-color: #fc9292 !important;
+border: none;
+color: #ffffff !important;
+font-size: 1em;
+border-radius: 50%;
+width: 24px;
+height: 24px;
+display: flex;
+align-items: center;
+justify-content: center;
+cursor: pointer;
+padding: 0;
+}
+.gakubu, .nen {
+display: inline-flex;
+align-items: center;
+justify-content: center;
+height: 36px;
+padding: 0 12px;
+font-size: 0.9em;
+background-color: #e0e7ff;
+border: none;
+border-radius: 6px;
+color: #00274d;
+margin: 5px 5px 0 0;
+cursor: default;
+}*/
