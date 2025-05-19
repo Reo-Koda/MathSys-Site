@@ -42,6 +42,7 @@ const Mypage = () => {
           <button className={styles.gakubu} title="学部">経済学部</button>
           <button className={styles.nen} title="年度">2023</button>
           <p>投稿者: studentA</p>
+          <p>投稿日: 20220101</p>
         </div>
         
         <div className={styles.favoriteitem}>
@@ -50,6 +51,7 @@ const Mypage = () => {
           <button className={styles.gakubu} title="学部">法学部</button>
           <button className={styles.nen} title="年度">2022</button>
           <p>投稿者: studentB</p>
+          <p>投稿日: 20230102</p>
         </div>
         
         <div className={styles.favoriteitem}>
@@ -58,6 +60,7 @@ const Mypage = () => {
           <button className={styles.gakubu} title="学部">工学部</button>
           <button className={styles.nen} title="年度">2023</button>
           <p>投稿者: studentC</p>
+          <p>投稿日: 20240229</p>
         </div>
         
         <div className={styles.favoriteitem}>
@@ -66,6 +69,7 @@ const Mypage = () => {
           <button className={styles.gakubu} title="学部">文学部</button>
           <button className={styles.nen} title="年度">2021</button>
           <p>投稿者: studentD</p>
+          <p>投稿日: 20200229</p>
         </div>
       </div>
     </div>

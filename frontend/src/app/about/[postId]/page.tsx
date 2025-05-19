@@ -7,5 +7,6 @@ export default async function About ({ params }: { params: Promise<{ postId: str
     <div className={ styles.container }>
       <div className={ styles.divs }>投稿番号：{ postId }</div>
     </div>
+    
   );
 }
