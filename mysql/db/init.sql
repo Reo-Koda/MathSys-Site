@@ -1,5 +1,5 @@
 CREATE DATABASE IF NOT EXISTS mathsys_db;
-use mathsys_db;
+USE mathsys_db;
 
 CREATE TABLE IF NOT EXISTS Users (
   user_name VARCHAR(30) PRIMARY KEY,
