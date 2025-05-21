@@ -2,30 +2,30 @@ package main
 
 import (
 	"database/sql"
-	"log"
 	"errors"
-	"time"
-	"os"
+	"log"
 	"net/http"
+	"os"
+	"time"
 
-	"github.com/joho/godotenv"
-	"github.com/gin-gonic/gin"
 	"github.com/gin-contrib/cors"
+	"github.com/gin-gonic/gin"
 	_ "github.com/go-sql-driver/mysql"
+	"github.com/joho/godotenv"
 )
 
 type Post struct {
-	PostId int `json:"postId"`
-	UserName string `json:"author"`
-	ClassTitle string `json:"class"`
-	DoctorName string `json:"doctor"`
-	Year int `json:"year"`
-	UnderGraduate string `json:"department"`
-	Course string `json:"major"`
-	Category string `json:"category"`
-	Image sql.NullString `json:"images"`
-	Memo sql.NullString `json:"memo"`
-	PostDate time.Time `json:"createdDay"`
+	PostId        int            `json:"postId"`
+	UserName      string         `json:"author"`
+	ClassTitle    string         `json:"class"`
+	DoctorName    string         `json:"doctor"`
+	Year          int            `json:"year"`
+	UnderGraduate string         `json:"department"`
+	Course        string         `json:"major"`
+	Category      string         `json:"category"`
+	Image         sql.NullString `json:"images"`
+	Memo          sql.NullString `json:"memo"`
+	PostDate      time.Time      `json:"createdDay"`
 }
 
 func init() {
@@ -51,7 +51,7 @@ func waitForDatabase(db *sql.DB) error {
 }
 
 func main() {
-	raw := "${MYSQL_USER}:${MYSQL_PASSWORD}@tcp(mathsys-site-mysql-1:3306)/mathsys_db?charset=utf8mb4&parseTime=True&loc=Asia%2FTokyo"
+	raw := "${MYSQL_USER}:${MYSQL_PASSWORD}@tcp(mathsys_database:3306)/mathsys_db?charset=utf8mb4&parseTime=True&loc=Asia%2FTokyo"
 	dsn := os.ExpandEnv(raw)
 
 	db, err := sql.Open("mysql", dsn)
@@ -105,11 +105,11 @@ func main() {
 
 			user := map[string]interface{}{
 				"user_name": userName,
-				"password": password,
+				"password":  password,
 			}
 			users = append(users, user)
 		}
-		
+
 		c.JSON(http.StatusOK, gin.H{"users": users})
 	})
 
@@ -125,19 +125,19 @@ func main() {
 
 		for rows.Next() {
 			var p Post
-			
+
 			if err := rows.Scan(
 				&p.PostId,
-        &p.UserName,
-        &p.ClassTitle,
-        &p.DoctorName,
-        &p.Year,
-        &p.UnderGraduate,
-        &p.Course,
-        &p.Category,
-        &p.Image,
-        &p.Memo,
-        &p.PostDate,
+				&p.UserName,
+				&p.ClassTitle,
+				&p.DoctorName,
+				&p.Year,
+				&p.UnderGraduate,
+				&p.Course,
+				&p.Category,
+				&p.Image,
+				&p.Memo,
+				&p.PostDate,
 			); err != nil {
 				c.JSON(http.StatusInternalServerError, gin.H{"error": err.Error()})
 				return

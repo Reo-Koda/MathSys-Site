@@ -12,6 +12,7 @@ services:
 
   mysql:
     image: mysql:8.0
+    container_name: mathsys_database
     volumes:
       - ./mysql/db:/docker-entrypoint-initdb.d # 初期データ
       - mathsys_db:/var/lib/mysql
