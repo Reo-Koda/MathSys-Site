@@ -64,7 +64,7 @@ const Post = () => {
       <PostInput title="分類" setValue={ setCategory } isRequired={ true } />
       <PostInput title="写真" setValue={ setImage } isRequired={ false } />
       <PostInput title="メモ" setValue={ setMemo } isRequired={ false } />
-      <button type="submit">追加</button>
+      <button type="submit">追加する</button>
     </form>
     </>
   );
