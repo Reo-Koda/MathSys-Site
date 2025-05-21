@@ -1,4 +1,4 @@
-CREATE DATABASE IF NOT EXISTS mathsys_db
+CREATE DATABASE IF NOT EXISTS mathsys_db;
 use mathsys_db;
 
 CREATE TABLE IF NOT EXISTS Users (
