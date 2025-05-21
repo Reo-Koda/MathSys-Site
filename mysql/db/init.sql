@@ -1,6 +1,4 @@
 CREATE DATABASE IF NOT EXISTS mathsys_db
-  CHARACTER SET utf8mb4
-  COLLATE utf8mb4_general_ci;
 use mathsys_db;
 
 CREATE TABLE IF NOT EXISTS Users (

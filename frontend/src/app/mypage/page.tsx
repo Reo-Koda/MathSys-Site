@@ -19,8 +19,6 @@ const Mypage = () => {
   return(
     <>
     <TopList topList={ topList }/>
-    <div className={ styles.divs }>Mypage</div>
-
   
     <div className={styles.container}>
       <div className={styles.mypageheader}>
