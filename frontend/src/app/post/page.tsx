@@ -1,5 +1,6 @@
 "use client";
-import { useState, FormEvent, SetStateAction } from "react";
+import { useEffect, useState, FormEvent, SetStateAction } from "react";
+import { useRouter } from "next/navigation";
 import styles from "./page.module.css";
 import TopList from "../../components/topList";
 import { topList } from "src/data/topList";
@@ -8,7 +9,8 @@ import SubHeader from "src/components/subHeader";
 import SubmitBtn from "src/components/submitBtn";
 
 const Post = () => {
-  const [userName, setUserName] = useState('月島 蛍')
+  const router = useRouter();
+  const [userName, setUserName] = useState('');
   const [className, setClassName] = useState('');
   const [doctorName, setDoctorName] = useState('');
   const [year, setYear] = useState('');
@@ -18,6 +20,12 @@ const Post = () => {
   const [image, setImage] = useState('');
   const [memo, setMemo] = useState('');
   const [message, setMessage] = useState('');
+  
+  useEffect(() => {
+    const token = localStorage.getItem("authToken");
+    if (!token) router.push('/signin');
+    else setUserName(token);
+    }, []);
 
   const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();

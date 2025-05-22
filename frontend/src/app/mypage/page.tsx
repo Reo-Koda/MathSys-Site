@@ -1,3 +1,6 @@
+"use client";
+import { useEffect } from "react";
+import { useRouter } from "next/navigation";
 import styles from "./page.module.css";
 import Image from "next/image";
 import Logo from "../../public/glass.svg";
@@ -6,6 +9,13 @@ import { topList } from "src/data/topList";
 import SubHeader from "src/components/subHeader";
 
 const Mypage = () => {
+  const router = useRouter();
+
+  useEffect(() => {
+    const token = localStorage.getItem("authToken");
+    if (!token) router.push('/signin');;
+    }, []);
+    
   return(
     <>
     <TopList topList={ topList }/>

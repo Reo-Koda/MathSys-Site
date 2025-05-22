@@ -1,9 +1,9 @@
-export interface topList {
+export interface TopList {
 	ref: string
 	top: string
 }
 
-export	const topList: topList[] = [
+export	const topList: TopList[] = [
 	{ ref: `/`, top: "ホーム" },
 	{ ref: `/mypage`, top: "マイページ" },
 	{ ref: `/post`, top: "投稿" },
