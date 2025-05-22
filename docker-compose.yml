@@ -6,7 +6,7 @@ services:
       - "3000:3000"
     volumes:
       - ./frontend:/usr/src/app
-      - ./frontend/node_modules:/usr/src/app/node_modules
+      # - ./frontend/node_modules:/usr/src/app/node_modules
     command: sh -c "npm run dev"
   backend:
     build: ./go
@@ -34,4 +34,4 @@ services:
 
 volumes:
   mathsys_db:
-  node_modules:
+  # node_modules:
