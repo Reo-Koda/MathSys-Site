@@ -8,22 +8,8 @@
   max-width: 1200px;
   margin: 20px auto;
 }
-.mypageheader {
-  background-color: #fff;
-  border-radius: 8px;
-  padding: 20px;
-  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-  margin-bottom: 20px;
-  text-align: center;
-}
-.mypageheader h2 {
-  font-size: 1.6em;
-  color: #00274d;
-  margin-bottom: 10px;
-}
 
 .pagesearch {
-
 /*flex-wrap: wrap;
 gap: 10px;*/
 margin-bottom: 20px;

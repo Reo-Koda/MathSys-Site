@@ -1,8 +1,9 @@
 import styles from "./page.module.css";
+import SignContainer from "src/components/signContainer";
 
 const SignIn = () => {
   return (
-    <div className={ styles.divs }>SignIn</div>
+    <SignContainer type="signin" btnText="ログイン"/>
   )
 }
 

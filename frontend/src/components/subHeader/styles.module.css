@@ -1,0 +1,13 @@
+.mypageheader {
+  background-color: var(--white);
+  border-radius: 8px;
+  padding: 20px;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+  margin-bottom: 20px;
+  text-align: center;
+}
+.mypageheader h2 {
+  font-size: 1.6em;
+  color: var(--blue);
+  margin-bottom: 10px;
+}

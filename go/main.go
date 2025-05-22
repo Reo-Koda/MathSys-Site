@@ -14,6 +14,11 @@ import (
 	"github.com/joho/godotenv"
 )
 
+type User struct {
+	UserName string `json:"user_name"`
+	Password string `json:"password"`
+}
+
 type Post struct {
 	PostId        int            `json:"postId"`
 	UserName      string         `json:"author"`
@@ -111,6 +116,58 @@ func main() {
 		}
 
 		c.JSON(http.StatusOK, gin.H{"users": users})
+	})
+
+	e.POST("/api/users/signin", func(c *gin.Context) {
+		var user User
+
+		if err := c.ShouldBindJSON(&user); err != nil {
+			c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
+			return
+		}
+
+		var dbPassword string
+		err := db.QueryRow("SELECT password FROM Users WHERE user_name = ?", user.UserName).Scan(&dbPassword)
+		if err == sql.ErrNoRows {
+			c.JSON(http.StatusNotFound, gin.H{"error": "ユーザーが存在しません"})
+			return
+		} else if err != nil {
+			c.JSON(http.StatusInternalServerError, gin.H{"error": err.Error()})
+			return
+		}
+
+		if dbPassword == user.Password {
+			c.JSON(http.StatusOK, gin.H{"message": "パスワードが一致しました", "token": user.UserName})
+		} else {
+			c.JSON(http.StatusUnauthorized, gin.H{"error": "パスワードが一致しません"})
+		}
+	})
+
+	e.POST("/api/users/signup", func(c *gin.Context) {
+		var newUser User
+
+		if err := c.ShouldBindJSON(&newUser); err != nil {
+			c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
+			return
+		}
+
+		var dbUserName string
+		err := db.QueryRow("SELECT user_name FROM Users WHERE user_name = ?", newUser.UserName).Scan(&dbUserName)
+		if err == nil {
+			c.JSON(http.StatusUnauthorized, gin.H{"error": "すでに存在する名前です"})
+			return
+		} else if err != nil && err != sql.ErrNoRows {
+			c.JSON(http.StatusInternalServerError, gin.H{"error": err.Error()})
+			return
+		}
+
+		_, err = db.Exec("INSERT INTO Users (user_name, password) VALUES (?, ?)", newUser.UserName, newUser.Password)
+		if err != nil {
+			c.JSON(http.StatusInternalServerError, gin.H{"error": err.Error()})
+			return
+		}
+
+		c.JSON(http.StatusOK, gin.H{"message": "新規登録が正常に終了しました", "token": newUser.UserName})
 	})
 
 	e.GET("/api/posts", func(c *gin.Context) {

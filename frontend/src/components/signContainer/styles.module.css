@@ -1,0 +1,53 @@
+.loginContainer {
+  background-color: var(--white);
+  border-radius: 8px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  width: 90%;
+  max-width: 400px;
+  margin: 10rem auto;
+  padding: 30px;
+  text-align: center;
+}
+.loginContainer h2 {
+  color: var(--blue);
+  margin-bottom: 20px;
+}
+.loginContainer form {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+.loginContainer input {
+  padding: 12px 15px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 1em;
+}
+.button {
+  padding: 12px 15px;
+  border: none;
+  border-radius: 4px;
+  background-color: var(--blue);
+  color: #fff;
+  font-size: 1em;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+.button:hover {
+  background-color: var(--hover-blue);
+}
+
+.toSignup {
+  font-size: 0.9em;
+  color: #555;
+  text-decoration: none;
+  margin-top: 10px;
+}
+.toSignup:hover {
+  text-decoration: underline;
+}
+
+.backendMessage {
+  text-align: center;
+  font-weight: 700;
+}

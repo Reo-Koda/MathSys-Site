@@ -2,20 +2,8 @@
 import { useEffect, useState } from "react";
 import css from "./page.module.css";
 import TopList from "../components/topList";
+import { topList } from "src/data/topList";
 import PostBlock from "../components/postBlock";
-
-interface topList {
-  ref: string
-	top: string
-}
-
-const topList: topList[] = [
-  { ref: `/`, top: "ホーム" },
-  { ref: `/mypage`, top: "マイページ" },
-  { ref: `/post`, top: "投稿" },
-  { ref: `/tag`, top: "タグ一覧" },
-  { ref: `/signin`, top: "ログイン" },
-]
 
 interface tag {
   class: string

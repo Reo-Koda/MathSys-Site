@@ -1,3 +1,7 @@
-.divs {
-  text-align: center;
+.postContainer {
+  width: 60vw;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  margin: auto;
 }
