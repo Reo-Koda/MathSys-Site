@@ -1,13 +1,4 @@
 services:
-  frontend:
-    build: ./frontend
-    container_name: mathsys_fronntend
-    ports:
-      - "3000:3000"
-    volumes:
-      - ./frontend:/usr/src/app
-      # - ./frontend/node_modules:/usr/src/app/node_modules
-    command: sh -c "npm run dev"
   backend:
     build: ./go
     container_name: mathsys_backend

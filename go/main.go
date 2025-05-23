@@ -28,8 +28,8 @@ type Post struct {
 	UnderGraduate string         `json:"department"`
 	Course        string         `json:"major"`
 	Category      string         `json:"category"`
-	Image         sql.NullString `json:"images"`
-	Memo          sql.NullString `json:"memo"`
+	Image         *string        `json:"images"`
+	Memo          *string        `json:"memo"`
 	PostDate      time.Time      `json:"createdDay"`
 }
 
@@ -145,7 +145,6 @@ func main() {
 
 	e.POST("/api/users/signup", func(c *gin.Context) {
 		var newUser User
-
 		if err := c.ShouldBindJSON(&newUser); err != nil {
 			c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
 			return
@@ -204,6 +203,46 @@ func main() {
 		}
 
 		c.JSON(http.StatusOK, gin.H{"posts": posts})
+	})
+
+	e.POST("/api/posts/post", func(c *gin.Context) {
+		var newPost Post
+		if err := c.ShouldBindJSON(&newPost); err != nil {
+			c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
+			return
+		}
+
+		imgNull := sql.NullString{Valid: false}
+    if newPost.Image != nil {
+        imgNull = sql.NullString{
+            String: *newPost.Image,
+            Valid:  true,
+        }
+    }
+    memoNull := sql.NullString{Valid: false}
+    if newPost.Memo != nil {
+        memoNull = sql.NullString{
+            String: *newPost.Memo,
+            Valid:  true,
+        }
+    }
+		
+		now := time.Now().Format("2006-01-02")
+
+		result, err := db.Exec("INSERT INTO Posts (user_name, class_title, doctor_name, year_num, undergraduate, course, category, images, memo, post_date) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)",
+			newPost.UserName, newPost.ClassTitle, newPost.DoctorName, newPost.Year, newPost.UnderGraduate, newPost.Course, newPost.Category, imgNull, memoNull, now)
+		if err != nil {
+			c.JSON(http.StatusInternalServerError, gin.H{"error": err.Error()})
+			return
+		}
+
+		id, err := result.LastInsertId()
+		if err != nil {
+			c.JSON(http.StatusInternalServerError, gin.H{"error": err.Error()})
+			return
+		}
+
+		c.JSON(http.StatusOK, gin.H{"message": "データが追加されました", "id": id})
 	})
 
 	if err := e.Run(":8000"); err != nil {
