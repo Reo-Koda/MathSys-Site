@@ -24,7 +24,7 @@ type Post struct {
 	UserName      string         `json:"author"`
 	ClassTitle    string         `json:"class"`
 	DoctorName    string         `json:"doctor"`
-	Year          int            `json:"year"`
+	Year          string         `json:"year"`
 	UnderGraduate string         `json:"department"`
 	Course        string         `json:"major"`
 	Category      string         `json:"category"`
@@ -214,20 +214,23 @@ func main() {
 
 		imgNull := sql.NullString{Valid: false}
     if newPost.Image != nil {
-        imgNull = sql.NullString{
-            String: *newPost.Image,
-            Valid:  true,
-        }
+			imgNull = sql.NullString{
+				String: *newPost.Image,
+				Valid:  true,
+			}
     }
     memoNull := sql.NullString{Valid: false}
     if newPost.Memo != nil {
-        memoNull = sql.NullString{
-            String: *newPost.Memo,
-            Valid:  true,
-        }
+			memoNull = sql.NullString{
+				String: *newPost.Memo,
+				Valid:  true,
+			}
     }
 		
 		now := time.Now().Format("2006-01-02")
+		
+		log.Println("user_name:", newPost.UserName)
+		log.Println("time:", now)
 
 		result, err := db.Exec("INSERT INTO Posts (user_name, class_title, doctor_name, year_num, undergraduate, course, category, images, memo, post_date) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)",
 			newPost.UserName, newPost.ClassTitle, newPost.DoctorName, newPost.Year, newPost.UnderGraduate, newPost.Course, newPost.Category, imgNull, memoNull, now)
