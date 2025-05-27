@@ -7,72 +7,93 @@ import Logo from "../../public/glass.svg";
 import TopList from "../../components/topList";
 import { topList } from "src/data/topList";
 import SubHeader from "src/components/subHeader";
+import PostBlock from "src/components/postBlock"; 
 
 const Mypage = () => {
   const router = useRouter();
 
   useEffect(() => {
     const token = localStorage.getItem("authToken");
-    if (!token) router.push('/signin');;
-    }, []);
-    
-  return(
+    if (!token) router.push("/signin");
+  }, []);
+
+  const favoritePosts = [
+    {
+      class: "経済学部",
+      doctor: "経済学入門",
+      year: 2023,
+      department: "経済学部",
+      major: "経済学",
+      category: "過去問",
+      author: "studentA",
+      createdDay: 20220101,
+      postId: 1,
+    },
+    {
+      class: "法学部",
+      doctor: "民法",
+      year: 2022,
+      department: "法学部",
+      major: "法学",
+      category: "過去問",
+      author: "studentB",
+      createdDay: 20230102,
+      postId: 2,
+    },
+    {
+      class: "工学部",
+      doctor: "機械工学",
+      year: 2023,
+      department: "工学部",
+      major: "機械工学",
+      category: "基礎過去問",
+      author: "studentC",
+      createdDay: 20240229,
+      postId: 3,
+    },
+    {
+      class: "文学部",
+      doctor: "英文学",
+      year: 2021,
+      department: "文学部",
+      major: "英文学",
+      category: "過去問",
+      author: "studentD",
+      createdDay: 20200229,
+      postId: 4,
+    },
+  ];
+
+  return (
     <>
-    <TopList topList={ topList }/>
-    <div className={styles.container}>
-      <SubHeader
-        title="お気に入り一覧"
-        text="あなたが登録したお気に入りの過去問やコンテンツ" />
-      <div className={styles.pagesearch}>
-        <section className={styles.pagesearch}>
-          <input type="text" placeholder="講義名、教授名、学部、学科、年度"/>
-          <button className={styles.pagesearchbtn} aria-label="検索">
-          <Image src={Logo} width={40} height={35} alt="icons"></Image>
-          </button>
-        </section>
-      
-        <div className={styles.favorites}>
-          <div className={styles.favoriteitem}>
-            <button className={styles.removebtn} title="お気に入り解除">×</button>
-            <h3>経済学部 経済学入門 過去問 2023</h3>
-            <button className={styles.gakubu} title="学部">経済学部</button>
-            <button className={styles.nen} title="年度">2023</button>
-            <p>投稿者: studentA</p>
-            <p>投稿日: 20220101</p>
-          </div>
-          
-          <div className={styles.favoriteitem}>
-            <button className={styles.removebtn} title="お気に入り解除">×</button>
-            <h3>法学部 民法 過去問 2022</h3>
-            <button className={styles.gakubu} title="学部">法学部</button>
-            <button className={styles.nen} title="年度">2022</button>
-            <p>投稿者: studentB</p>
-            <p>投稿日: 20230102</p>
-          </div>
-          
-          <div className={styles.favoriteitem}>
-            <button className={styles.removebtn} title="お気に入り解除">×</button>
-            <h3>工学部 機械工学 基礎過去問 2023</h3>
-            <button className={styles.gakubu} title="学部">工学部</button>
-            <button className={styles.nen} title="年度">2023</button>
-            <p>投稿者: studentC</p>
-            <p>投稿日: 20240229</p>
-          </div>
-          
-          <div className={styles.favoriteitem}>
-            <button className={styles.removebtn} title="お気に入り解除">×</button>
-            <h3>文学部 英文学 過去問 2021</h3>
-            <button className={styles.gakubu} title="学部">文学部</button>
-            <button className={styles.nen} title="年度">2021</button>
-            <p>投稿者: studentD</p>
-            <p>投稿日: 20200229</p>
+      <TopList topList={topList} />
+      <div className={styles.container}>
+        <SubHeader
+          title="お気に入り一覧"
+          text="あなたが登録したお気に入りの過去問やコンテンツ"
+        />
+        <div className={styles.pagesearch}>
+          <section className={styles.pagesearch}>
+            <input
+              type="text"
+              placeholder="講義名、教授名、学部、学科、年度"
+            />
+            <button className={styles.pagesearchbtn} aria-label="検索">
+              <Image src={Logo} width={40} height={35} alt="icons" />
+            </button>
+          </section>
+
+          <div className={styles.favorites}>
+            {favoritePosts.map((post) => (
+              
+                <PostBlock tagList={post} />
+             
+            ))}
           </div>
         </div>
       </div>
-    </div>
-
-  </>
+    </>
   );
-}
+};
 
 export default Mypage;

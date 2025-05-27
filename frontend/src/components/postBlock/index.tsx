@@ -1,5 +1,6 @@
 import styles from "./styles.module.css";
 import Link from "next/link";
+import { MouseEvent } from "react";
 
 interface tag {
   class: string
@@ -18,20 +19,25 @@ type Props = {
 }
 
 const PostBlock = ({ tagList }: Props) => {
+  
+  const stopLink = (e: MouseEvent) => {
+    e.stopPropagation(); // 遷移させない
+  };
 
   return (
     <Link href={ `/about/${ tagList.postId }` }>
-      <article className={ styles.post }>
+      <article className={ styles.post } >
         
         <h2>{ tagList.class } { tagList.category } { tagList.year }</h2>
 
         <div className={ styles.tagContainer }>
-          <p>{ tagList.department } </p>
-          <p>{tagList.year} </p>
+           <p onClick={stopLink}>{ tagList.doctor }</p>
+           <p onClick={stopLink}>{ tagList.department }</p>
+           <p onClick={stopLink}>{ tagList.major }</p>
         </div>
         <div className={ styles.nameday }>
-          <p>投稿者: { tagList.author }</p>
-          <p>投稿日: { tagList. createdDay}</p>
+          <p onClick={stopLink}>投稿者: { tagList.author }</p>
+          <p onClick={stopLink}>投稿日: { tagList. createdDay}</p>
         </div>
       </article>
     </Link>
