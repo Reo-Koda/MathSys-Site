@@ -44,7 +44,7 @@ export default function Home() {
         console.error("API error:", err);
       } finally {
         setIsLoading(false);
-      } 
+      }
     }
 
     getPosts();
@@ -52,7 +52,7 @@ export default function Home() {
 
   return (
     <>
-    <TopList topList={ topList }/>
+    <TopList topList={ topList } />
     
     <div className={ css.container }>
       <section className={ css.search }>
@@ -61,7 +61,7 @@ export default function Home() {
       </section>
       
       <h1 className={ css.subTitle }>最近の投稿</h1>
-      {isLoading ? <p>データを取得中...</p> :
+      { isLoading ? <p>データを取得中...</p> :
         <section className={ css.posts }>
           { posts.map((post) => {
             return (
