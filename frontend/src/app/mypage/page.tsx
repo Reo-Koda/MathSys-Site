@@ -1,5 +1,5 @@
 "use client";
-import { useEffect } from "react";
+import { useEffect, useState} from "react";
 import { useRouter } from "next/navigation";
 import styles from "./page.module.css";
 import Image from "next/image";
@@ -9,12 +9,47 @@ import { topList } from "src/data/topList";
 import SubHeader from "src/components/subHeader";
 import PostBlock from "src/components/postBlock"; 
 
+interface tag {
+  class: string
+  doctor: string
+  year: number
+  department: string
+  major: string
+  category: string
+  author: string
+  createdDay: number
+  postId: number
+  images?: string
+  memo?: string
+}
+
 const Mypage = () => {
   const router = useRouter();
 
   useEffect(() => {
     const token = localStorage.getItem("authToken");
     if (!token) router.push("/signin");
+  }, []);
+
+    const [posts, setPosts] = useState<tag[]>([]);
+    const [isLoading, setIsLoading] = useState(false);
+     useEffect(() => {
+    setIsLoading(true);
+    const getPosts = async () => {
+      try {
+        const res = await fetch(
+          `${process.env.NEXT_PUBLIC_API_URL}/api/posts`
+        );
+        const json = await res.json();
+        setPosts(json.posts);
+      } catch (err: any) {
+        console.error("API error:", err);
+      } finally {
+        setIsLoading(false);
+      } 
+    }
+
+    getPosts();
   }, []);
 
   const favoritePosts = [
@@ -82,11 +117,11 @@ const Mypage = () => {
               <Image src={Logo} width={40} height={35} alt="icons" />
             </button>
           </section>
-
+        
           <div className={styles.favorites}>
-            {favoritePosts.map((post) => (
+            {isLoading ? <p>データを取得中...</p> :posts.map((post) => (
               
-                <PostBlock tagList={post} />
+                <PostBlock tagList={post} key={post.postId}/>
              
             ))}
           </div>

@@ -20,9 +20,7 @@ type Props = {
 
 const PostBlock = ({ tagList }: Props) => {
   
-  const stopLink = (e: MouseEvent) => {
-    e.stopPropagation(); // 遷移させない
-  };
+  
 
   return (
     <Link href={ `/about/${ tagList.postId }` }>
@@ -31,13 +29,13 @@ const PostBlock = ({ tagList }: Props) => {
         <h2>{ tagList.class } { tagList.category } { tagList.year }</h2>
 
         <div className={ styles.tagContainer }>
-           <p onClick={stopLink}>{ tagList.doctor }</p>
-           <p onClick={stopLink}>{ tagList.department }</p>
-           <p onClick={stopLink}>{ tagList.major }</p>
+           <p onClick={(e) => e.preventDefault() }>{ tagList.doctor }</p>
+           <p onClick={(e) => e.preventDefault() }>{ tagList.department }</p>
+           <p onClick={(e) => e.preventDefault() }>{ tagList.major }</p>
         </div>
         <div className={ styles.nameday }>
-          <p onClick={stopLink}>投稿者: { tagList.author }</p>
-          <p onClick={stopLink}>投稿日: { tagList. createdDay}</p>
+          <p >投稿者: { tagList.author }</p>
+          <p >投稿日: { tagList. createdDay}</p>
         </div>
       </article>
     </Link>
