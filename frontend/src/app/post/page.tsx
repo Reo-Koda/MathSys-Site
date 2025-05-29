@@ -88,7 +88,7 @@ const Post = () => {
       <SubHeader
       title="投稿"
       text="以下の必要な項目を入力してください" />
-
+    <div className={ styles.postwidth}>
       <InputBox
         type="text"
         name="className"
@@ -145,6 +145,8 @@ const Post = () => {
         value={ memo }
         handleChange={ handleChange }
         isRequired={ false } />
+
+    </div>
       <SubmitBtn btnText="追加" />
       { message && <p className={ styles.backendMessage }>{ message }</p> }
     </form>
