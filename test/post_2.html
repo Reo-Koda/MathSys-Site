@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>投稿フォーム</title>
+  <style>
+    /* ベーシックリセット */
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      background: #f7f9fc;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      color: #333;
+      line-height: 1.5;
+      padding: 20px;
+    }
+
+    /* ヘッダー */
+    header {
+      background-color: #00274d; /* 大学のイメージカラー */
+      color: #fff;
+      padding: 20px;
+      text-align: center;
+      position: relative;
+    }
+    header img.logo {
+      width: 60px;
+      height: auto;
+      position: absolute;
+      left: 20px;
+      top: 20px;
+    }
+    header h1 {
+      font-size: 1.8em;
+      margin-bottom: 5px;
+    }
+    header p {
+      font-size: 1em;
+    }
+
+    /* カードコンテナ */
+    .postContainer {
+      background: #fff;
+      max-width: 700px;
+      margin: 40px auto;
+      padding: 32px;
+      border-left: 5px solid #00274d;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+      border-radius: 4px;
+    }
+
+    /* グリッドレイアウト */
+    .form-grid {
+      display: grid;
+      gap: 24px;
+      grid-template-columns: 1fr;
+    }
+    @media (min-width: 768px) {
+      .form-grid {
+        grid-template-columns: 1fr 1fr;
+      }
+    }
+
+    /* 各フィールド */
+    .form-group label {
+      display: block;
+      font-size: 0.9rem;
+      margin-bottom: 6px;
+      color: #555;
+    }
+    .form-group input,
+    .form-group textarea {
+      width: 100%;
+      padding: 8px 4px;
+      border: none;
+      border-bottom: 2px solid #ddd;
+      font-size: 1rem;
+      background: transparent;
+      transition: border-color 0.3s;
+    }
+    .form-group input:focus,
+    .form-group textarea:focus {
+      outline: none;
+      border-bottom-color: #00274d;
+    }
+
+    /* 写真・メモ縦並び */
+    .fullWidth {
+      display: flex;
+      flex-direction: column;
+      gap: 24px;
+      margin-top: 32px;
+    }
+    textarea {
+      resize: vertical;
+    }
+
+    /* 送信ボタン */
+    .submit-btn {
+      display: inline-block;
+      margin-top: 32px;
+      padding: 10px 26px;
+      font-size: 1rem;
+      color: #00274d;
+      border: 2px solid #00274d;
+      background: none;
+      border-radius: 4px;
+      cursor: pointer;
+      transition: background-color 0.3s, color 0.3s;
+    }
+    .submit-btn:hover {
+      background: #00274d;
+      color: #fff;
+    }
+
+    /* メッセージ */
+    .backendMessage {
+      margin-top: 16px;
+      font-size: 0.9rem;
+      color: #d32f2f;
+      display: none;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <!-- 大学のロゴ（実際の画像ファイルに差し替え） -->
+    <img src="logo.png" alt="ABC大学ロゴ" class="logo">
+    <h1>ABC大学 学生専用過去問サイト</h1>
+    <p>あなたの学びをサポートする試験対策コミュニティ</p>
+  </header>
+
+  <div class="postContainer">
+    <!-- フォーム -->
+    <form action="#" method="POST">
+      <!-- 最初の６フィールドをグリッド配置 -->
+      <div class="form-grid">
+        <div class="form-group">
+          <label for="className">授業名</label>
+          <input id="className" name="className" type="text" required>
+        </div>
+        <div class="form-group">
+          <label for="doctorName">教授名</label>
+          <input id="doctorName" name="doctorName" type="text" required>
+        </div>
+        <div class="form-group">
+          <label for="year">年度</label>
+          <input id="year" name="year" type="text" required>
+        </div>
+        <div class="form-group">
+          <label for="category">分類</label>
+          <input id="category" name="category" type="text" required>
+        </div>
+        <div class="form-group">
+          <label for="undergraduate">学部</label>
+          <input id="undergraduate" name="undergraduate" type="text" required>
+        </div>
+        <div class="form-group">
+          <label for="course">学科</label>
+          <input id="course" name="course" type="text" required>
+        </div>
+      </div>
+
+      <!-- 写真とメモは全幅縦並び -->
+      <div class="fullWidth">
+        <div class="form-group">
+          <label for="image">写真 URL</label>
+          <input id="image" name="image" type="text">
+        </div>
+        <div class="form-group">
+          <label for="memo">メモ</label>
+          <textarea id="memo" name="memo" rows="4"></textarea>
+        </div>
+      </div>
+
+      <button type="submit" class="submit-btn">追加</button>
+      <p class="backendMessage">ここにサーバーメッセージが表示されます</p>
+    </form>
+  </div>
+
+</body>
+</html>
