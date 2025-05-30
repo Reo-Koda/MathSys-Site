@@ -1,7 +1,9 @@
 "use client";
-import { use, useEffect, useState } from "react";
+import { use, useEffect, useState, FormEvent } from "react";
 import { useRouter } from "next/navigation";
 import styles from "./page.module.css";
+import TopList from "src/components/topList";
+import { topList } from "src/data/topList";
 import SubmitBtn from "src/components/submitBtn";
 
 export default function About ({ params }: { params: Promise<{ postId: string }>;}) {
@@ -9,7 +11,6 @@ export default function About ({ params }: { params: Promise<{ postId: string }>
   const { postId } = use(params);
   const [userName, setUserName] = useState<string>("");
   const [message, setMessage] = useState<string>("");
-  const [isLoading, setIsLoading] = useState<boolean>(false);
   const [isFavorite, setIsFavorite] = useState<boolean>(false);
 
   useEffect(() => {
@@ -17,7 +18,6 @@ export default function About ({ params }: { params: Promise<{ postId: string }>
     if (token) setUserName(token);
     else return;
 
-    setIsLoading(true);
     const getFavorite = async () => {
       try {
         const url = new URL(
@@ -31,8 +31,6 @@ export default function About ({ params }: { params: Promise<{ postId: string }>
         setIsFavorite(json.isFavorite);
       } catch (err: any) {
         console.error("API error:", err);
-      } finally {
-        setIsLoading(false);
       }
     }
 
@@ -55,15 +53,14 @@ export default function About ({ params }: { params: Promise<{ postId: string }>
           'Content-Type': 'application/json',
         },
         body: JSON.stringify({
-          user_name: userName,
-          post_id: postId,
+          user: userName,
+          id: postId,
         }),
       });
 
       const data = await res.json();
       if (res.ok) {
-        setMessage(`データ追加 新規ID: ${ data.id }`);
-        // window.location.reload();
+        setMessage(`データ ID: ${ data.id }`);
       } else {
         setMessage(`エラー: ${ data.error }`);
       }
@@ -73,6 +70,8 @@ export default function About ({ params }: { params: Promise<{ postId: string }>
   }
 
   return (
+    <>
+    <TopList topList={ topList } />
     <div className={ styles.container }>
       <div className={ styles.divs }>投稿番号：{ postId }</div>
       <form onSubmit={ handleSubmit }>
@@ -80,6 +79,8 @@ export default function About ({ params }: { params: Promise<{ postId: string }>
           : <SubmitBtn btnText="お気に入り登録"  />
         }
       </form>
+      { message && <p>{ message }</p> }
     </div>
+    </>
   );
 }

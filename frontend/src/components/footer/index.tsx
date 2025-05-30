@@ -14,16 +14,16 @@ type Props = {
 const Footer = ({ head }: Props) => {
   return (
     <footer className={ styles.footer }>
-      <Link href={"#"}>
+      <Link href={"/aboutsite"}>
         <p>&copy; { head.year } { head.university } { head.site }</p>
       </Link>
-      <Link href={"#"}>
+      <Link href={"/privacypolicy"}>
         <p>プライバシーポリシー</p>
       </Link>
-      <Link href={"#"}>
+      <Link href={"/note"}>
         <p>ご利用に際しての注意事項</p>
       </Link>
-      <Link href={"#"}>
+      <Link href={"/contact"}>
         <p>お問い合わせ</p>
       </Link>
     </footer>

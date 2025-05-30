@@ -57,15 +57,15 @@ export default function Home() {
     
     <div className={ css.container }>
       <SearchContainer />
-      
+
       <h1 className={ css.subTitle }>最近の投稿</h1>
       { isLoading ? <p>データを取得中...</p> :
         <section className={ css.posts }>
-          { posts.map((post) => {
+          { posts ? posts.map((post) => {
             return (
               <PostBlock tagList={ post } key={ post.postId }></PostBlock>
             )
-          }) }
+          }) : <p>過去問を投稿してみよう</p> }
         </section>
       }
       

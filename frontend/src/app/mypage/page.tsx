@@ -25,6 +25,7 @@ interface tag {
 const Mypage = () => {
   const router = useRouter();
   const [posts, setPosts] = useState<tag[]>([]);
+  const [selfPosts, setSelfPosts] = useState<tag[]>([]);
   const [isLoading, setIsLoading] = useState(false);
 
   useEffect(() => {
@@ -34,8 +35,8 @@ const Mypage = () => {
       return;
     }
 
-    setIsLoading(true);
     const getPosts = async () => {
+      setIsLoading(true);
       try {
         const url = new URL(
           `${process.env.NEXT_PUBLIC_API_URL}/api/favorites`
@@ -52,7 +53,26 @@ const Mypage = () => {
       } 
     }
 
+    const getSelfPosts = async () => {
+      setIsLoading(true);
+      try {
+        const url = new URL(
+          `${process.env.NEXT_PUBLIC_API_URL}/api/posts/self`
+        );
+        url.searchParams.set("user", token);
+        
+        const res = await fetch(url.toString());
+        const json = await res.json();
+        setSelfPosts(json.posts);
+      } catch (err: any) {
+        console.error("API error:", err);
+      } finally {
+        setIsLoading(false);
+      } 
+    }
+
     getPosts();
+    getSelfPosts();
   }, []);
 
   return (
@@ -71,11 +91,26 @@ const Mypage = () => {
               <>
               { posts ?  posts.map((post) => (
                   <PostBlock tagList={post} key={post.postId}/>
-                )) : <p>null data</p> }
+                )) : <p>お気に入り登録がされていません<br />気になる投稿を保存していつでも見返せるようにしましょう</p> }
               </>
             }
           </div>
         </div>
+
+        <SubHeader
+          title="自分の投稿"
+          text="あなたが投稿したの過去問やコンテンツ"
+        />
+        <div className={styles.favorites}>
+          { isLoading ? <p>データを取得中...</p> :
+            <>
+            { selfPosts ?  selfPosts.map((post) => (
+                <PostBlock tagList={post} key={post.postId}/>
+              )) : <p>過去の投稿がありません<br />役に立った過去問を投稿してみんなに共有してみましょう</p> }
+            </>
+          }
+        </div>
+        
       </div>
     </>
   );

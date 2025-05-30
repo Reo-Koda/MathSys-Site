@@ -34,8 +34,8 @@ type Post struct {
 }
 
 type Favorite struct {
-	userName string `json:"author"`
-	PostId   int    `json:"postId"`
+	UserName string `json:"user"`
+	PostId   string `json:"id"`
 }
 
 func init() {
@@ -223,6 +223,29 @@ func main() {
 		c.JSON(http.StatusOK, gin.H{"posts": posts})
 	})
 
+	e.GET("/api/posts/self", func(c *gin.Context) {
+		user := c.Query("user")
+    if user == "" {
+			c.JSON(http.StatusBadRequest, gin.H{"error": "ユーザーを指定してください"})
+			return
+    }
+
+		rows, err := db.Query("SELECT * FROM Posts WHERE user_name = ?;", user)
+		if err != nil {
+			c.JSON(http.StatusInternalServerError, gin.H{"error": err.Error()})
+			return
+		}
+		defer rows.Close()
+
+		posts, err := appendToPosts(rows)
+    if err != nil {
+			c.JSON(http.StatusInternalServerError, gin.H{"error": err.Error()})
+			return
+    }
+
+		c.JSON(http.StatusOK, gin.H{"posts": posts})
+	})
+
 	e.POST("/api/posts/post", func(c *gin.Context) {
 		var newPost Post
 		if err := c.ShouldBindJSON(&newPost); err != nil {
@@ -267,7 +290,7 @@ func main() {
 		// クエリパラメータからキーワード取得
     user := c.Query("q")
     if user == "" {
-			c.JSON(http.StatusBadRequest, gin.H{"error": "ユーザーが存在しません"})
+			c.JSON(http.StatusBadRequest, gin.H{"error": "ユーザーを指定してください"})
 			return
     }
 
@@ -298,10 +321,10 @@ func main() {
 
 	e.GET("/api/isfavorite", func(c *gin.Context) {
 		// クエリパラメータからキーワード取得
-    user := c.Query("user")
+    user     := c.Query("user")
 		postID   := c.Query("id")
     if user == "" || postID == "" {
-			c.JSON(http.StatusBadRequest, gin.H{"error": "ユーザーまたは投稿が存在しません"})
+			c.JSON(http.StatusBadRequest, gin.H{"error": "ユーザーと投稿を指定してください"})
 			return
     }
 
@@ -332,19 +355,15 @@ func main() {
 			return
 		}
 
-		result, err := db.Exec("INSERT INTO Favorites (user_name, post_id) VALUES (?, ?)", newFavorite.UserName, newFavorite.PostId)
+		log.Println("user_name:", newFavorite.UserName)
+
+		_, err := db.Exec("INSERT INTO Favorites (user_name, post_id) VALUES (?, ?)", newFavorite.UserName, newFavorite.PostId)
 		if err != nil {
 			c.JSON(http.StatusInternalServerError, gin.H{"error": err.Error()})
 			return
 		}
 
-		id, err := result.LastInsertId()
-		if err != nil {
-			c.JSON(http.StatusInternalServerError, gin.H{"error": err.Error()})
-			return
-		}
-
-		c.JSON(http.StatusOK, gin.H{"message": "データが追加されました", "id": id})
+		c.JSON(http.StatusOK, gin.H{"message": "データが追加されました", "id": newFavorite.PostId})
 	})
 
 	e.POST("/api/favorites/out", func(c *gin.Context) {
@@ -354,7 +373,7 @@ func main() {
 			return
 		}
 
-		result, err := db.Exec("DELETE FROM Favorites WHERE user_name = ? AND post_id = ?", deleteFavorite.UserName, deleteFavorite.PostID)
+		result, err := db.Exec("DELETE FROM Favorites WHERE user_name = ? AND post_id = ?", deleteFavorite.UserName, deleteFavorite.PostId)
 		if err != nil {
 			c.JSON(http.StatusInternalServerError, gin.H{"error": err.Error()})
 			return
@@ -362,11 +381,11 @@ func main() {
 
 		rowsAffected, _ := result.RowsAffected()
     if rowsAffected == 0 {
-			c.JSON(http.StatusNotFound, gin.H{"message": "該当するデータがありません", "id": deleteFavorite.PostID})
+			c.JSON(http.StatusNotFound, gin.H{"message": "該当するデータがありません", "id": deleteFavorite.PostId})
 			return
     }
 
-		c.JSON(http.StatusOK, gin.H{"message": "データが削除されました", "id": deleteFavorite.PostID})
+		c.JSON(http.StatusOK, gin.H{"message": "データが削除されました", "id": deleteFavorite.PostId})
 	})
 
 	if err := e.Run(":8000"); err != nil {

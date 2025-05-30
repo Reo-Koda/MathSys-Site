@@ -27,9 +27,7 @@ const Post = () => {
     else setUserName(token);
     }, []);
 
-  const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-    
+  const handleSubmit = async () => {
     try {
       const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/posts/post`, {
         method: 'POST',
