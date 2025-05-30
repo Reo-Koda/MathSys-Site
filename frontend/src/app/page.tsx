@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 import css from "./page.module.css";
 import TopList from "../components/topList";
 import { topList } from "src/data/topList";
+import SearchContainer from "src/components/searchContainer";
 import PostBlock from "../components/postBlock";
 
 interface tag {
@@ -55,10 +56,7 @@ export default function Home() {
     <TopList topList={ topList } />
     
     <div className={ css.container }>
-      <section className={ css.search }>
-        <input type="text" placeholder="講義名、科目、年度で検索" />
-        <button>検索</button>
-      </section>
+      <SearchContainer />
       
       <h1 className={ css.subTitle }>最近の投稿</h1>
       { isLoading ? <p>データを取得中...</p> :

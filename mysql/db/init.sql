@@ -21,6 +21,13 @@ CREATE TABLE IF NOT EXISTS Posts (
   FOREIGN KEY (user_name) REFERENCES Users(user_name)
 );
 
+CREATE TABLE IF NOT EXISTS Favorites (
+  user_name VARCHAR(30),
+  post_id INT NOT NULL,
+  FOREIGN KEY (user_name) REFERENCES Users(user_name),
+  FOREIGN KEY (post_id) REFERENCES Posts(post_id)
+);
+
 INSERT INTO Users (user_name, password) VALUES
   ('月島 蛍', 'test_pass'),
   ('村田 獅子', 'test_pass'),
