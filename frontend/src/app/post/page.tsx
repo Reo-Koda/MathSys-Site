@@ -88,7 +88,7 @@ const Post = () => {
       <SubHeader
       title="投稿"
       text="以下の必要な項目を入力してください" />
-    <div className={ styles.postwidth}>
+    <div className={ styles.postContainer}>
       <InputBox
         type="text"
         name="className"
@@ -103,6 +103,8 @@ const Post = () => {
         value={ doctorName }
         handleChange={ handleChange }
         isRequired={ true } />
+    </div>
+    <div className={ styles.postwidth}>
       <InputBox
         type="text"
         name="year"
@@ -131,6 +133,8 @@ const Post = () => {
         value={ course }
         handleChange={ handleChange }
         isRequired={ true } />
+    </div>
+    <div className={ styles.postContainer}>
       <InputBox
         type="text"
         name="image"
