@@ -8,12 +8,18 @@
   margin: auto;
 }
 
-.postwidth {
+/*.postwidth {
   width: 95%;
   max-width: 2500px;
   margin: 40px 140px;
-  display: block;
-  
-  
-  
+  display: block; 
+}*/
+
+.postwidth{
+  display: flex;
+  width: 95%;
+  max-width: 2500px;
+  margin: 15px auto;      
+  justify-content: center; /* 横方向の中央揃え */
+  gap: 15px;  
 }
