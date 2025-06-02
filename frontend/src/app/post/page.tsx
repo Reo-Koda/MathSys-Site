@@ -20,19 +20,19 @@ const Post = () => {
   const [image, setImage] = useState('');
   const [memo, setMemo] = useState('');
   const [message, setMessage] = useState('');
-  
+
   useEffect(() => {
     const token = localStorage.getItem("authToken");
-    if (!token) router.push('/signin');
+    if (!token) router.push("/signin");
     else setUserName(token);
-    }, []);
+  }, []);
 
   const handleSubmit = async () => {
     try {
       const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/posts/post`, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
+        method: "POST",
+        headers: { 
+          "Content-Type": "application/json" 
         },
         body: JSON.stringify({
           author: userName,
@@ -58,7 +58,7 @@ const Post = () => {
       setMessage(`通信エラー: ${ error.message }`);
     }
   }
-
+  
   const handleChange = (e: { target: { name: string; value: SetStateAction<string>; }; }) => {
     if (e.target.name === "className") {
       setClassName(e.target.value);
@@ -83,7 +83,7 @@ const Post = () => {
     <TopList topList={ topList }/>
 
     <form onSubmit={ handleSubmit } className={ styles.postContainer }>
-      <SubHeader
+      <SubHeader 
       title="投稿"
       text="以下の必要な項目を入力してください" />
     <div className={ styles.postContainer}>
@@ -94,6 +94,8 @@ const Post = () => {
         value={ className }
         handleChange={ handleChange }
         isRequired={ true } />
+    </div>
+    <div className={ styles.postContainer}>
       <InputBox
         type="text"
         name="doctorName"
@@ -103,34 +105,84 @@ const Post = () => {
         isRequired={ true } />
     </div>
     <div className={ styles.postwidth}>
-      <InputBox
-        type="text"
+      <select
         name="year"
-        placeholder="年度"
         value={ year }
-        handleChange={ handleChange }
-        isRequired={ true } />
-      <InputBox
-        type="text"
+        onChange={handleChange}
+        required
+        className={styles.postselect}
+      >
+       <option value="" disabled hidden>年度</option>
+       <option value="2020">2020</option>
+       <option value="2021">2021</option>
+       <option value="2022">2022</option> 
+       <option value="2023">2023</option>
+       <option value="2024">2024</option>
+      </select>
+      <select
         name="category"
-        placeholder="分類"
         value={ category }
-        handleChange={ handleChange }
-        isRequired={ true } />
-      <InputBox
-        type="text"
+        onChange={handleChange}
+        required
+        className={styles.postselect}
+      >
+       <option value="" disabled hidden>分類</option>
+       <option value="過去問">過去問</option>
+       <option value="レポート">レポート</option>
+       <option value="レジュメ">レジュメ</option> 
+       <option value="その他">その他</option>
+      </select>
+       <select
         name="undergraduate"
-        placeholder="学部"
         value={ undergraduate }
-        handleChange={ handleChange }
-        isRequired={ true } />
-      <InputBox
-        type="text"
+        onChange={handleChange}
+        required
+        className={styles.postselect}
+      >
+       <option value="" disabled hidden>学部</option>
+       <option value="人文社会科学部">人文社会科学部</option>
+       <option value="医学部">医学部</option>
+       <option value="工学部">工学部</option>
+       <option value="情報学部">情報学部</option> 
+       <option value="農学部">農学部</option>
+      </select>
+      <select
         name="course"
-        placeholder="学科"
         value={ course }
-        handleChange={ handleChange }
-        isRequired={ true } />
+        onChange={handleChange}
+        required
+        className={styles.postselect}
+      >
+       <option value="" disabled hidden>学科</option>
+       
+       <optgroup label="人文社会科学部">
+          <option value="法学科">法学科</option>
+          <option value="社会学科">社会学科</option>
+          <option value="経済学科">経済学科</option>
+          <option value="国際学科">国際学科</option>
+       </optgroup>
+     
+       <optgroup label="医学部">
+          <option value="医学科">医学科</option>
+       </optgroup>
+      
+       <optgroup label="工学部">
+          <option value="機械工学科">機械工学科</option>
+          <option value="電気電子工学科">電気電子工学科</option>
+          <option value="電子物質工学科">電子物質工学科</option>
+          <option value="化学バイオ工学科">化学バイオ工学科</option>
+          <option value="数理システム工学科">数理システム工学科</option>
+       </optgroup>
+      
+       <optgroup label="情報学部">
+          <option value="情報科学科">情報科学科</option>
+          <option value="行動情報学科">行動情報学科</option>
+       </optgroup>
+      
+       <optgroup label="農学部">
+          <option value="農学科">農学科</option>
+       </optgroup>
+      </select>
     </div>
     <div className={ styles.postContainer}>
       <InputBox
@@ -140,6 +192,8 @@ const Post = () => {
         value={ image }
         handleChange={ handleChange }
         isRequired={ false } />
+    </div>
+    <div className={ styles.postContainer}>
       <InputBox
         type="text"
         name="memo"
@@ -147,13 +201,16 @@ const Post = () => {
         value={ memo }
         handleChange={ handleChange }
         isRequired={ false } />
+    
 
     </div>
-      <SubmitBtn btnText="追加" />
+      <SubmitBtn btnText="追加・投稿" />
       { message && <p className={ styles.backendMessage }>{ message }</p> }
     </form>
     </>
   );
 }
+  
+  
 
 export default Post;
