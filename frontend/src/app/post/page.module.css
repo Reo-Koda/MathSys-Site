@@ -10,9 +10,9 @@
   
 }
 
-.postContainer:hover {
+/* .postContainer:hover {
   transform: translateY(-5px);
-}
+} */
 .postwidth{
   display: flex;
   width: 95%;
