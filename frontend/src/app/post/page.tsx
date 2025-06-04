@@ -4,22 +4,21 @@ import { useRouter } from "next/navigation";
 import styles from "./page.module.css";
 import TopList from "../../components/topList";
 import { topList } from "src/data/topList";
-import InputBox from "src/components/inputBox";
 import SubHeader from "src/components/subHeader";
 import SubmitBtn from "src/components/submitBtn";
 
 const Post = () => {
   const router = useRouter();
-  const [userName, setUserName] = useState('');
-  const [className, setClassName] = useState('');
-  const [doctorName, setDoctorName] = useState('');
-  const [year, setYear] = useState('');
-  const [category, setCategory] = useState('');
-  const [undergraduate, setUndergraduate] = useState('');
-  const [course, setCourse] = useState('');
-  const [image, setImage] = useState('');
-  const [memo, setMemo] = useState('');
-  const [message, setMessage] = useState('');
+  const [userName, setUserName] = useState("");
+  const [className, setClassName] = useState("");
+  const [doctorName, setDoctorName] = useState("");
+  const [year, setYear] = useState("");
+  const [category, setCategory] = useState("");
+  const [undergraduate, setUndergraduate] = useState("");
+  const [course, setCourse] = useState("");
+  const [image, setImage] = useState("");
+  const [memo, setMemo] = useState("");
+  const [message, setMessage] = useState("");
 
   useEffect(() => {
     const token = localStorage.getItem("authToken");
@@ -27,12 +26,13 @@ const Post = () => {
     else setUserName(token);
   }, []);
 
-  const handleSubmit = async () => {
+  const handleSubmit = async (e: FormEvent) => {
+    e.preventDefault();
     try {
       const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/posts/post`, {
         method: "POST",
-        headers: { 
-          "Content-Type": "application/json" 
+        headers: {
+          "Content-Type": "application/json"
         },
         body: JSON.stringify({
           author: userName,
@@ -41,7 +41,7 @@ const Post = () => {
           year: year,
           department: undergraduate,
           major: course,
-          category: category,
+          category,
           images: image,
           memo: memo,
         }),
@@ -49,16 +49,15 @@ const Post = () => {
 
       const data = await res.json();
       if (res.ok) {
-        setMessage(`データ追加 新規ID: ${ data.id }`);
-        // window.location.reload();
+        setMessage(`データ追加 新規ID: ${data.id}`);
       } else {
-        setMessage(`エラー: ${ data.error }`);
+        setMessage(`エラー: ${data.error}`);
       }
     } catch (error: any) {
-      setMessage(`通信エラー: ${ error.message }`);
+      setMessage(`通信エラー: ${error.message}`);
     }
-  }
-  
+  };
+
   const handleChange = (e: { target: { name: string; value: SetStateAction<string>; }; }) => {
     if (e.target.name === "className") {
       setClassName(e.target.value);
@@ -78,139 +77,65 @@ const Post = () => {
       setMemo(e.target.value);
     }
   }
+
   return (
     <>
-    <TopList topList={ topList }/>
+      <TopList topList={topList} />
+      <form onSubmit={handleSubmit} className={styles.postContainer}>
+        <SubHeader
+          title="投稿"
+          text="以下の必要な項目を入力してください"
+        />
+        <div className={styles.formgrid}>
+          <div className={styles.formgroup}>
+            <label htmlFor="className">授業名</label>
+            <input id="className" name="className" value={className} onChange={handleChange} required />
+          </div>
+          <div className={styles.formgroup}>
+            <label htmlFor="doctorName">教授名</label>
+            <input id="doctorName" name="doctorName" value={doctorName} onChange={handleChange} required />
+          </div>
+          <div className={styles.formgroup}>
+            <label htmlFor="year">年度</label>
+            <input id="year" name="year" value={year} onChange={handleChange} required />
+          </div>
+          <div className={styles.formgroup}>
+            <label htmlFor="category">分類</label>
+            <select  name="category" value={category} onChange={handleChange} required className={styles.select}>
+                <option value="" disabled hidden>選択してください</option>
+                <option value="過去問">過去問</option>
+                <option value="レポート">レポート</option>
+                <option value="レジュメ">レジュメ</option>
+                <option value="その他">その他</option>
+            </select>
+          </div>
+          <div className={styles.formgroup}>
+            <label htmlFor="undergraduate">学部</label>
+            <input id="undergraduate" name="undergraduate" value={undergraduate} onChange={handleChange} required />
+          </div>
+          <div className={styles.formgroup}>
+            <label htmlFor="course">学科</label>
+            <input id="course" name="course" value={course} onChange={handleChange} required />
+          </div>
+        </div>
 
-    <form onSubmit={ handleSubmit } className={ styles.postContainer }>
-      <SubHeader 
-      title="投稿"
-      text="以下の必要な項目を入力してください" />
-    <div className={ styles.postContainer}>
-      <InputBox
-        type="text"
-        name="className"
-        placeholder="授業名"
-        value={ className }
-        handleChange={ handleChange }
-        isRequired={ true } />
-    </div>
-    <div className={ styles.postContainer}>
-      <InputBox
-        type="text"
-        name="doctorName"
-        placeholder="教授名"
-        value={ doctorName }
-        handleChange={ handleChange }
-        isRequired={ true } />
-    </div>
-    <div className={ styles.postwidth}>
-      <select
-        name="year"
-        value={ year }
-        onChange={handleChange}
-        required
-        className={styles.postselect}
-      >
-       <option value="" disabled hidden>年度</option>
-       <option value="2020">2020</option>
-       <option value="2021">2021</option>
-       <option value="2022">2022</option> 
-       <option value="2023">2023</option>
-       <option value="2024">2024</option>
-      </select>
-      <select
-        name="category"
-        value={ category }
-        onChange={handleChange}
-        required
-        className={styles.postselect}
-      >
-       <option value="" disabled hidden>分類</option>
-       <option value="過去問">過去問</option>
-       <option value="レポート">レポート</option>
-       <option value="レジュメ">レジュメ</option> 
-       <option value="その他">その他</option>
-      </select>
-       <select
-        name="undergraduate"
-        value={ undergraduate }
-        onChange={handleChange}
-        required
-        className={styles.postselect}
-      >
-       <option value="" disabled hidden>学部</option>
-       <option value="人文社会科学部">人文社会科学部</option>
-       <option value="医学部">医学部</option>
-       <option value="工学部">工学部</option>
-       <option value="情報学部">情報学部</option> 
-       <option value="農学部">農学部</option>
-      </select>
-      <select
-        name="course"
-        value={ course }
-        onChange={handleChange}
-        required
-        className={styles.postselect}
-      >
-       <option value="" disabled hidden>学科</option>
-       
-       <optgroup label="人文社会科学部">
-          <option value="法学科">法学科</option>
-          <option value="社会学科">社会学科</option>
-          <option value="経済学科">経済学科</option>
-          <option value="国際学科">国際学科</option>
-       </optgroup>
-     
-       <optgroup label="医学部">
-          <option value="医学科">医学科</option>
-       </optgroup>
-      
-       <optgroup label="工学部">
-          <option value="機械工学科">機械工学科</option>
-          <option value="電気電子工学科">電気電子工学科</option>
-          <option value="電子物質工学科">電子物質工学科</option>
-          <option value="化学バイオ工学科">化学バイオ工学科</option>
-          <option value="数理システム工学科">数理システム工学科</option>
-       </optgroup>
-      
-       <optgroup label="情報学部">
-          <option value="情報科学科">情報科学科</option>
-          <option value="行動情報学科">行動情報学科</option>
-       </optgroup>
-      
-       <optgroup label="農学部">
-          <option value="農学科">農学科</option>
-       </optgroup>
-      </select>
-    </div>
-    <div className={ styles.postContainer}>
-      <InputBox
-        type="text"
-        name="image"
-        placeholder="写真"
-        value={ image }
-        handleChange={ handleChange }
-        isRequired={ false } />
-    </div>
-    <div className={ styles.postContainer}>
-      <InputBox
-        type="text"
-        name="memo"
-        placeholder="メモ"
-        value={ memo }
-        handleChange={ handleChange }
-        isRequired={ false } />
-    
-
-    </div>
-      <SubmitBtn btnText="追加・投稿" />
-      { message && <p className={ styles.backendMessage }>{ message }</p> }
-    </form>
+        <div className={styles.fullWidth}>
+          <div className={styles.formgroup}>
+            <label htmlFor="image">写真 URL</label>
+            <input id="image" name="image" value={image} onChange={handleChange} required/>
+          </div>
+          <div className={styles.formgroup}>
+            <label htmlFor="memo">メモ</label>
+            <input id="memo" name="memo"  value={memo} onChange={handleChange} required/>
+          </div>
+        </div>
+        <div className={styles.submitplace}>
+        <SubmitBtn btnText="追加・投稿" />
+        </div>
+        {message && <p className={styles.backendMessage}>{message}</p>}
+      </form>
     </>
   );
-}
-  
-  
+};
 
 export default Post;
