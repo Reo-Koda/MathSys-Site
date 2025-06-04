@@ -50,6 +50,7 @@ const Post = () => {
       const data = await res.json();
       if (res.ok) {
         setMessage(`データ追加 新規ID: ${data.id}`);
+        router.push("/");
       } else {
         setMessage(`エラー: ${data.error}`);
       }
