@@ -19,19 +19,19 @@ const SignContainer = ({ type, btnText }: Props) => {
 
   const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+    setMessage("");
     try {
-      const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/users/${ type }`, {
+      const res = await fetch(`${ process.env.NEXT_PUBLIC_API_URL }/users/${ type }`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
         },
+        credentials: "include",
         body: JSON.stringify({ user_name: userName, password: password }),
       });
 
       const data = await res.json();
       if (res.ok) {
-        localStorage.setItem("authToken", data.token);
-
         setMessage(`サインイン成功: ${ data.message }`);
         router.push('/');
       } else {

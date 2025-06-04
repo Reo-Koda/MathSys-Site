@@ -27,25 +27,33 @@ const Mypage = () => {
   const [posts, setPosts] = useState<tag[]>([]);
   const [selfPosts, setSelfPosts] = useState<tag[]>([]);
   const [isLoading, setIsLoading] = useState(false);
+  const [message, setMessage] = useState<string>("");
 
   useEffect(() => {
-    const token = localStorage.getItem("authToken");
-    if (!token) {
-      router.push("/signin");
-      return;
-    }
-
     const getPosts = async () => {
       setIsLoading(true);
       try {
         const url = new URL(
-          `${process.env.NEXT_PUBLIC_API_URL}/api/favorites`
+          `${process.env.NEXT_PUBLIC_API_URL}/favorites`
         );
-        url.searchParams.set("q", token);
         
-        const res = await fetch(url.toString());
+        const res = await fetch(url.toString(), {
+          method: "GET",
+          credentials: "include", // セッションID（Cookie）を送信
+        });
         const json = await res.json();
-        setPosts(json.posts);
+        
+        if (res.ok) {
+          setPosts(json.posts);
+        } else {
+          setMessage(json.error || "認証に失敗しました");
+          // 401 ならログインページに戻す
+          if (res.status === 401) {
+            router.push("/signin");
+          }
+          return;
+        }
+        
       } catch (err: any) {
         console.error("API error:", err);
       } finally {
@@ -57,13 +65,24 @@ const Mypage = () => {
       setIsLoading(true);
       try {
         const url = new URL(
-          `${process.env.NEXT_PUBLIC_API_URL}/api/posts/self`
+          `${process.env.NEXT_PUBLIC_API_URL}/posts/self`
         );
-        url.searchParams.set("user", token);
         
-        const res = await fetch(url.toString());
+        const res = await fetch(url.toString(), {
+          method: "GET",
+          credentials: "include", // セッションID（Cookie）を送信
+        });
         const json = await res.json();
-        setSelfPosts(json.posts);
+        if (res.ok) {
+          setSelfPosts(json.posts);
+        } else {
+          setMessage(json.error || "認証に失敗しました");
+          // 401 ならログインページに戻す
+          if (res.status === 401) {
+            router.push("/signin");
+          }
+          return;
+        }
       } catch (err: any) {
         console.error("API error:", err);
       } finally {
@@ -85,6 +104,7 @@ const Mypage = () => {
         />
         <div className={styles.pagesearch}>
           <SearchContainer />
+          { message && <p>{ message }</p> }
         
           <div className={styles.favorites}>
             { isLoading ? <p>データを取得中...</p> :

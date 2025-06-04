@@ -17,15 +17,36 @@ const TopList = ({ topList }: Props) => {
   const [isLogin, setIsLogin] = useState(false);
 
   useEffect(() => {
-    const token = localStorage.getItem("authToken");
-    if (token) setIsLogin(true);
-    else setIsLogin(false);
+    // バックエンドの /auth/status エンドポイントを叩いてセッションが有効かチェック
+    const getAuthStatus = async () => {
+      try {
+        const res = await fetch(`${ process.env.NEXT_PUBLIC_API_URL }/auth/status`, {
+          method: "GET",
+          credentials: "include", // Cookie（セッションID）を自動で送る
+        });
+        const json = await res.json();
+        setIsLogin(json.isLogin);
+      } catch (err: any) {
+        console.error("セッションチェックでエラー:", err);
+        setIsLogin(false);
+      };
+    }
+
+    getAuthStatus();
   }, []);
 
-  const logout = () => {
-    localStorage.removeItem("authToken");
-    window.location.reload();
-  }
+  const logout = async () => {
+    try {
+      const res = await fetch(`${ process.env.NEXT_PUBLIC_API_URL }/users/signout`, {
+        method: "POST",
+        credentials: "include",
+      });
+      // リロードして isLogin を false にする
+      window.location.reload();
+    } catch(err: any) {
+      console.error("ログアウトエラー:", err);
+    }
+  };
 
   const items: topList[] = isLogin ? [
       ...topList.slice(0, -1),

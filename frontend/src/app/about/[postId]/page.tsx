@@ -12,21 +12,34 @@ export default function About ({ params }: { params: Promise<{ postId: string }>
   const [userName, setUserName] = useState<string>("");
   const [message, setMessage] = useState<string>("");
   const [isFavorite, setIsFavorite] = useState<boolean>(false);
+  const [canDelete, setCanDelete] = useState<boolean>(false);
 
   useEffect(() => {
-    const token = localStorage.getItem("authToken");
-    if (token) setUserName(token);
-    else return;
+    const getAuthStatus = async () => {
+      try {
+        const res = await fetch(`${ process.env.NEXT_PUBLIC_API_URL }/auth/status`, {
+          method: "GET",
+          credentials: "include", // Cookie（セッションID）を自動で送る
+        });
+        const json = await res.json();
+        setUserName(json.userName);
+      } catch (err: any) {
+        console.error("セッションチェックでエラー:", err);
+      };
+    }
 
     const getFavorite = async () => {
+      if (!userName) return;
       try {
         const url = new URL(
-          `${process.env.NEXT_PUBLIC_API_URL}/api/isfavorite`
+          `${process.env.NEXT_PUBLIC_API_URL}/isfavorite`
         );
-        url.searchParams.set("user", token);
         url.searchParams.set("id", postId);
         
-        const res = await fetch(url.toString());
+        const res = await fetch(url.toString(), {
+          method: "GET",
+          credentials: "include", // Cookie（セッションID）を自動で送る
+        });
         const json = await res.json();
         setIsFavorite(json.isFavorite);
       } catch (err: any) {
@@ -34,10 +47,12 @@ export default function About ({ params }: { params: Promise<{ postId: string }>
       }
     }
 
+    getAuthStatus();
     getFavorite();
-  }, []);
+  }, [userName, postId]);
 
-  const handleSubmit = async () => {
+  const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
     if (!userName) {
       router.push("/signin");
       return;
@@ -47,13 +62,13 @@ export default function About ({ params }: { params: Promise<{ postId: string }>
       var type;
       if (isFavorite) type = "out";
       else type = "in";
-      const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/favorites/${ type }`, {
+      const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/favorites/${ type }`, {
         method: 'POST',
+        credentials: "include",
         headers: {
           'Content-Type': 'application/json',
         },
         body: JSON.stringify({
-          user: userName,
           id: postId,
         }),
       });
@@ -61,12 +76,18 @@ export default function About ({ params }: { params: Promise<{ postId: string }>
       const data = await res.json();
       if (res.ok) {
         setMessage(`データ ID: ${ data.id }`);
+        router.push("/mypage");
       } else {
         setMessage(`エラー: ${ data.error }`);
       }
     } catch (error: any) {
       setMessage(`通信エラー: ${ error.message }`);
     }
+  }
+
+  // 現在のユーザーが投稿したっユーザーと同じかつ削除ボタンを押した時、投稿を削除する機能を実装する
+  const handleDelete = () => {
+    return;
   }
 
   return (
@@ -78,6 +99,9 @@ export default function About ({ params }: { params: Promise<{ postId: string }>
         { isFavorite ? <SubmitBtn btnText="お気に入り解除"  />
           : <SubmitBtn btnText="お気に入り登録"  />
         }
+      </form>
+      <form onSubmit={ handleDelete }>
+        { canDelete && <SubmitBtn btnText="投稿を削除" /> }
       </form>
       { message && <p>{ message }</p> }
     </div>

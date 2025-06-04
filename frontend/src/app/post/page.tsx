@@ -21,9 +21,23 @@ const Post = () => {
   const [message, setMessage] = useState("");
 
   useEffect(() => {
-    const token = localStorage.getItem("authToken");
-    if (!token) router.push("/signin");
-    else setUserName(token);
+    const getAuthStatus = async () => {
+      try {
+        const res = await fetch(`${ process.env.NEXT_PUBLIC_API_URL }/auth/status`, {
+          method: "GET",
+          credentials: "include",
+        });
+        const json = await res.json();
+        setUserName(json.userName);
+        if (!json.userName) {
+          router.push("/signin");
+        }
+      } catch (err: any) {
+        console.error("セッションチェックでエラー:", err);
+      };
+    }
+
+    getAuthStatus();
   }, []);
 
   const handleSubmit = async (e: FormEvent) => {
@@ -35,7 +49,6 @@ const Post = () => {
           "Content-Type": "application/json"
         },
         body: JSON.stringify({
-          author: userName,
           class: className,
           doctor: doctorName,
           year: year,
