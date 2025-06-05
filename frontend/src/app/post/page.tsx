@@ -92,14 +92,15 @@ const Post = () => {
     }
   }
 
+  
   return (
     <>
       <TopList topList={topList} />
-      <form onSubmit={handleSubmit} className={styles.postContainer}>
-        <SubHeader
+      <SubHeader
           title="投稿"
           text="以下の必要な項目を入力してください"
-        />
+      />
+      <form onSubmit={handleSubmit} className={styles.postContainer}>
         <div className={styles.formgrid}>
           <div className={styles.formgroup}>
             <label htmlFor="className">授業名</label>
@@ -115,7 +116,7 @@ const Post = () => {
           </div>
           <div className={styles.formgroup}>
             <label htmlFor="category">分類</label>
-            <select  name="category" value={category} onChange={handleChange} required className={styles.select}>
+            <select  name="category" value={category} onChange={handleChange} required >
                 <option value="" disabled hidden>選択してください</option>
                 <option value="過去問">過去問</option>
                 <option value="レポート">レポート</option>
@@ -136,11 +137,11 @@ const Post = () => {
         <div className={styles.fullWidth}>
           <div className={styles.formgroup}>
             <label htmlFor="image">写真 URL</label>
-            <input id="image" name="image" value={image} onChange={handleChange} required/>
+            <input id="image" name="image" value={image} onChange={handleChange} />
           </div>
           <div className={styles.formgroup}>
             <label htmlFor="memo">メモ</label>
-            <input id="memo" name="memo"  value={memo} onChange={handleChange} required/>
+            <input id="memo" name="memo"  value={memo} onChange={handleChange} />
           </div>
         </div>
         <div className={styles.submitplace}>

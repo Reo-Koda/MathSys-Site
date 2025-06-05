@@ -36,7 +36,8 @@
   color: #555;
 }
 .formgroup input,
-.formgroup textarea {
+.formgroup textarea,
+.formgroup select{
   width: 100%;
   padding: 8px 4px;
   border: none;
@@ -44,17 +45,9 @@
   font-size: 1rem;
   background-color: transparent;
   transition: border-color 0.3s;
-  /*resize: vertical;*/
-}
-.formgroup select{
-  font-size: 1rem;
-  padding: 8px 4px;
-  border: none;
-  border-bottom: 2px solid #ccc;
-  background-color: transparent;
-  transition: border-color 0.3s;
   
 }
+
 .formgroup input:focus,
 .formgroup textarea:focus {
   outline: none;
