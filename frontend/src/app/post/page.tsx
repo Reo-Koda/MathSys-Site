@@ -6,6 +6,7 @@ import TopList from "../../components/topList";
 import { topList } from "src/data/topList";
 import SubHeader from "src/components/subHeader";
 import SubmitBtn from "src/components/submitBtn";
+import FormGroup from "../../components/formGroup";
 
 const Post = () => {
   const router = useRouter();
@@ -43,8 +44,9 @@ const Post = () => {
   const handleSubmit = async (e: FormEvent) => {
     e.preventDefault();
     try {
-      const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/posts/post`, {
+      const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/posts/post`, {
         method: "POST",
+          credentials: "include",
         headers: {
           "Content-Type": "application/json"
         },
@@ -102,18 +104,25 @@ const Post = () => {
       />
       <form onSubmit={handleSubmit} className={styles.postContainer}>
         <div className={styles.formgrid}>
-          <div className={styles.formgroup}>
-            <label htmlFor="className">授業名</label>
-            <input id="className" name="className" value={className} onChange={handleChange} required />
-          </div>
-          <div className={styles.formgroup}>
-            <label htmlFor="doctorName">教授名</label>
-            <input id="doctorName" name="doctorName" value={doctorName} onChange={handleChange} required />
-          </div>
-          <div className={styles.formgroup}>
-            <label htmlFor="year">年度</label>
-            <input id="year" name="year" value={year} onChange={handleChange} required />
-          </div>
+          <FormGroup 
+              labeltitle="className"
+              nametitle="授業名"
+              value={className}
+              handleChange={handleChange}
+          />
+          <FormGroup 
+              labeltitle="doctorName"
+              nametitle="教授名"
+              value={doctorName}
+              handleChange={handleChange}
+          />
+           <FormGroup 
+              labeltitle="year"
+              nametitle="年度"
+              value={year}
+              handleChange={handleChange}
+          />
+          
           <div className={styles.formgroup}>
             <label htmlFor="category">分類</label>
             <select  name="category" value={category} onChange={handleChange} required >
@@ -124,14 +133,18 @@ const Post = () => {
                 <option value="その他">その他</option>
             </select>
           </div>
-          <div className={styles.formgroup}>
-            <label htmlFor="undergraduate">学部</label>
-            <input id="undergraduate" name="undergraduate" value={undergraduate} onChange={handleChange} required />
-          </div>
-          <div className={styles.formgroup}>
-            <label htmlFor="course">学科</label>
-            <input id="course" name="course" value={course} onChange={handleChange} required />
-          </div>
+          <FormGroup 
+              labeltitle="undergraduate"
+              nametitle="学部"
+              value={undergraduate}
+              handleChange={handleChange}
+          />
+          <FormGroup 
+              labeltitle="course"
+              nametitle="学科"
+              value={course}
+              handleChange={handleChange}
+          />
         </div>
 
         <div className={styles.fullWidth}>
