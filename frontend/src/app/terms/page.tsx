@@ -1,12 +1,11 @@
 import styles from "./page.module.css";
 import TopList from "../../components/topList";
-import { topList } from "src/data/topList";
 import SubHeader from "src/components/subHeader";
 
 const Terms = () => {
   return (
     <>
-    <TopList topList={ topList } />
+    <TopList />
     <div className={ styles.container }>
       <SubHeader
         title="利用規約"

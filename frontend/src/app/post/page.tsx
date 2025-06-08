@@ -3,7 +3,6 @@ import { useEffect, useState, FormEvent, SetStateAction } from "react";
 import { useRouter } from "next/navigation";
 import styles from "./page.module.css";
 import TopList from "../../components/topList";
-import { topList } from "src/data/topList";
 import SubHeader from "src/components/subHeader";
 import SubmitBtn from "src/components/submitBtn";
 import FormGroup from "../../components/formGroup";
@@ -97,7 +96,7 @@ const Post = () => {
   
   return (
     <>
-      <TopList topList={topList} />
+      <TopList />
       <SubHeader
           title="投稿"
           text="以下の必要な項目を入力してください"

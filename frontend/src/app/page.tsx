@@ -2,7 +2,6 @@
 import { useEffect, useState } from "react";
 import css from "./page.module.css";
 import TopList from "../components/topList";
-import { topList } from "src/data/topList";
 import SearchContainer from "src/components/searchContainer";
 import PostBlock from "../components/postBlock";
 
@@ -53,7 +52,7 @@ export default function Home() {
 
   return (
     <>
-    <TopList topList={ topList } />
+    <TopList />
     
     <div className={ css.container }>
       <SearchContainer />

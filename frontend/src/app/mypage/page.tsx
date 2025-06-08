@@ -3,7 +3,6 @@ import { useEffect, useState} from "react";
 import { useRouter } from "next/navigation";
 import styles from "./page.module.css";
 import TopList from "../../components/topList";
-import { topList } from "src/data/topList";
 import SubHeader from "src/components/subHeader";
 import PostBlock from "src/components/postBlock"; 
 import SearchContainer from "src/components/searchContainer";
@@ -96,7 +95,7 @@ const Mypage = () => {
 
   return (
     <>
-      <TopList topList={topList} />
+      <TopList />
       <div className={styles.container}>
         <SubHeader
           title="お気に入り一覧"

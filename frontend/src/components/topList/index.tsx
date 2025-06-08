@@ -2,6 +2,7 @@
 import { useEffect, useState } from "react";
 import styles from "./styles.module.css";
 import Link from "next/link";
+import { topList } from "src/data/topList";
 
 interface topList {
   ref: string
@@ -9,11 +10,7 @@ interface topList {
   func?: () => void
 }
 
-type Props = {
-	topList: topList[]
-}
-
-const TopList = ({ topList }: Props) => {
+const TopList = () => {
   const [isLogin, setIsLogin] = useState(false);
 
   useEffect(() => {

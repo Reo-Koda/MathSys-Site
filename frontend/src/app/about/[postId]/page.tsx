@@ -3,7 +3,6 @@ import { use, useEffect, useState, FormEvent } from "react";
 import { useRouter } from "next/navigation";
 import styles from "./page.module.css";
 import TopList from "src/components/topList";
-import { topList } from "src/data/topList";
 import SubmitBtn from "src/components/submitBtn";
 
 export default function About ({ params }: { params: Promise<{ postId: string }>;}) {
@@ -98,7 +97,7 @@ export default function About ({ params }: { params: Promise<{ postId: string }>
 
   return (
     <>
-    <TopList topList={ topList } />
+    <TopList />
     <div className={ styles.container }>
       <div className={ styles.divs }>投稿番号：{ postId }</div>
       <form onSubmit={ handleSubmit }>
