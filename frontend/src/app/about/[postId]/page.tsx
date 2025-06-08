@@ -47,8 +47,14 @@ export default function About ({ params }: { params: Promise<{ postId: string }>
       }
     }
 
+    const changeDeleteState = () => {
+      if (!userName) return;
+      // 投稿者と現在のユーザーを比較し、同じなら canDeleteをtrueにする
+    }
+
     getAuthStatus();
     getFavorite();
+    changeDeleteState();
   }, [userName, postId]);
 
   const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
@@ -85,7 +91,7 @@ export default function About ({ params }: { params: Promise<{ postId: string }>
     }
   }
 
-  // 現在のユーザーが投稿したっユーザーと同じかつ削除ボタンを押した時、投稿を削除する機能を実装する
+  // 現在のユーザーが投稿したユーザーと同じかつ削除ボタンを押した時、投稿を削除する機能を実装する
   const handleDelete = () => {
     return;
   }
@@ -101,7 +107,7 @@ export default function About ({ params }: { params: Promise<{ postId: string }>
         }
       </form>
       <form onSubmit={ handleDelete }>
-        { canDelete && <SubmitBtn btnText="投稿を削除" /> }
+        {canDelete && <SubmitBtn btnText="投稿を削除" /> }
       </form>
       { message && <p>{ message }</p> }
     </div>

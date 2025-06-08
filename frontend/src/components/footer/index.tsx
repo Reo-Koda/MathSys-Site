@@ -17,8 +17,8 @@ const Footer = ({ head }: Props) => {
       <Link href={"/aboutsite"}>
         <p>&copy; { head.year } { head.university } { head.site }</p>
       </Link>
-      <Link href={"/privacypolicy"}>
-        <p>プライバシーポリシー</p>
+      <Link href={"/terms"}>
+        <p>利用規約</p>
       </Link>
       <Link href={"/note"}>
         <p>ご利用に際しての注意事項</p>
