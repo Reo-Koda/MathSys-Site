@@ -7,7 +7,7 @@ type Props = {
 
 const SubHeader = ({ title, text }: Props) => {
   return (
-    <div className={ styles.mypageheader }>
+    <div className={ styles.subHeader }>
 			<h2>{ title }</h2>
 			<p>{ text }</p>
     </div>

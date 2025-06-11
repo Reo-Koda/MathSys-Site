@@ -108,6 +108,33 @@ func appendToPosts(rows *sql.Rows) ([]Post, error) {
 	return posts, nil
 }
 
+func appendToTags(rows *sql.Rows, value string) ([]Post, error) {
+	var tags []Post
+
+	for rows.Next() {
+		var tag string
+
+		if err := rows.Scan(
+			&tag.ClassTitle,
+			&tag.DoctorName,
+			&tag.Year,
+			&tag.UnderGraduate,
+			&tag.Course,
+			&tag.Category,
+		); err != nil {
+			return nil, err
+		}
+
+		posts = append(posts, p)
+	}
+
+	if err := rows.Err(); err != nil {
+		return nil, err
+	}
+
+	return posts, nil
+}
+
 func main() {
 	raw := "${MYSQL_USER}:${MYSQL_PASSWORD}@tcp(mathsys_database:3306)/mathsys_db?charset=utf8mb4&parseTime=True&loc=Asia%2FTokyo"
 	dsn := os.ExpandEnv(raw)
@@ -283,7 +310,7 @@ func main() {
     session.Clear()
     session.Options(sessions.Options{
 			Path:     "/",           // Cookie のパス
-			Domain:   domain,   // 本番では自分のドメインにする
+			Domain:   domain,        // 本番では自分のドメインにする
 			MaxAge:   -1,            // MaxAge を -1 にすると即時 Cookie が削除される
 			HttpOnly: true,          // XSS 対策
 			Secure:   false,         // 本番では true にする
@@ -313,6 +340,19 @@ func main() {
 		}
 
 		c.JSON(http.StatusOK, gin.H{"posts": posts})
+	})
+
+	r.GET("/tags", func(c *gin.Context) {
+		tags := [6]string{"class_title", "doctor_name", "year_num", "undergraduate", "course", "category"}
+		for _, v := range tags {
+			rows, err := db.Query("SELECT ? FROM Posts;", v)
+			if err != nil {
+				c.JSON(http.StatusInternalServerError, gin.H{"error": err.Error()})
+				return
+			}
+			defer rows.Close()
+		}
+		
 	})
 
 	authorized := r.Group("/")

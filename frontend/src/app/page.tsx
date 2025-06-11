@@ -3,21 +3,9 @@ import { useEffect, useState } from "react";
 import css from "./page.module.css";
 import TopList from "../components/topList";
 import SearchContainer from "src/components/searchContainer";
-import PostBlock from "../components/postBlock";
-
-interface tag {
-  class: string
-  doctor: string
-  year: number
-  department: string
-  major: string
-  category: string
-  author: string
-  createdDay: number
-  postId: number
-  images?: string
-  memo?: string
-}
+import SubTitle from "src/components/subTitle";
+import PostBlock from "src/components/postBlock";
+import { tag } from "src/data/tag";
 
 // この配列オブジェクトはサンプルとしてのデータ
 // const tagList: tag[] = [
@@ -29,7 +17,8 @@ interface tag {
 
 export default function Home() {
   const [posts, setPosts] = useState<tag[]>([]);
-  const [isLoading, setIsLoading] = useState(false);
+  const [isLoading, setIsLoading] = useState<boolean>(false);
+  const [isShowResult, setIsShowResult] = useState<boolean>(false);
 
   useEffect(() => {
     setIsLoading(true);
@@ -57,7 +46,8 @@ export default function Home() {
     <div className={ css.container }>
       <SearchContainer />
 
-      <h1 className={ css.subTitle }>最近の投稿</h1>
+      { isShowResult && <SubTitle text="検索結果" /> }
+      <SubTitle text="最近の投稿" />
       { isLoading ? <p>データを取得中...</p> :
         <section className={ css.posts }>
           { posts ? posts.map((post) => {
@@ -67,6 +57,10 @@ export default function Home() {
           }) : <p>過去問を投稿してみよう</p> }
         </section>
       }
+
+      <br />
+      <SubTitle text="お知らせ" />
+      <p>準備中...</p>
       
     </div>
     </>

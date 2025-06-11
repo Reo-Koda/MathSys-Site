@@ -1,0 +1,9 @@
+.subTitle {
+  display: inline-block;
+  color: var(--pre-blue);
+  border-top: solid 3px var(--pre-blue);
+  border-bottom: solid 3px var(--pre-blue);
+  font-size: 1.7em;
+  margin-bottom: 0.5em;
+  padding: 0 1.62em 0 1em;
+}

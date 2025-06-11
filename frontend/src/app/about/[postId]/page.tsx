@@ -67,7 +67,7 @@ export default function About ({ params }: { params: Promise<{ postId: string }>
       var type;
       if (isFavorite) type = "out";
       else type = "in";
-      const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/favorites/${ type }`, {
+      const res = await fetch(`${ process.env.NEXT_PUBLIC_API_URL }/favorites/${ type }`, {
         method: 'POST',
         credentials: "include",
         headers: {
@@ -106,7 +106,7 @@ export default function About ({ params }: { params: Promise<{ postId: string }>
         }
       </form>
       <form onSubmit={ handleDelete }>
-        {canDelete && <SubmitBtn btnText="投稿を削除" /> }
+        { canDelete && <SubmitBtn btnText="投稿を削除" /> }
       </form>
       { message && <p>{ message }</p> }
     </div>

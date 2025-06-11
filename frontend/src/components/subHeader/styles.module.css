@@ -1,6 +1,4 @@
-.mypageheader {
-  width:90%;
-  margin: 0 auto;
+.subHeader {
   background-color: var(--white);
   border-radius: 8px;
   padding: 20px;
@@ -8,15 +6,8 @@
   margin-bottom: 20px;
   text-align: center;
 }
-.mypageheader h2 {
+.subHeader h2 {
   font-size: 1.6em;
   color: var(--blue);
   margin-bottom: 10px;
-}
-
-@media (max-width: 768px) {
-  .mypageheader{
-    width: 90%;
-  }
-  
 }
