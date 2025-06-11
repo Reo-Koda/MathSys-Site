@@ -22,17 +22,17 @@ type User struct {
 }
 
 type Post struct {
-	PostId        int            `json:"postId"`
-	UserName      string         `json:"author"`
-	ClassTitle    string         `json:"class"`
-	DoctorName    string         `json:"doctor"`
-	Year          string         `json:"year"`
-	UnderGraduate string         `json:"department"`
-	Course        string         `json:"major"`
-	Category      string         `json:"category"`
-	Image         *string        `json:"images"`
-	Memo          *string        `json:"memo"`
-	PostDate      time.Time      `json:"createdDay"`
+	PostId        int       `json:"postId"`
+	UserName      string    `json:"author"`
+	ClassTitle    string    `json:"class"`
+	DoctorName    string    `json:"doctor"`
+	Year          string    `json:"year"`
+	UnderGraduate string    `json:"department"`
+	Course        string    `json:"major"`
+	Category      string    `json:"category"`
+	Image         *string   `json:"images"`
+	Memo          *string   `json:"memo"`
+	PostDate      time.Time `json:"createdDay"`
 }
 
 type Favorite struct {
@@ -108,32 +108,32 @@ func appendToPosts(rows *sql.Rows) ([]Post, error) {
 	return posts, nil
 }
 
-func appendToTags(rows *sql.Rows, value string) ([]Post, error) {
-	var tags []Post
+// func appendToTags(rows *sql.Rows, value string) ([]Post, error) {
+// 	var tags []Post
 
-	for rows.Next() {
-		var tag string
+// 	for rows.Next() {
+// 		var tag string
 
-		if err := rows.Scan(
-			&tag.ClassTitle,
-			&tag.DoctorName,
-			&tag.Year,
-			&tag.UnderGraduate,
-			&tag.Course,
-			&tag.Category,
-		); err != nil {
-			return nil, err
-		}
+// 		if err := rows.Scan(
+// 			&tag.ClassTitle,
+// 			&tag.DoctorName,
+// 			&tag.Year,
+// 			&tag.UnderGraduate,
+// 			&tag.Course,
+// 			&tag.Category,
+// 		); err != nil {
+// 			return nil, err
+// 		}
 
-		posts = append(posts, p)
-	}
+// 		posts = append(posts, p)
+// 	}
 
-	if err := rows.Err(); err != nil {
-		return nil, err
-	}
+// 	if err := rows.Err(); err != nil {
+// 		return nil, err
+// 	}
 
-	return posts, nil
-}
+// 	return posts, nil
+// }
 
 func main() {
 	raw := "${MYSQL_USER}:${MYSQL_PASSWORD}@tcp(mathsys_database:3306)/mathsys_db?charset=utf8mb4&parseTime=True&loc=Asia%2FTokyo"
@@ -155,7 +155,7 @@ func main() {
 	db.SetMaxIdleConns(10)
 
 	// 本番時には変更する
-  domain := "localhost"
+	domain := "localhost"
 
 	r := gin.Default()
 
@@ -218,10 +218,10 @@ func main() {
 
 	users.POST("/signin", func(c *gin.Context) {
 		var user User
-    if err := c.ShouldBindJSON(&user); err != nil {
+		if err := c.ShouldBindJSON(&user); err != nil {
 			c.JSON(http.StatusBadRequest, gin.H{"error": "パラメータが不正です"})
 			return
-    }
+		}
 
 		// ユーザー存在有無確認
 		var dbPassword string
@@ -241,23 +241,23 @@ func main() {
 
 		// セッションIDの発行
 		session := sessions.Default(c)
-    session.Set("user", user.UserName)
-    session.Options(sessions.Options{
-			Path:     "/",           // Cookie のパス
-			Domain:   domain,   // 本番では自分のドメインにする
-			MaxAge:   3600 * 24,     // 1日（秒単位）。セッションの有効期限
-			HttpOnly: true,          // XSS 対策
-			Secure:   false,         // 本番では true にする
+		session.Set("user", user.UserName)
+		session.Options(sessions.Options{
+			Path:     "/",       // Cookie のパス
+			Domain:   domain,    // 本番では自分のドメインにする
+			MaxAge:   3600 * 24, // 1日（秒単位）。セッションの有効期限
+			HttpOnly: true,      // XSS 対策
+			Secure:   false,     // 本番では true にする
 			SameSite: http.SameSiteLaxMode,
-    })
+		})
 
-    // Save() を呼ぶと Cookie に暗号化されたセッションデータが書き込まれる
-    if err := session.Save(); err != nil {
+		// Save() を呼ぶと Cookie に暗号化されたセッションデータが書き込まれる
+		if err := session.Save(); err != nil {
 			c.JSON(http.StatusInternalServerError, gin.H{"error": "セッション保存に失敗しました"})
 			return
-    }
+		}
 
-    c.JSON(http.StatusOK, gin.H{"message": "ログイン成功"})
+		c.JSON(http.StatusOK, gin.H{"message": "ログイン成功"})
 	})
 
 	users.POST("/signup", func(c *gin.Context) {
@@ -285,44 +285,44 @@ func main() {
 
 		// セッションIDの発行
 		session := sessions.Default(c)
-    session.Set("user", newUser.UserName)
-    session.Options(sessions.Options{
-			Path:     "/",           // Cookie のパス
-			Domain:   domain,   // 本番では自分のドメインにする
-			MaxAge:   3600 * 24,     // 1日（秒単位）。セッションの有効期限
-			HttpOnly: true,          // XSS 対策
-			Secure:   false,         // 本番では true にする
+		session.Set("user", newUser.UserName)
+		session.Options(sessions.Options{
+			Path:     "/",       // Cookie のパス
+			Domain:   domain,    // 本番では自分のドメインにする
+			MaxAge:   3600 * 24, // 1日（秒単位）。セッションの有効期限
+			HttpOnly: true,      // XSS 対策
+			Secure:   false,     // 本番では true にする
 			SameSite: http.SameSiteLaxMode,
-    })
+		})
 
-    if err := session.Save(); err != nil {
+		if err := session.Save(); err != nil {
 			c.JSON(http.StatusInternalServerError, gin.H{"error": "セッション保存に失敗しました"})
 			return
-    }
+		}
 
 		c.JSON(http.StatusOK, gin.H{"message": "新規登録が正常に終了しました"})
 	})
 
 	users.POST("/signout", func(c *gin.Context) {
-    session := sessions.Default(c)
+		session := sessions.Default(c)
 
-    // セッション内のキーをすべてクリアする
-    session.Clear()
-    session.Options(sessions.Options{
-			Path:     "/",           // Cookie のパス
-			Domain:   domain,        // 本番では自分のドメインにする
-			MaxAge:   -1,            // MaxAge を -1 にすると即時 Cookie が削除される
-			HttpOnly: true,          // XSS 対策
-			Secure:   false,         // 本番では true にする
+		// セッション内のキーをすべてクリアする
+		session.Clear()
+		session.Options(sessions.Options{
+			Path:     "/",    // Cookie のパス
+			Domain:   domain, // 本番では自分のドメインにする
+			MaxAge:   -1,     // MaxAge を -1 にすると即時 Cookie が削除される
+			HttpOnly: true,   // XSS 対策
+			Secure:   false,  // 本番では true にする
 			SameSite: http.SameSiteLaxMode,
-    })
+		})
 
-    if err := session.Save(); err != nil {
+		if err := session.Save(); err != nil {
 			c.JSON(http.StatusInternalServerError, gin.H{"error": "セッション破棄に失敗しました"})
 			return
-    }
+		}
 
-    c.JSON(http.StatusOK, gin.H{"message": "ログアウトしました"})
+		c.JSON(http.StatusOK, gin.H{"message": "ログアウトしました"})
 	})
 
 	r.GET("/posts", func(c *gin.Context) {
@@ -352,7 +352,7 @@ func main() {
 			}
 			defer rows.Close()
 		}
-		
+
 	})
 
 	authorized := r.Group("/")
@@ -400,7 +400,7 @@ func main() {
 					Valid:  true,
 				}
 			}
-			
+
 			now := time.Now().Format("2006-01-02")
 
 			result, err := db.Exec("INSERT INTO Posts (user_name, class_title, doctor_name, year_num, undergraduate, course, category, images, memo, post_date) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)",
@@ -490,7 +490,7 @@ func main() {
 		authorized.GET("/isfavorite", func(c *gin.Context) {
 			// クエリパラメータからキーワード取得
 			user := c.GetString("user")
-			postID   := c.Query("id")
+			postID := c.Query("id")
 			if postID == "" {
 				c.JSON(http.StatusBadRequest, gin.H{"error": "ユーザーと投稿を指定してください"})
 				return
