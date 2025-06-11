@@ -22,3 +22,15 @@
 .header p {
   font-size: 1em;
 }
+
+@media (max-width: 768px) {
+  .logo{
+    position: static;
+    transform: none;
+    margin: 0 auto 10px;
+    display: block;
+  }
+  .header h1 {
+    align-items: center;
+  }
+}
