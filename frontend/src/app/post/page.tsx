@@ -101,31 +101,34 @@ const Post = () => {
         <SubHeader
           title="投稿"
           text="以下の必要な項目を入力してください"
-        />
-        <form onSubmit={handleSubmit} className={styles.postContainer}>
-          <div className={styles.formgrid}>
-            <FormGroup 
+      />
+      <form onSubmit={ handleSubmit } className={ styles.postContainer }>
+        <div className={ styles.formgrid }>
+          <FormGroup 
               labeltitle="className"
               nametitle="授業名"
-              value={className}
-              handleChange={handleChange}
-            />
-            <FormGroup 
+              value={ className }
+              handleChange={ handleChange }
+              required={ true }
+          />
+          <FormGroup 
               labeltitle="doctorName"
               nametitle="教授名"
-              value={doctorName}
-              handleChange={handleChange}
-            />
-            <FormGroup 
+              value={ doctorName }
+              handleChange={ handleChange }
+              required={ true }
+          />
+           <FormGroup 
               labeltitle="year"
               nametitle="年度"
-              value={year}
-              handleChange={handleChange}
-            />
-            
-            <div className={styles.formgroup}>
-              <label htmlFor="category">分類</label>
-              <select  name="category" value={category} onChange={handleChange} required >
+              value={ year }
+              handleChange={ handleChange }
+              required={ true }
+          />
+          
+          <div className={ styles.formgroup }>
+            <label htmlFor="category">分類</label>
+            <select  name="category" value={ category } onChange={ handleChange } required >
                 <option value="" disabled hidden>選択してください</option>
                 <option value="過去問">過去問</option>
                 <option value="レポート">レポート</option>
@@ -136,34 +139,40 @@ const Post = () => {
             <FormGroup 
               labeltitle="undergraduate"
               nametitle="学部"
-              value={undergraduate}
-              handleChange={handleChange}
-            />
-            <FormGroup 
+              value={ undergraduate }
+              handleChange={ handleChange }
+              required={ true }
+          />
+          <FormGroup 
               labeltitle="course"
               nametitle="学科"
-              value={course}
-              handleChange={handleChange}
-            />
-          </div>
+              value={ course }
+              handleChange={ handleChange }
+          />
+          <div className={ styles.fullWidth }>
+          <FormGroup 
+              labeltitle="image"
+              nametitle="写真URL"
+              value={ image }
+              handleChange={ handleChange }
+              required={ false }
+          />
+          <FormGroup 
+              labeltitle="memo"
+              nametitle="メモ"
+              value={ memo }
+              handleChange={ handleChange }
+              required={ false }
 
-          <div className={styles.fullWidth}>
-            <div className={styles.formgroup}>
-              <label htmlFor="image">写真 URL</label>
-              <input id="image" name="image" value={image} onChange={handleChange} />
-            </div>
-            <div className={styles.formgroup}>
-              <label htmlFor="memo">メモ</label>
-              <input id="memo" name="memo"  value={memo} onChange={handleChange} />
-            </div>
+          />
           </div>
-          <div className={styles.submitplace}>
-          <SubmitBtn btnText="追加・投稿" />
-          </div>
-          {message && <p className={styles.backendMessage}>{message}</p>}
-        </form>
-      </div>
-      
+        </div>
+
+        <div className={ styles.submitplace }>
+        <SubmitBtn btnText="追加・投稿" />
+        </div>
+        { message && <p className={ styles.backendMessage }>{ message }</p> }
+      </form>
     </>
   );
 };
