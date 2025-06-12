@@ -60,7 +60,7 @@ const Tag = (): JSX.Element => {
           : <p>タグがありません</p>
       }
       <br /><br />
-      <SubTitle text="教授名" /><br />
+      <SubTitle text="教授" /><br />
       { tagList.doctor.length > 0
         ? tagList.doctor.map((t, i) => <p className={ styles.tag } key={`doc-${i}`}>{t}</p>)
         : isLoading
