@@ -1,3 +1,4 @@
+import { JSX } from "react"
 import styles from "./styles.module.css"
 
 type Props = {
@@ -5,7 +6,7 @@ type Props = {
 	text: string
 }
 
-const SubHeader = ({ title, text }: Props) => {
+const SubHeader = ({ title, text }: Props): JSX.Element => {
   return (
     <div className={ styles.subHeader }>
 			<h2>{ title }</h2>

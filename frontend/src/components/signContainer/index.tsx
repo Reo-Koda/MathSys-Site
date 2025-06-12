@@ -1,5 +1,5 @@
 "use client";
-import { useState, FormEvent, SetStateAction } from "react";
+import { useState, FormEvent, SetStateAction, JSX } from "react";
 import { useRouter } from "next/navigation";
 import styles from "./styles.module.css";
 import Link from "next/link";
@@ -11,7 +11,7 @@ type Props = {
   btnText: string
 }
 
-const SignContainer = ({ type, btnText }: Props) => {
+const SignContainer = ({ type, btnText }: Props): JSX.Element => {
   const router = useRouter();
   const [userName, setUserName] = useState('');
   const [password, setPassword] = useState('');

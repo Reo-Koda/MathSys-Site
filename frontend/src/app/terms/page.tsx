@@ -1,8 +1,9 @@
 import styles from "./page.module.css";
-import TopList from "../../components/topList";
+import { JSX } from "react";
+import TopList from "src/components/topList";
 import SubHeader from "src/components/subHeader";
 
-const Terms = () => {
+const Terms = (): JSX.Element => {
   return (
     <>
     <TopList />

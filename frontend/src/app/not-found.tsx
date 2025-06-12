@@ -1,8 +1,9 @@
+import styles from "./not-found.module.css";
+import { JSX } from "react";
 import Image from "next/image";
 import SadCat from "../public/sadcat_1.png";
-import styles from "./not-found.module.css";
 
-const NotFound = () => {
+const NotFound = (): JSX.Element => {
   return (
     <div className={ styles.container }>
       <h1>404 NotFound</h1>

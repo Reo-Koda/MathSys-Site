@@ -1,6 +1,6 @@
-import styles from "./styles.module.css";
 import Link from "next/link";
-import { MouseEvent } from "react";
+import { JSX } from "react";
+import styles from "./styles.module.css";
 
 interface tag {
   class: string
@@ -18,7 +18,7 @@ type Props = {
   tagList: tag
 }
 
-const PostBlock = ({ tagList }: Props) => {
+const PostBlock = ({ tagList }: Props): JSX.Element => {
   
   
 
@@ -27,9 +27,9 @@ const PostBlock = ({ tagList }: Props) => {
       <article className={ styles.post } >
         <h2>{ tagList.class } { tagList.category } { tagList.year }</h2>
         <div className={ styles.tagContainer }>
-           <p onClick={(e) => e.preventDefault() }>{ tagList.doctor }</p>
-           <p onClick={(e) => e.preventDefault() }>{ tagList.department }</p>
-           <p onClick={(e) => e.preventDefault() }>{ tagList.major }</p>
+           <p onClick={ (e) => e.preventDefault() }>{ tagList.doctor }</p>
+           <p onClick={ (e) => e.preventDefault() }>{ tagList.department }</p>
+           <p onClick={ (e) => e.preventDefault() }>{ tagList.major }</p>
         </div>
         <div className={ styles.nameday }>
           <p >投稿者: { tagList.author }</p>

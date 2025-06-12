@@ -1,5 +1,5 @@
 "use client";
-import { useEffect, useState} from "react";
+import { JSX, useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import styles from "./page.module.css";
 import TopList from "../../components/topList";
@@ -21,7 +21,7 @@ interface tag {
   memo?: string
 }
 
-const Mypage = () => {
+const Mypage = (): JSX.Element => {
   const router = useRouter();
   const [posts, setPosts] = useState<tag[]>([]);
   const [selfPosts, setSelfPosts] = useState<tag[]>([]);

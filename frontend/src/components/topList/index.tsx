@@ -1,5 +1,5 @@
 "use client";
-import { useEffect, useState } from "react";
+import { JSX, useEffect, useState } from "react";
 import styles from "./styles.module.css";
 import Link from "next/link";
 import { topList } from "src/data/topList";
@@ -10,7 +10,7 @@ interface topList {
   func?: () => void
 }
 
-const TopList = () => {
+const TopList = (): JSX.Element => {
   const [isLogin, setIsLogin] = useState(false);
 
   useEffect(() => {

@@ -1,3 +1,4 @@
+import { JSX } from "react";
 import Image, { StaticImageData } from "next/image";
 import Link from "next/link";
 import styles from "./styles.module.css";
@@ -13,7 +14,7 @@ type Props = {
 	head: head
 }
 
-const Header = ({ head }: Props) => {
+const Header = ({ head }: Props): JSX.Element => {
   return (
     <header className={ styles.header }>
       {/* 大学のロゴ（実際の画像ファイルに差し替え） */}

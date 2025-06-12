@@ -1,5 +1,5 @@
 "use client";
-import { useEffect, useState, FormEvent, SetStateAction } from "react";
+import { useEffect, useState, FormEvent, SetStateAction, JSX } from "react";
 import { useRouter } from "next/navigation";
 import styles from "./page.module.css";
 import TopList from "../../components/topList";
@@ -7,7 +7,7 @@ import SubHeader from "src/components/subHeader";
 import SubmitBtn from "src/components/submitBtn";
 import FormGroup from "../../components/formGroup";
 
-const Post = () => {
+const Post = (): JSX.Element => {
   const router = useRouter();
   const [userName, setUserName] = useState("");
   const [className, setClassName] = useState("");
@@ -96,83 +96,84 @@ const Post = () => {
   
   return (
     <>
-      <TopList />
-      <div className={ styles.container }>
-        <SubHeader
-          title="投稿"
-          text="以下の必要な項目を入力してください"
+    <TopList />
+    <div className={ styles.container }>
+      <SubHeader
+        title="投稿"
+        text="以下の必要な項目を入力してください"
       />
       <form onSubmit={ handleSubmit } className={ styles.postContainer }>
         <div className={ styles.formgrid }>
           <FormGroup 
-              labeltitle="className"
-              nametitle="授業名"
-              value={ className }
-              handleChange={ handleChange }
-              required={ true }
+            labeltitle="className"
+            nametitle="授業名"
+            value={ className }
+            handleChange={ handleChange }
+            required={ true }
           />
           <FormGroup 
-              labeltitle="doctorName"
-              nametitle="教授名"
-              value={ doctorName }
-              handleChange={ handleChange }
-              required={ true }
+            labeltitle="doctorName"
+            nametitle="教授名"
+            value={ doctorName }
+            handleChange={ handleChange }
+            required={ true }
           />
-           <FormGroup 
-              labeltitle="year"
-              nametitle="年度"
-              value={ year }
-              handleChange={ handleChange }
-              required={ true }
+          <FormGroup 
+            labeltitle="year"
+            nametitle="年度"
+            value={ year }
+            handleChange={ handleChange }
+            required={ true }
           />
           
           <div className={ styles.formgroup }>
             <label htmlFor="category">分類</label>
             <select  name="category" value={ category } onChange={ handleChange } required >
-                <option value="" disabled hidden>選択してください</option>
-                <option value="過去問">過去問</option>
-                <option value="レポート">レポート</option>
-                <option value="レジュメ">レジュメ</option>
-                <option value="その他">その他</option>
-              </select>
-            </div>
-            <FormGroup 
-              labeltitle="undergraduate"
-              nametitle="学部"
-              value={ undergraduate }
-              handleChange={ handleChange }
-              required={ true }
+              <option value="" disabled hidden>選択してください</option>
+              <option value="過去問">過去問</option>
+              <option value="レポート">レポート</option>
+              <option value="レジュメ">レジュメ</option>
+              <option value="その他">その他</option>
+            </select>
+          </div>
+          <FormGroup 
+            labeltitle="undergraduate"
+            nametitle="学部"
+            value={ undergraduate }
+            handleChange={ handleChange }
+            required={ true }
           />
           <FormGroup 
-              labeltitle="course"
-              nametitle="学科"
-              value={ course }
-              handleChange={ handleChange }
+            labeltitle="course"
+            nametitle="学科"
+            value={ course }
+            handleChange={ handleChange }
+            required={ true }
           />
           <div className={ styles.fullWidth }>
-          <FormGroup 
+            <FormGroup 
               labeltitle="image"
               nametitle="写真URL"
               value={ image }
               handleChange={ handleChange }
               required={ false }
-          />
-          <FormGroup 
+            />
+            <FormGroup 
               labeltitle="memo"
               nametitle="メモ"
               value={ memo }
               handleChange={ handleChange }
               required={ false }
-
-          />
+            />
           </div>
         </div>
 
         <div className={ styles.submitplace }>
-        <SubmitBtn btnText="追加・投稿" />
+          <SubmitBtn btnText="追加・投稿" />
         </div>
         { message && <p className={ styles.backendMessage }>{ message }</p> }
       </form>
+    </div>
     </>
   );
 };

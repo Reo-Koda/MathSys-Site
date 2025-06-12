@@ -1,4 +1,4 @@
-import { Dispatch, SetStateAction } from 'react'
+import { Dispatch, JSX, SetStateAction } from 'react'
 
 type Props = {
   title: string
@@ -6,7 +6,7 @@ type Props = {
   isRequired: boolean
 }
 
-const PostInput = ({ title, setValue, isRequired }: Props) => {
+const PostInput = ({ title, setValue, isRequired }: Props): JSX.Element => {
     return (
       <>
         <p>{ title }</p>

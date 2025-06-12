@@ -1,11 +1,11 @@
 "use client";
-import { useEffect, useState } from "react";
+import { JSX, useEffect, useState } from "react";
 import styles from "./page.module.css";
 import TopList from "src/components/topList";
 import SubHeader from "src/components/subHeader";
 import SubTitle from "src/components/subTitle";
 
-const Tag = () => {
+const Tag = (): JSX.Element => {
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [tagList, setTagList] = useState<string[]>([]);
 

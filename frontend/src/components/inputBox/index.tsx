@@ -1,3 +1,4 @@
+import { JSX } from "react";
 import styles from "./styles.module.css";
 
 type Props = {
@@ -9,7 +10,7 @@ type Props = {
   isRequired: boolean
 }
 
-const InputBox = ({ type, name, placeholder, value, handleChange, isRequired }: Props) => {
+const InputBox = ({ type, name, placeholder, value, handleChange, isRequired }: Props): JSX.Element => {
   return (
     <input
       className={ styles.inputbox }

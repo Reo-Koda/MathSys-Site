@@ -1,3 +1,4 @@
+import { JSX } from "react";
 import styles from "./styles.module.css";
 
 type Props ={
@@ -5,10 +6,9 @@ type Props ={
     nametitle:string 
     value: string
     handleChange: (event: React.ChangeEvent<HTMLInputElement>) =>void
-    required?: boolean;
+    required: boolean;
 }
-const FormGroup = ({labeltitle,nametitle,value,handleChange,required}:Props) =>{
-    
+const FormGroup = ({ labeltitle, nametitle, value, handleChange, required }: Props): JSX.Element =>{
     return(
         <>
         <div className={styles.formgroup}>
