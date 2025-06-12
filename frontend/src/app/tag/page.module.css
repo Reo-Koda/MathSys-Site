@@ -3,3 +3,18 @@
   max-width: 1200px;
   margin: 20px auto;
 }
+
+.tag {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  height: 36px;
+  padding: 0 12px;
+  font-size: 0.9em;
+  background-color: #e0e7ff;
+  border: none;
+  border-radius: 6px;
+  color: #00274d;
+  margin: 5px 5px 0 0;
+  cursor: default;
+}
