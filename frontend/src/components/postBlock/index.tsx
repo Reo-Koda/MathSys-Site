@@ -19,9 +19,6 @@ type Props = {
 }
 
 const PostBlock = ({ tagList }: Props): JSX.Element => {
-  
-  
-
   return (
     <Link href={ `/about/${ tagList.postId }` }>
       <article className={ styles.post } >
@@ -33,7 +30,7 @@ const PostBlock = ({ tagList }: Props): JSX.Element => {
         </div>
         <div className={ styles.nameday }>
           <p >投稿者: { tagList.author }</p>
-          <p >投稿日: { tagList. createdDay}</p>
+          <p >投稿日: { tagList.createdDay.toString().split("T")[0] }</p>
         </div>
       </article>
     </Link>
