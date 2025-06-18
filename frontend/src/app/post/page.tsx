@@ -96,34 +96,37 @@ const Post = () => {
   
   return (
     <>
-      <TopList />
+      < TopList />
       <div className={ styles.container }>
         <SubHeader
           title="投稿"
           text="以下の必要な項目を入力してください"
-      />
+        />
       <form onSubmit={ handleSubmit } className={ styles.postContainer }>
         <div className={ styles.formgrid }>
           <FormGroup 
+              type="text"
               labeltitle="className"
               nametitle="授業名"
               value={ className }
               handleChange={ handleChange }
-              required={ true }
+              isRequired={ true }
           />
           <FormGroup 
+              type="text"
               labeltitle="doctorName"
               nametitle="教授名"
               value={ doctorName }
               handleChange={ handleChange }
-              required={ true }
+              isRequired={ true }
           />
            <FormGroup 
+              type="text"
               labeltitle="year"
               nametitle="年度"
               value={ year }
               handleChange={ handleChange }
-              required={ true }
+              isRequired={ true }
           />
           
           <div className={ styles.formgroup }>
@@ -135,44 +138,51 @@ const Post = () => {
                 <option value="レジュメ">レジュメ</option>
                 <option value="その他">その他</option>
               </select>
-            </div>
-            <FormGroup 
+          </div>
+          <FormGroup 
+              type="text"
               labeltitle="undergraduate"
               nametitle="学部"
               value={ undergraduate }
               handleChange={ handleChange }
-              required={ true }
+              isRequired={ true }
           />
           <FormGroup 
+              type="text"
               labeltitle="course"
               nametitle="学科"
               value={ course }
               handleChange={ handleChange }
+              isRequired={ true }
           />
           <div className={ styles.fullWidth }>
           <FormGroup 
+              type="text"
               labeltitle="image"
               nametitle="写真URL"
               value={ image }
               handleChange={ handleChange }
-              required={ false }
+              isRequired={ false }
           />
           <FormGroup 
+              type="textarea"
               labeltitle="memo"
               nametitle="メモ"
               value={ memo }
               handleChange={ handleChange }
-              required={ false }
-
+              isRequired={ false }
           />
           </div>
         </div>
+       
 
         <div className={ styles.submitplace }>
         <SubmitBtn btnText="追加・投稿" />
         </div>
+        
         { message && <p className={ styles.backendMessage }>{ message }</p> }
-      </form>
+        </form>
+      </div>
     </>
   );
 };

@@ -1,19 +1,20 @@
 import styles from "./styles.module.css";
 
 type Props ={
+    type: string
     labeltitle: string
     nametitle:string 
     value: string
-    handleChange: (event: React.ChangeEvent<HTMLInputElement>) =>void
-    required?: boolean;
+    handleChange: ( event: React.ChangeEvent<HTMLInputElement> ) =>void
+    isRequired: boolean;
 }
-const FormGroup = ({labeltitle,nametitle,value,handleChange,required}:Props) =>{
+const FormGroup = ( { type,labeltitle,nametitle,value,handleChange,isRequired }:Props ) =>{
     
     return(
         <>
-        <div className={styles.formgroup}>
-            <label htmlFor={labeltitle}>{nametitle}</label>
-            <input id={labeltitle} name={labeltitle} value={value} onChange={handleChange} required={required}/>
+        <div className={ styles.formgroup }>
+            <label htmlFor={ labeltitle }>{ nametitle }</label>
+            <input type={ type } id={ labeltitle } name={ nametitle } value={ value } onChange={ handleChange } required={ isRequired }/>
         </div>
         </>
     )
