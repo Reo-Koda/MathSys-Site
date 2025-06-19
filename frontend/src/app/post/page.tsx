@@ -1,5 +1,5 @@
 "use client";
-import { useEffect, useState, FormEvent, SetStateAction } from "react";
+import { useEffect, useState, FormEvent, SetStateAction, JSX } from "react";
 import { useRouter } from "next/navigation";
 import styles from "./page.module.css";
 import TopList from "../../components/topList";
@@ -7,7 +7,7 @@ import SubHeader from "src/components/subHeader";
 import SubmitBtn from "src/components/submitBtn";
 import FormGroup from "../../components/formGroup";
 
-const Post = () => {
+const Post = (): JSX.Element => {
   const router = useRouter();
   const [userName, setUserName] = useState("");
   const [className, setClassName] = useState("");
@@ -96,6 +96,7 @@ const Post = () => {
   
   return (
     <>
+
       < TopList />
       <div className={ styles.container }>
         <SubHeader
@@ -177,7 +178,7 @@ const Post = () => {
        
 
         <div className={ styles.submitplace }>
-        <SubmitBtn btnText="追加・投稿" />
+          <SubmitBtn btnText="追加・投稿" />
         </div>
         
         { message && <p className={ styles.backendMessage }>{ message }</p> }

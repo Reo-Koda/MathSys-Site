@@ -1,6 +1,7 @@
+import { JSX } from "react";
 import styles from "./styles.module.css";
 
-const SearchContainer = () => {
+const SearchContainer = (): JSX.Element => {
   return (
     <section className={ styles.search }>
       <input type="text" placeholder="講義名、教授、年度、学部、学科、分類で検索" />

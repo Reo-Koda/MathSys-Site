@@ -1,3 +1,4 @@
+import { JSX } from "react";
 import Link from "next/link";
 import styles from "./styles.module.css";
 
@@ -11,7 +12,7 @@ type Props = {
 	head: head
 }
 
-const Footer = ({ head }: Props) => {
+const Footer = ({ head }: Props): JSX.Element => {
   return (
     <footer className={ styles.footer }>
       <Link href={"/aboutsite"}>

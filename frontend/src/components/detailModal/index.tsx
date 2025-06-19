@@ -1,3 +1,4 @@
+import { JSX } from "react";
 import styles from "./styles.module.css";
 
 type Props = {
@@ -5,7 +6,7 @@ type Props = {
     toggleModal: () => void;
 }
 
-const DetailModal = ({ showModal, toggleModal }: Props) => {
+const DetailModal = ({ showModal, toggleModal }: Props): JSX.Element => {
   return (
     <>
     { showModal && (

@@ -1,7 +1,8 @@
 import styles from "./page.module.css";
+import { JSX } from "react";
 import TopList from "../../components/topList";
 
-const AboutSite = () => {
+const AboutSite = (): JSX.Element => {
   return (
     <>
     <TopList />

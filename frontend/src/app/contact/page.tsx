@@ -1,7 +1,8 @@
 import styles from "./page.module.css";
+import { JSX } from "react";
 import TopList from "../../components/topList";
 
-const Contact = () => {
+const Contact = (): JSX.Element => {
   return (
     <>
     <TopList />

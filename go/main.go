@@ -6,6 +6,7 @@ import (
 	"log"
 	"net/http"
 	"os"
+	"fmt"
 	"time"
 
 	"github.com/gin-contrib/cors"
@@ -33,6 +34,15 @@ type Post struct {
 	Image         *string   `json:"images"`
 	Memo          *string   `json:"memo"`
 	PostDate      time.Time `json:"createdDay"`
+}
+
+type Tags struct {
+	ClassTitle    []string    `json:"class"`
+	DoctorName    []string    `json:"doctor"`
+	Year          []string    `json:"year"`
+	UnderGraduate []string    `json:"department"`
+	Course        []string    `json:"major"`
+	Category      []string    `json:"category"`
 }
 
 type Favorite struct {
@@ -107,33 +117,6 @@ func appendToPosts(rows *sql.Rows) ([]Post, error) {
 
 	return posts, nil
 }
-
-// func appendToTags(rows *sql.Rows, value string) ([]Post, error) {
-// 	var tags []Post
-
-// 	for rows.Next() {
-// 		var tag string
-
-// 		if err := rows.Scan(
-// 			&tag.ClassTitle,
-// 			&tag.DoctorName,
-// 			&tag.Year,
-// 			&tag.UnderGraduate,
-// 			&tag.Course,
-// 			&tag.Category,
-// 		); err != nil {
-// 			return nil, err
-// 		}
-
-// 		posts = append(posts, p)
-// 	}
-
-// 	if err := rows.Err(); err != nil {
-// 		return nil, err
-// 	}
-
-// 	return posts, nil
-// }
 
 func main() {
 	raw := "${MYSQL_USER}:${MYSQL_PASSWORD}@tcp(mathsys_database:3306)/mathsys_db?charset=utf8mb4&parseTime=True&loc=Asia%2FTokyo"
@@ -343,16 +326,45 @@ func main() {
 	})
 
 	r.GET("/tags", func(c *gin.Context) {
-		tags := [6]string{"class_title", "doctor_name", "year_num", "undergraduate", "course", "category"}
-		for _, v := range tags {
-			rows, err := db.Query("SELECT ? FROM Posts;", v)
+		// tagsList := [6]string{"class_title", "doctor_name", "year_num", "undergraduate", "course", "category"}
+		var tags Tags
+		queries := []struct {
+			Col   string
+			Slice *[]string  // スキャン先のスライス
+    } {
+			{"class_title", &tags.ClassTitle},
+			{"doctor_name", &tags.DoctorName},
+			{"year_num", &tags.Year},
+			{"undergraduate", &tags.UnderGraduate},
+			{"course", &tags.Course},
+			{"category", &tags.Category},
+    }
+
+		for _, q := range queries {
+			sqlStr := fmt.Sprintf("SELECT DISTINCT %s FROM Posts;", q.Col)
+			rows, err := db.Query(sqlStr)
 			if err != nil {
 				c.JSON(http.StatusInternalServerError, gin.H{"error": err.Error()})
 				return
 			}
-			defer rows.Close()
+
+			for rows.Next() {
+				var v string
+				if err := rows.Scan(&v); err != nil {
+					c.JSON(http.StatusInternalServerError, gin.H{"error": err.Error()})
+					return
+				}
+				*q.Slice = append(*q.Slice, v)
+			}
+			rows.Close()
+
+			if err := rows.Err(); err != nil {
+				c.JSON(http.StatusInternalServerError, gin.H{"error": err.Error()})
+				return
+			}
 		}
 
+		c.JSON(http.StatusOK, gin.H{"tags": tags})
 	})
 
 	authorized := r.Group("/")

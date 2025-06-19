@@ -1,3 +1,4 @@
+import { JSX } from "react";
 import styles from "./styles.module.css";
 
 type Props ={
@@ -18,5 +19,8 @@ const FormGroup = ( { type,labeltitle,nametitle,value,handleChange,isRequired }:
         </div>
         </>
     )
+    
 }
+
+
 export default FormGroup;
