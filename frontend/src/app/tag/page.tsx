@@ -48,58 +48,40 @@ const Tag = (): JSX.Element => {
     <>
     <TopList />
     <div className={ styles.container }>
+      
       <SubHeader
         title="タグ一覧"
         text="投稿されたコンテンツに付けられたタグの一覧を確認できます"
       />
-      <SubTitle text="講義名" /><br />
-      { tagList.class.length > 0
-        ? tagList.class.map((t, i) => <p className={ styles.tag } key={`class-${i}`}>{t}</p>)
-        : isLoading
-          ? null
-          : <p>タグがありません</p>
-      }
-      <br /><br />
-      <SubTitle text="教授" /><br />
-      { tagList.doctor.length > 0
-        ? tagList.doctor.map((t, i) => <p className={ styles.tag } key={`doc-${i}`}>{t}</p>)
-        : isLoading
-          ? null
-          : <p>タグがありません</p>
-      }
-      <br /><br />
-      <SubTitle text="年度" /><br />
-      { tagList.year.length > 0
-        ? tagList.year.map((t, i) => <p className={ styles.tag } key={`year-${i}`}>{t}</p>)
-        : isLoading
-          ? null
-          : <p>タグがありません</p>
-      }
-      <br /><br />
-      <SubTitle text="学部" /><br />
-      { tagList.department.length > 0
-        ? tagList.department.map((t, i) => <p className={ styles.tag } key={`dep-${i}`}>{t}</p>)
-        : isLoading
-          ? null
-          : <p>タグがありません</p>
-      }
-      <br /><br />
-      <SubTitle text="学科" /><br />
-      { tagList.major.length > 0
-        ? tagList.major.map((t, i) => <p className={ styles.tag } key={`major-${i}`}>{t}</p>)
-        : isLoading
-          ? null
-          : <p>タグがありません</p>
-      }
-      <br /><br />
-      <SubTitle text="分類" /><br />
-      { tagList.category.length > 0
-        ? tagList.category.map((t, i) => <p className={ styles.tag } key={`cate-${i}`}>{t}</p>)
-        : isLoading
-          ? null
-          : <p>タグがありません</p>
-      }
-      <br /><br />
+      <div className={ styles.favorites }>
+      {[
+        { title: "講義名", key: "class" },
+        { title: "教授", key: "doctor" },
+        { title: "年度", key: "year" },
+        { title: "学部", key: "department" },
+        { title: "学科", key: "major" },
+        { title: "分類", key: "category" },
+      ].map(({ title, key }) => (
+        <div className={ styles.favoriteitem } key={ key }>
+          <div className={ styles.title }>
+            <h3>{ title }</h3>
+          </div>
+        <div className={ styles.tagList }>
+        { tagList[key as keyof TagList].length > 0 
+          ? tagList[key as keyof TagList].map((t, i) => <p className={ styles.tag } key={`${key}-${i}`}>{t}</p>)
+          : isLoading 
+            ? null
+            : <p>タグがありません</p>
+        }
+        </div>
+        </div>
+  ))}
+  </div>
+
+
+  
+    
+      
     </div>
     </>
   );
