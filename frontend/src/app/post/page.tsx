@@ -96,67 +96,67 @@ const Post = (): JSX.Element => {
   
   return (
     <>
-
-      < TopList />
-      <div className={ styles.container }>
-        <SubHeader
-          title="投稿"
-          text="以下の必要な項目を入力してください"
+    <TopList />
+    <div className={ styles.container }>
+      <SubHeader
+        title="投稿"
+        text="以下の必要な項目を入力してください"
+      />
+    <form onSubmit={ handleSubmit } className={ styles.postContainer }>
+      <div className={ styles.formgrid }>
+        <FormGroup 
+            type="text"
+            labeltitle="className"
+            nametitle="授業名"
+            value={ className }
+            handleChange={ handleChange }
+            isRequired={ true }
         />
-      <form onSubmit={ handleSubmit } className={ styles.postContainer }>
-        <div className={ styles.formgrid }>
+        <FormGroup 
+            type="text"
+            labeltitle="doctorName"
+            nametitle="教授名"
+            value={ doctorName }
+            handleChange={ handleChange }
+            isRequired={ true }
+        />
           <FormGroup 
-              type="text"
-              labeltitle="className"
-              nametitle="授業名"
-              value={ className }
-              handleChange={ handleChange }
-              isRequired={ true }
-          />
-          <FormGroup 
-              type="text"
-              labeltitle="doctorName"
-              nametitle="教授名"
-              value={ doctorName }
-              handleChange={ handleChange }
-              isRequired={ true }
-          />
-           <FormGroup 
-              type="text"
-              labeltitle="year"
-              nametitle="年度"
-              value={ year }
-              handleChange={ handleChange }
-              isRequired={ true }
-          />
-          
-          <div className={ styles.formgroup }>
-            <label htmlFor="category">分類</label>
-            <select  name="category" value={ category } onChange={ handleChange } required >
-                <option value="" disabled hidden>選択してください</option>
-                <option value="過去問">過去問</option>
-                <option value="レポート">レポート</option>
-                <option value="レジュメ">レジュメ</option>
-                <option value="その他">その他</option>
-              </select>
-          </div>
-          <FormGroup 
-              type="text"
-              labeltitle="undergraduate"
-              nametitle="学部"
-              value={ undergraduate }
-              handleChange={ handleChange }
-              isRequired={ true }
-          />
-          <FormGroup 
-              type="text"
-              labeltitle="course"
-              nametitle="学科"
-              value={ course }
-              handleChange={ handleChange }
-              isRequired={ true }
-          />
-          <div className={ styles.fullWidth }>
+            type="text"
+            labeltitle="year"
+            nametitle="年度"
+            value={ year }
+            handleChange={ handleChange }
+            isRequired={ true }
+        />
+        
+        <div className={ styles.formgroup }>
+          <label htmlFor="category">分類</label>
+          <select  name="category" value={ category } onChange={ handleChange } required >
+              <option value="" disabled hidden>選択してください</option>
+              <option value="過去問">過去問</option>
+              <option value="レポート">レポート</option>
+              <option value="レジュメ">レジュメ</option>
+              <option value="その他">その他</option>
+            </select>
+        </div>
+
+        <FormGroup 
+            type="text"
+            labeltitle="undergraduate"
+            nametitle="学部"
+            value={ undergraduate }
+            handleChange={ handleChange }
+            isRequired={ true }
+        />
+        <FormGroup 
+            type="text"
+            labeltitle="course"
+            nametitle="学科"
+            value={ course }
+            handleChange={ handleChange }
+            isRequired={ true }
+        />
+        <div className={ styles.fullWidth }>
           <FormGroup 
               type="text"
               labeltitle="image"
@@ -173,17 +173,17 @@ const Post = (): JSX.Element => {
               handleChange={ handleChange }
               isRequired={ false }
           />
-          </div>
         </div>
-       
-
-        <div className={ styles.submitplace }>
-          <SubmitBtn btnText="追加・投稿" />
-        </div>
-        
-        { message && <p className={ styles.backendMessage }>{ message }</p> }
-        </form>
       </div>
+      
+
+      <div className={ styles.submitplace }>
+        <SubmitBtn btnText="追加・投稿" />
+      </div>
+      
+      { message && <p className={ styles.backendMessage }>{ message }</p> }
+      </form>
+    </div>
     </>
   );
 };

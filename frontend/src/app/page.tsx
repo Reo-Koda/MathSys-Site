@@ -25,7 +25,7 @@ export default function Home() {
     const getPosts = async () => {
       try {
         const res = await fetch(
-          `${process.env.NEXT_PUBLIC_API_URL}/posts`
+          `${ process.env.NEXT_PUBLIC_API_URL }/posts`
         );
         const json = await res.json();
         setPosts(json.posts);

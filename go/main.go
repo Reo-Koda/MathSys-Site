@@ -189,7 +189,7 @@ func main() {
 				return
 			}
 
-			user := map[string]interface{}{
+			user := map[string]interface{} {
 				"user_name": userName,
 				"password":  password,
 			}
@@ -431,6 +431,27 @@ func main() {
 			c.JSON(http.StatusOK, gin.H{"message": "データが追加されました", "id": id})
 		})
 
+		// posts.POST("delete", func(c *gin.Context) {
+		// 	user := c.GetString("user")
+		// 	var deletePost Post
+		// 	if err := c.ShouldBindJSON(&deletePost); err != nil {
+		// 		c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
+		// 		return
+		// 	}
+
+		// 	tx, err := db.Begin()
+		// 	if err != nil {
+		// 		log.Fatal(err)
+		// 	}
+
+		// 	_, err = tx.Exec("DELETE FROM Favorites", user, deletePost)  // 口座1から100を減額
+		// 	if err != nil {
+		// 		tx.Rollback()
+		// 		log.Fatal(err)
+		// 	}
+
+		// })
+
 		authorized.GET("/favorites", func(c *gin.Context) {
 			user := c.GetString("user")
 
@@ -525,7 +546,24 @@ func main() {
 				return
 			}
 
-			c.JSON(http.StatusOK, gin.H{"isFavorite": true})
+			var author string
+			err = db.QueryRow(
+				`SELECT user_name FROM Posts WHERE post_id = ?`,
+				id,
+			).Scan(&author)
+
+			if err != nil {
+				if err == sql.ErrNoRows {
+					// レコードなし → isFavorite = false
+					c.JSON(http.StatusOK, gin.H{"isFavorite": false})
+					return
+				}
+				// DBエラー
+				c.JSON(http.StatusInternalServerError, gin.H{"error": err.Error()})
+				return
+			}
+
+			c.JSON(http.StatusOK, gin.H{"isFavorite": true, "author": author})
 		})
 	}
 
