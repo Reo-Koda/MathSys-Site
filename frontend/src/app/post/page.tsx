@@ -165,14 +165,10 @@ const Post = (): JSX.Element => {
               handleChange={ handleChange }
               isRequired={ false }
           />
-          <FormGroup 
-              type="textarea"
-              labeltitle="memo"
-              nametitle="メモ"
-              value={ memo }
-              handleChange={ handleChange }
-              isRequired={ false }
-          />
+          <div className={ styles.formgroup }>
+            <label htmlFor="memo">メモ</label>
+            <textarea id="memo" name="memo" value={ memo } onChange={ handleChange } />
+        </div>
         </div>
       </div>
       
