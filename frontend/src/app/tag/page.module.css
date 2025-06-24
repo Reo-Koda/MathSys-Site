@@ -44,9 +44,9 @@
   position: relative;
   transition: transform 0.3s ease;
 }
-/*.favoriteitem:hover {
+.favoriteitem:hover {
   transform: translateY(-5px);
-}*/
+}
 .favoriteitem h3 {
   font-size: 1.2em;
   margin-bottom: 10px;
