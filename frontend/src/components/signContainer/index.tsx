@@ -16,10 +16,17 @@ const SignContainer = ({ type, btnText }: Props): JSX.Element => {
   const [userName, setUserName] = useState('');
   const [password, setPassword] = useState('');
   const [message, setMessage] = useState('');
+  const [agree, setAgree] = useState(false);
 
   const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    setMessage("");
+    //setMessage("");
+
+    if (type === "signup" && !agree) {
+      setMessage("利用規約に同意してください。");
+      return;
+    }
+
     try {
       const res = await fetch(`${ process.env.NEXT_PUBLIC_API_URL }/users/${ type }`, {
         method: 'POST',
@@ -68,6 +75,17 @@ const SignContainer = ({ type, btnText }: Props): JSX.Element => {
         value={ password }
         handleChange={ handleChange }
         isRequired={ true } />
+
+        { type == "signup" && (
+        <label className={ styles.checkboxLabel }>
+            <input
+              type="checkbox"
+              checked={ agree }
+              onChange={() => setAgree(!agree)}
+              className={ styles.checkbox }
+            />
+            <p><Link href="/terms" className={ styles.toSignup }>利用規約</Link>に同意する</p> </label>)}
+
         <SubmitBtn btnText={ btnText } />
       </form>
       { type == "signin" && <Link href="/signup" className={ styles.toSignup }>新規登録</Link> }
