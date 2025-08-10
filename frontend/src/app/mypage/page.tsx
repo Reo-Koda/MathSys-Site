@@ -101,20 +101,19 @@ const Mypage = (): JSX.Element => {
           title="お気に入り一覧"
           text="あなたが登録したお気に入りの過去問やコンテンツ"
         />
-        <div className={styles.pagesearch}>
-          <SearchContainer />
-          { message && <p>{ message }</p> }
+        <SearchContainer />
+        { message && <p>{ message }</p> }
         
-          <div className={styles.favorites}>
-            { isLoading ? <p>データを取得中...</p> :
-              <>
-              { posts ?  posts.map((post) => (
-                  <PostBlock tagList={post} key={post.postId}/>
-                )) : <p>お気に入り登録がされていません<br />気になる投稿を保存していつでも見返せるようにしましょう</p> }
-              </>
-            }
-          </div>
+        <div className={styles.favorites}>
+          { isLoading ? <p>データを取得中...</p> :
+            <>
+            { posts ?  posts.map((post) => (
+                <PostBlock tagList={post} key={post.postId}/>
+              )) : <p>お気に入り登録がされていません<br />気になる投稿を保存していつでも見返せるようにしましょう</p> }
+            </>
+          }
         </div>
+      
 
         <SubHeader
           title="自分の投稿"
