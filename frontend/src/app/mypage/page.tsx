@@ -6,6 +6,7 @@ import TopList from "../../components/topList";
 import SubHeader from "src/components/subHeader";
 import PostBlock from "src/components/postBlock"; 
 import SearchContainer from "src/components/searchContainer";
+import TitleHeader from "src/components/titleHeader";
 
 interface tag {
   class: string
@@ -97,7 +98,7 @@ const Mypage = (): JSX.Element => {
     <>
       <TopList />
       <div className={styles.container}>
-        <SubHeader
+        {/* <SubHeader
           title="お気に入り一覧"
           text="あなたが登録したお気に入りの過去問やコンテンツ"
         />
@@ -111,11 +112,29 @@ const Mypage = (): JSX.Element => {
                 <PostBlock tagList={post} key={post.postId}/>
               )) : <p>お気に入り登録がされていません<br />気になる投稿を保存していつでも見返せるようにしましょう</p> }
             </>
-          }
-        </div>
-      
+          } 
 
-        <SubHeader
+        </div>*/}
+
+        <TitleHeader 
+          title= "お気に入り一覧"
+          text="あなたが登録したお気に入りの過去問やコンテンツ"
+          posts= {posts}
+          isLoading= {isLoading}
+          message1= "お気に入り登録がされていません"
+          message2="気になる投稿を保存していつでも見返せるようにしましょう"
+        />
+        <TitleHeader 
+          title= "自分の投稿"
+          text="あなたが投稿したの過去問やコンテンツ"
+          posts= {selfPosts}
+          isLoading= {isLoading}
+          message1= "過去の投稿がありません"
+          message2="役に立った過去問を投稿してみんなに共有してみましょう"
+        />
+
+
+        {/* <SubHeader
           title="自分の投稿"
           text="あなたが投稿したの過去問やコンテンツ"
         />
@@ -128,7 +147,7 @@ const Mypage = (): JSX.Element => {
             </>
           }
         </div>
-        
+         */}
       </div>
     </>
   );
