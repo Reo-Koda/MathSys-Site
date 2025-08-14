@@ -12,15 +12,21 @@ type Props = {
   isLoading: boolean
   message1: string
   message2: string
+
+  searchBox?: boolean
+  message?: string
 }
 
-const TitleHeader = ({ title, text, posts, isLoading, message1, message2}: Props): JSX.Element => {
+const TitleHeader = ({ title, text, posts, isLoading, message1, message2, searchBox, message}: Props): JSX.Element => {
   return (
     <>
     <SubHeader
           title={title}
           text={text}
     />
+
+    {searchBox && <SearchContainer/>}
+    {message && <p className={styles.para}>{message}</p>}
     
     <div className={styles.favorites}>
         { isLoading ? <p className={styles.para}>データを取得中...</p> :

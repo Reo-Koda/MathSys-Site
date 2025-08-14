@@ -123,6 +123,8 @@ const Mypage = (): JSX.Element => {
           isLoading= {isLoading}
           message1= "お気に入り登録がされていません"
           message2="気になる投稿を保存していつでも見返せるようにしましょう"
+          searchBox= {true}
+          message= {message}
         />
         <TitleHeader 
           title= "自分の投稿"
@@ -131,6 +133,8 @@ const Mypage = (): JSX.Element => {
           isLoading= {isLoading}
           message1= "過去の投稿がありません"
           message2="役に立った過去問を投稿してみんなに共有してみましょう"
+          searchBox= {false}
+          message= {message}
         />
 
 
