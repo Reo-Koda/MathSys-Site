@@ -14,6 +14,7 @@ export default function About ({ params }: { params: Promise<{ postId: string }>
   const [canDelete, setCanDelete] = useState<boolean>(false);
 
   useEffect(() => {
+    // ユーザー名を取得する処理
     const getAuthStatus = async () => {
       try {
         const res = await fetch(`${ process.env.NEXT_PUBLIC_API_URL }/auth/status`, {
@@ -27,6 +28,7 @@ export default function About ({ params }: { params: Promise<{ postId: string }>
       };
     }
 
+    // お気に入り登録されているかを確認する処理
     const getFavorite = async () => {
       if (!userName) return;
       try {
@@ -56,6 +58,7 @@ export default function About ({ params }: { params: Promise<{ postId: string }>
     changeDeleteState();
   }, [userName, postId]);
 
+  // お気に入り登録ボタンを押した際の処理
   const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     if (!userName) {

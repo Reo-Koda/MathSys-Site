@@ -29,8 +29,8 @@ const PostBlock = ({ tagList }: Props): JSX.Element => {
            <p onClick={ (e) => e.preventDefault() }>{ tagList.major }</p>
         </div>
         <div className={ styles.nameday }>
-          <p >投稿者: { tagList.author }</p>
-          <p >投稿日: { tagList.createdDay.toString().split("T")[0] }</p>
+          <p>投稿者: { tagList.author }</p>
+          <p>投稿日: { tagList.createdDay.toString().split("T")[0] }</p>
         </div>
       </article>
     </Link>
