@@ -3,10 +3,10 @@ package main
 import (
 	"database/sql"
 	"errors"
+	"fmt"
 	"log"
 	"net/http"
 	"os"
-	"fmt"
 	"time"
 
 	"github.com/gin-contrib/cors"
@@ -37,12 +37,12 @@ type Post struct {
 }
 
 type Tags struct {
-	ClassTitle    []string    `json:"class"`
-	DoctorName    []string    `json:"doctor"`
-	Year          []string    `json:"year"`
-	UnderGraduate []string    `json:"department"`
-	Course        []string    `json:"major"`
-	Category      []string    `json:"category"`
+	ClassTitle    []string `json:"class"`
+	DoctorName    []string `json:"doctor"`
+	Year          []string `json:"year"`
+	UnderGraduate []string `json:"department"`
+	Course        []string `json:"major"`
+	Category      []string `json:"category"`
 }
 
 type Favorite struct {
@@ -55,6 +55,7 @@ func init() {
 	}
 }
 
+// データベースが立ち上がるのを待つ処理
 func waitForDatabase(db *sql.DB) error {
 	const maxRetries = 10
 	const delay = time.Second * 5
@@ -71,6 +72,7 @@ func waitForDatabase(db *sql.DB) error {
 	return errors.New("database is not ready after several attempts")
 }
 
+// ログインしているのかを判断する処理
 func authRequired(c *gin.Context) {
 	session := sessions.Default(c)
 
@@ -159,6 +161,7 @@ func main() {
 		})
 	})
 
+	// ユーザーがログイン状態かどうかを判断する
 	r.GET("/auth/status", func(c *gin.Context) {
 		session := sessions.Default(c)
 		user := session.Get("user")
@@ -189,7 +192,7 @@ func main() {
 				return
 			}
 
-			user := map[string]interface{} {
+			user := map[string]interface{}{
 				"user_name": userName,
 				"password":  password,
 			}
@@ -326,19 +329,18 @@ func main() {
 	})
 
 	r.GET("/tags", func(c *gin.Context) {
-		// tagsList := [6]string{"class_title", "doctor_name", "year_num", "undergraduate", "course", "category"}
 		var tags Tags
 		queries := []struct {
 			Col   string
-			Slice *[]string  // スキャン先のスライス
-    } {
+			Slice *[]string // スキャン先のスライス
+		}{
 			{"class_title", &tags.ClassTitle},
 			{"doctor_name", &tags.DoctorName},
 			{"year_num", &tags.Year},
 			{"undergraduate", &tags.UnderGraduate},
 			{"course", &tags.Course},
 			{"category", &tags.Category},
-    }
+		}
 
 		for _, q := range queries {
 			sqlStr := fmt.Sprintf("SELECT DISTINCT %s FROM Posts;", q.Col)
