@@ -1,144 +1,140 @@
 "use client";
-import { useEffect, useState, FormEvent } from "react";
+import { use, useEffect, useState, FormEvent } from "react";
 import { useRouter } from "next/navigation";
 import styles from "./page.module.css";
 import TopList from "src/components/topList";
 import SubmitBtn from "src/components/submitBtn";
+import { tag } from "src/data/tag";
 
-interface PostData {
-  class: string;
-  doctor: string;
-  department: string;
-  major: string;
-  author: string;
-  createdDay: string;
-  photo: string;
-  category: string;
-  year: number;
-}
-
-export default function About({ params }: { params: Promise<{ postId: string }>; }) {
+export default function About ({ params }: { params: Promise<{ postId: string }>;}) {
   const router = useRouter();
-
-  const [postId, setPostId] = useState<string>("");
-  const [postData, setPostData] = useState<PostData>({
-    class: "情報なし",
-    doctor: "情報なし",
-    department: "情報なし",
-    major: "情報なし",
-    author: "情報なし",
-    createdDay: new Date().toISOString(),
-    photo: "情報なし",
-    category: "情報なし",
-    year: 0,
-  });
-
+  const { postId } = use(params);
+  const [post, setPost] = useState<tag | null>(null);
   const [userName, setUserName] = useState<string>("");
   const [message, setMessage] = useState<string>("");
   const [isFavorite, setIsFavorite] = useState<boolean>(false);
   const [canDelete, setCanDelete] = useState<boolean>(false);
-  const [loading, setLoading] = useState<boolean>(true);
 
   useEffect(() => {
-    const resolveParams = async () => {
-      const p = await params;
-      setPostId(p.postId);
-    };
-    resolveParams();
-  }, [params]);
-
-  // 投稿データ取得
-  useEffect(() => {
-    if (!postId) return; // postId がない場合はスキップ
-
-    const fetchPostData = async () => {
+    const getAuthStatus = async () => {
       try {
-        const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/posts/${postId}`, {
-          credentials: "include",
+        const res = await fetch(`${ process.env.NEXT_PUBLIC_API_URL }/auth/status`, {
+          method: "GET",
+          credentials: "include", // Cookie（セッションID）を自動で送る
         });
-
-        if (!res.ok) {
-          console.warn("投稿データ取得エラー:", res.status);
-        } else {
-          const text = await res.text();
-          const data = text.trim() ? JSON.parse(text) : null;
-          if (data) setPostData(data);
-        }
+        const json = await res.json();
+        setUserName(json.userName);
       } catch (err: any) {
-        console.error("通信エラー:", err.message);
-      } finally {
-        setLoading(false);
-      }
-    };
-    fetchPostData();
-  }, [postId]);
+        console.error("セッションチェックでエラー:", err);
+      };
+    }
 
-  // 認証ユーザー取得
-  useEffect(() => {
-    const fetchUser = async () => {
+    const getAbout = async () => {
       try {
-        const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/auth/status`, {
-          credentials: "include",
+        const url = new URL(
+          `${process.env.NEXT_PUBLIC_API_URL}/about`
+        );
+        url.searchParams.set("id", postId);
+        
+        const res = await fetch(url.toString(), {
+          method: "GET",
         });
-
-        if (!res.ok) return;
-
-        const text = await res.text();
-        const data = text.trim() ? JSON.parse(text) : null;
-        if (!data) return;
-
-        setUserName(data.userName);
-        if (data.userName === postData.author) setCanDelete(true);
+        const json = await res.json();
+        setPost(json.post);
       } catch (err: any) {
-        console.error("認証ユーザー取得エラー:", err.message);
+        console.error("API error:", err);
       }
-    };
-    fetchUser();
-  }, [postData]);
+    }
 
-  const handleFavorite = (e: FormEvent<HTMLFormElement>) => {
+    const getFavorite = async () => {
+      if (!userName) return;
+      try {
+        const url = new URL(
+          `${process.env.NEXT_PUBLIC_API_URL}/isfavorite`
+        );
+        url.searchParams.set("id", postId);
+        
+        const res = await fetch(url.toString(), {
+          method: "GET",
+          credentials: "include", // Cookie（セッションID）を自動で送る
+        });
+        const json = await res.json();
+        setIsFavorite(json.isFavorite);
+      } catch (err: any) {
+        console.error("API error:", err);
+      }
+    }
+
+    const changeDeleteState = () => {
+      if (!userName) return;
+      // 投稿者と現在のユーザーを比較し、同じなら canDeleteをtrueにする
+    }
+
+    getAuthStatus();
+    getAbout();
+    getFavorite();
+    changeDeleteState();
+    if (post !== null) console.log(`post is ${post.class}`);
+    else console.log("post is null");
+  }, [userName, postId]);
+
+  const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     if (!userName) {
       router.push("/signin");
       return;
     }
 
-    setIsFavorite(!isFavorite);
-    setMessage(isFavorite ? "お気に入り解除しました" : "お気に入り登録しました");
-  };
+    try {
+      var type;
+      if (isFavorite) type = "out";
+      else type = "in";
+      const res = await fetch(`${ process.env.NEXT_PUBLIC_API_URL }/favorites/${ type }`, {
+        method: 'POST',
+        credentials: "include",
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          id: postId,
+        }),
+      });
 
-  const handleDelete = (e: FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-    if (canDelete) {
-      setMessage("投稿を削除しました");
-      router.push("/mypage");
+      const data = await res.json();
+      if (res.ok) {
+        setMessage(`データ ID: ${ data.id }`);
+        router.push("/mypage");
+      } else {
+        setMessage(`エラー: ${ data.error }`);
+      }
+    } catch (error: any) {
+      setMessage(`通信エラー: ${ error.message }`);
     }
-  };
+  }
 
-  if (loading) return <p>Loading...</p>;
+  // 現在のユーザーが投稿したユーザーと同じかつ削除ボタンを押した時、投稿を削除する機能を実装する
+  const handleDelete = () => {
+    return;
+  }
 
   return (
     <>
-      <TopList />
-      <div className={styles.container}>
-        <div className={styles.divs}>
-          <p>授業名：{postData.class}</p>
-          <p>教授名：{postData.doctor}</p>
-          <p>学部：{postData.department}</p>
-          <p>学科：{postData.major}</p>
-          <p>写真：{postData.photo}</p>
-        </div>
-
-        <form onSubmit={handleFavorite}>
-          <SubmitBtn btnText={isFavorite ? "お気に入り解除" : "お気に入り登録"} />
-        </form>
-
-        <form onSubmit={handleDelete}>
-          {canDelete && <SubmitBtn btnText="投稿を削除" />}
-        </form>
-
-        {message && <p>{message}</p>}
+    <TopList />
+    <div className={ styles.container }>
+      <div className={ styles.divs }>
+        投稿番号：{ postId }
       </div>
+      { post && <h1>{ post.class }</h1> }
+      <form onSubmit={ handleSubmit }>
+        { isFavorite ? <SubmitBtn btnText="お気に入り解除"  />
+          : <SubmitBtn btnText="お気に入り登録"  />
+        }
+      </form>
+      <form onSubmit={ handleDelete }>
+        { canDelete && <SubmitBtn btnText="投稿を削除" /> }
+      </form>
+      { message && <p>{ message }</p> }
+    </div>
     </>
   );
 }

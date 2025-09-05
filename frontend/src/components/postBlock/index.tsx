@@ -20,7 +20,7 @@ type Props = {
 
 const PostBlock = ({ tagList }: Props): JSX.Element => {
   return (
-    <Link href={ `/about/${ tagList.postId }` }> 
+    <Link href={ `/about/${ tagList.postId }` }>
       <article className={ styles.post } >
         <h2>{ tagList.class } { tagList.category } { tagList.year }</h2>
         <div className={ styles.tagContainer }>

@@ -45,7 +45,7 @@ const Post = (): JSX.Element => {
     try {
       const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/posts/post`, {
         method: "POST",
-          credentials: "include",
+        credentials: "include",
         headers: {
           "Content-Type": "application/json"
         },

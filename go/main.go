@@ -328,6 +328,47 @@ func main() {
 		c.JSON(http.StatusOK, gin.H{"posts": posts})
 	})
 
+	r.GET("/about", func(c *gin.Context) {
+		postID := c.Query("id")
+		if postID == "" {
+			c.JSON(http.StatusBadRequest, gin.H{"error": "idを指定してください"})
+			return
+		}
+
+		// rows, err := db.Query("SELECT * FROM Posts WHERE post_id = ?;", postID)
+		// if err != nil {
+		// 	c.JSON(http.StatusInternalServerError, gin.H{"error": err.Error()})
+		// 	return
+		// }
+		// defer rows.Close()
+
+		var post Post
+		err := db.QueryRow("SELECT post_id, user_name, class_title, doctor_name, year_num, undergraduate, course, category, images, memo, post_date	FROM Posts WHERE post_id = ?", postID).Scan(
+			&post.PostId,
+			&post.UserName,
+			&post.ClassTitle,
+			&post.DoctorName,
+			&post.Year,
+			&post.UnderGraduate,
+			&post.Course,
+			&post.Category,
+			&post.Image,
+			&post.Memo,
+			&post.PostDate,
+		)
+
+		if err != nil {
+			if err == sql.ErrNoRows {
+				c.JSON(http.StatusNotFound, gin.H{"error": "対象の投稿が存在しません"})
+				return
+			}
+			c.JSON(http.StatusInternalServerError, gin.H{"error": err.Error()})
+			return
+		}
+
+		c.JSON(http.StatusOK, gin.H{"post": post})
+	})
+
 	r.GET("/tags", func(c *gin.Context) {
 		var tags Tags
 		queries := []struct {
