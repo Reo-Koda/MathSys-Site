@@ -124,7 +124,44 @@ export default function About ({ params }: { params: Promise<{ postId: string }>
       <div className={ styles.divs }>
         投稿番号：{ postId }
       </div>
-      { post && <h1>{ post.class }</h1> }
+      {/* { post && <h1>授業名：{ post.class }</h1> } */}
+      {/* { post && <div>教授名：{ post.doctor }</div> } */}
+      {/* { post && <div>年度：{ post.year }</div> } */}
+      {/* { post && <div>学部：{ post.department }</div> } */}
+      {/* { post && <div>学科：{ post.major }</div> } */}
+      {/* { post && <div>分類：{ post.category }</div> } */}
+      { post && 
+      <table className={styles.Table}>
+        <tbody>
+        <tr>
+          <th>授業名</th>
+          <td>{post.class}</td>
+        </tr>
+        <tr>
+          <th>教授名</th>
+          <td>{post.doctor}</td>
+        </tr>
+        <tr>
+          <th>年度</th>
+          <td>{post.year}</td>
+        </tr>
+        <tr>
+          <th>学部</th>
+          <td>{post.department}</td>
+        </tr>
+        <tr>
+          <th>学科</th>
+          <td>{post.major}</td>
+        </tr>
+        <tr>
+          <th>分類</th>
+          <td>{post.category}</td>
+        </tr>
+        </tbody>
+      </table>
+      }
+
+
       <form onSubmit={ handleSubmit }>
         { isFavorite ? <SubmitBtn btnText="お気に入り解除"  />
           : <SubmitBtn btnText="お気に入り登録"  />
